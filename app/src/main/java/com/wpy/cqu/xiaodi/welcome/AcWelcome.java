@@ -1,10 +1,12 @@
 package com.wpy.cqu.xiaodi.welcome;
 
+import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.WindowManager;
 
 import com.orhanobut.logger.Logger;
 import com.wpy.cqu.xiaodi.R;
@@ -17,19 +19,19 @@ import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.functions.Consumer;
 
 public class AcWelcome extends StatusBarAppComptActivity {
 
-    private static final int STATUE_BAR_COLOR = Color.parseColor("#00ff00");
-
     private static final int DELAY_SECONDS_TO_NEXT_AC = 3;
+
+    private static final int StatusBarColor = Color.parseColor("#08131d");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Bundle bundle = new Bundle();
-        bundle.putInt(StatusBarAppComptActivity.STATUS_COLOR_STR, STATUE_BAR_COLOR);
+        bundle.putInt(StatusBarAppComptActivity.STATUS_COLOR_STR, StatusBarColor);
         super.onCreate(bundle);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.ac_welcome);
 
         if (isFirstTimeUse()) {
@@ -56,7 +58,7 @@ public class AcWelcome extends StatusBarAppComptActivity {
         SharedPreferences sharedPreferences = this.getSharedPreferences("conf", Context.MODE_PRIVATE);
         SharedPreferences.Editor edit = sharedPreferences.edit();
         edit.putBoolean("isFirstUse", false);
-        edit.commit();
+        edit.apply();
     }
 
     private void toNextAc(Class<?> nextClass) {
@@ -68,12 +70,7 @@ public class AcWelcome extends StatusBarAppComptActivity {
     private void delayToNextAc(final Class<?> nextClass) {
         Observable.timer(DELAY_SECONDS_TO_NEXT_AC, TimeUnit.SECONDS)
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Consumer<Long>() {
-                    @Override
-                    public void accept(Long aLong) throws Exception {
-                        toNextAc(nextClass);
-                    }
-                });
+                .subscribe(i -> toNextAc(nextClass));
     }
 
     private boolean isHasAccount() {

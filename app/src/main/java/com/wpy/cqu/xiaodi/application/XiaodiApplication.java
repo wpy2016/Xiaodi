@@ -8,10 +8,6 @@ import com.orhanobut.logger.Logger;
 import com.orhanobut.logger.PrettyFormatStrategy;
 
 
-/**
- * Created by wangpeiyu on 2018/3/27.
- */
-
 public class XiaodiApplication extends Application {
 
     @Override
