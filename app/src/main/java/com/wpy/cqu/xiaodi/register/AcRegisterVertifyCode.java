@@ -81,6 +81,9 @@ public class AcRegisterVertifyCode extends TopBarAppComptAcitity {
     }
 
     private void next(View v) {
+        toNext(AcRegister.class);
+        // TODO: 2018/3/29 去掉注释
+        /*
         String phone = metPhone.getText().toString();
         String code = metVertify.getText().toString();
         Logger.i("phone=%s,code=%s", phone, code);
@@ -95,6 +98,7 @@ public class AcRegisterVertifyCode extends TopBarAppComptAcitity {
             }
             Toast.makeText(this, getResources().getString(R.string.vertify_fail), Toast.LENGTH_LONG).show();
         });
+        */
     }
 
     private void bindView() {
@@ -110,11 +114,14 @@ public class AcRegisterVertifyCode extends TopBarAppComptAcitity {
 
     private void initView() {
         mivBack.setImageResource(R.drawable.go_back_white);
+        mtvBack.setTextColor(Color.WHITE);
         mtvBack.setText(getResources().getString(R.string.login));
-        mtvContent.setText(getResources().getString(R.string.register));
+        mtvContent.setText(getResources().getString(R.string.vertify_phone));
     }
 
     private void bindEvent() {
+        mivBack.setOnClickListener(v->finish());
+        mtvBack.setOnClickListener(v->finish());
         mbtnGetVertify.setOnClickListener(this::sendCode);
         mbtnNext.setOnClickListener(this::next);
     }
@@ -122,5 +129,6 @@ public class AcRegisterVertifyCode extends TopBarAppComptAcitity {
     private void toNext(Class<?> next) {
         Intent intent = new Intent(this, next);
         startActivity(intent);
+        finish();
     }
 }

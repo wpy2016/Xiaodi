@@ -115,6 +115,7 @@
     <string name="take_photo">拍照</string>
     <string name="photo">照片</string>
     <string name="vertify_number">验证码</string>
+    <string name="vertify_phone">验证手机号</string>
     <string name="get">获取</string>
     <string name="get2">领取</string>
     <string name="reset_pass">重设密码</string>
