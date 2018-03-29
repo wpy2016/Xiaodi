@@ -39,7 +39,7 @@ public class AcGuide extends StatusBarAppComptActivity {
         ViewPager viewpager = (ViewPager) findViewById(R.id.id_ac_guide_vp);
         viewpager.setAdapter(new WelcomePagerAdaper(mViews));
         viewpager.setPageTransformer(true, new DepthPageTransformer());
-        viewpager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+        viewpager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 

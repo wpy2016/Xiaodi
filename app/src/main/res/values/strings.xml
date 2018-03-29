@@ -199,6 +199,7 @@
     <string name="good_start_or_end_place_null">出发地、目的地不能为空</string>
     <string name="please_give_smile_point">请给笑点</string>
     <string name="phone_no_null">手机号不能为空</string>
+    <string name="phone_no_right">手机号不正确</string>
     <string name="less_than_two">(&lt;2)</string>
     <string name="more_than_two_and_less_than_five">(2&lt;*&lt;5)</string>
     <string name="more_than_five">(&gt;5)</string>

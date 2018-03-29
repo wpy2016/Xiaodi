@@ -40,7 +40,7 @@ public class AcLogin extends StatusBarAppComptActivity {
         bundle.putInt(StatusBarAppComptActivity.STATUS_COLOR_STR,StatusColor);
         super.onCreate(bundle);
         setContentView(R.layout.ac_login);
-        initView();
+        bindView();
         initEvent();
     }
 
@@ -54,7 +54,7 @@ public class AcLogin extends StatusBarAppComptActivity {
     }
 
     private void register(View v){
-        Logger.d(v);
+        Logger.d("to register");
         toNextAc(AcRegisterVertifyCode.class);
     }
 
@@ -70,7 +70,7 @@ public class AcLogin extends StatusBarAppComptActivity {
 
     }
 
-    private void initView(){
+    private void bindView(){
         metAccount = (EditText) findViewById(R.id.id_ac_login_et_username);
         metPass = (EditText) findViewById(R.id.id_ac_login_et_password);
         mbtnLogin = (Button) findViewById(R.id.id_ac_login_btn_login);
