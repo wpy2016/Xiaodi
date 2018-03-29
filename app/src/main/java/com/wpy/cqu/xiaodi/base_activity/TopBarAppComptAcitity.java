@@ -20,6 +20,8 @@ public class TopBarAppComptAcitity extends CheckPermissionsActivity {
 
     protected RelativeLayout mrlTop;
 
+    protected ImageView mivRight;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

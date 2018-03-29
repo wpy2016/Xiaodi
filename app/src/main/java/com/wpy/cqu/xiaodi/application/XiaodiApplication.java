@@ -10,9 +10,12 @@ import com.orhanobut.logger.PrettyFormatStrategy;
 
 public class XiaodiApplication extends Application {
 
+    public static String IMG_SAVE_PATH;
+
     @Override
     public void onCreate() {
         super.onCreate();
+        IMG_SAVE_PATH = getExternalFilesDir(null).getAbsolutePath() + "/crop_photo";
         initLogger();
     }
 

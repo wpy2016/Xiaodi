@@ -3,29 +3,31 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.wpy.cqu.xiaodi">
 
-    <!--允许联网 -->
+    <!-- 允许联网 -->
     <uses-permission android:name="android.permission.INTERNET" />
-    <!--获取GSM（2g）、WCDMA（联通3g）等网络状态的信息  -->
+    <!-- 获取GSM（2g）、WCDMA（联通3g）等网络状态的信息 -->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <!--获取wifi网络状态的信息 -->
+    <!-- 获取wifi网络状态的信息 -->
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <!--允许读取手机状态 -->
+    <!-- 允许读取手机状态 -->
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <!-- 其他权限 短信 -->
     <uses-permission android:name="android.permission.RECEIVE_SMS" />
     <uses-permission android:name="android.permission.READ_SMS" />
     <uses-permission android:name="android.permission.SEND_SMS" />
-    <uses-permission android:name="android.permission.GET_ACCOUNTS"/>
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
-        tools:replace="android:name"
         android:name=".application.XiaodiApplication"
         android:allowBackup="true"
         android:icon="@drawable/xiaodi_logo"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        tools:replace="android:name">
         <activity
             android:name=".welcome.AcWelcome"
             android:screenOrientation="portrait"
@@ -48,7 +50,10 @@
         <activity
             android:name=".register.AcRegisterVertifyCode"
             android:screenOrientation="portrait" />
-        <activity android:name=".register.AcRegister"
+        <activity
+            android:name=".register.AcRegister"
+            android:screenOrientation="portrait" />
+        <activity android:name=".clip.AcClipImg"
             android:screenOrientation="portrait"/>
     </application>
 

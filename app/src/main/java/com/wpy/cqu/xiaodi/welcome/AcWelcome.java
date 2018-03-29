@@ -69,7 +69,7 @@ public class AcWelcome extends StatusBarAppComptActivity {
 
     private void delayToNextAc(final Class<?> nextClass) {
         Observable.timer(DELAY_SECONDS_TO_NEXT_AC, TimeUnit.SECONDS)
-                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(AndroidSchedulers.mainThread())
                 .subscribe(i -> toNextAc(nextClass));
     }
 
