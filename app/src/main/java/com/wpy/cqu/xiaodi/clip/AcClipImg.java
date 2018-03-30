@@ -8,11 +8,9 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.wpy.cqu.xiaodi.R;
 import com.wpy.cqu.xiaodi.application.XiaodiApplication;
@@ -21,6 +19,7 @@ import com.wpy.cqu.xiaodi.base_activity.StatusBarAppComptActivity;
 import com.wpy.cqu.xiaodi.base_activity.TopBarAppComptAcitity;
 import com.wpy.cqu.xiaodi.clip.clip_image.ClipImageLayout;
 import com.wpy.cqu.xiaodi.clip.clip_image.ImageTools;
+import com.wpy.cqu.xiaodi.util.ToastUtil;
 
 import java.io.File;
 
@@ -91,12 +90,12 @@ public class AcClipImg extends TopBarAppComptAcitity {
         path = getIntent().getStringExtra("path");
         if (path != null)
             if (TextUtils.isEmpty(path) || !(new File(path).exists())) {
-                Toast.makeText(this, getResources().getString(R.string.photo_load_fail), Toast.LENGTH_SHORT).show();
+                ToastUtil.toast(this, getResources().getString(R.string.photo_load_fail));
                 return;
             }
         Bitmap bitmap = ImageTools.convertToBitmap(path, 800, 1000);
         if (bitmap == null) {
-            Toast.makeText(this, getResources().getString(R.string.photo_load_fail), Toast.LENGTH_SHORT).show();
+            ToastUtil.toast(this,getResources().getString(R.string.photo_load_fail));
             return;
         }
         mClipImageLayout.setBitmap(bitmap);

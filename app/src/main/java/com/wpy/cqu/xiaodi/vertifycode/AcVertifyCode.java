@@ -1,19 +1,15 @@
-package com.wpy.cqu.xiaodi.register;
+package com.wpy.cqu.xiaodi.vertifycode;
 
 import android.Manifest;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.orhanobut.logger.Logger;
 import com.wpy.cqu.vertifycode.base.IVertifyCode;
@@ -22,8 +18,11 @@ import com.wpy.cqu.xiaodi.R;
 import com.wpy.cqu.xiaodi.base_activity.CheckPermissionsActivity;
 import com.wpy.cqu.xiaodi.base_activity.StatusBarAppComptActivity;
 import com.wpy.cqu.xiaodi.base_activity.TopBarAppComptAcitity;
+import com.wpy.cqu.xiaodi.register.AcRegister;
+import com.wpy.cqu.xiaodi.resetpass.AcResetPass;
+import com.wpy.cqu.xiaodi.util.ToastUtil;
 
-public class AcRegisterVertifyCode extends TopBarAppComptAcitity {
+public class AcVertifyCode extends TopBarAppComptAcitity {
 
     private static final int STATUS_BAR_COLOR = Color.parseColor("#00dec9");
 
@@ -65,7 +64,7 @@ public class AcRegisterVertifyCode extends TopBarAppComptAcitity {
         String phone = metPhone.getText().toString();
         Logger.i("phone=%s", phone);
         if (!phone.matches("1[0-9]{10}")) {
-            Toast.makeText(this, getResources().getString(R.string.phone_no_right), Toast.LENGTH_LONG).show();
+            ToastUtil.toast(this, getResources().getString(R.string.phone_no_right));
             return;
         }
 
@@ -73,30 +72,30 @@ public class AcRegisterVertifyCode extends TopBarAppComptAcitity {
             Logger.i("sendcode return exception=%s", ex);
             if (null == ex) {
                 mbtnGetVertify.setEnabled(false);
-                Toast.makeText(this, getResources().getString(R.string.vertify_have_send), Toast.LENGTH_LONG).show();
+                ToastUtil.toast(this, getResources().getString(R.string.vertify_have_send));
                 return;
             }
-            Toast.makeText(this, getResources().getString(R.string.verify_send_fail), Toast.LENGTH_LONG).show();
+            ToastUtil.toast(this, getResources().getString(R.string.verify_send_fail));
         });
     }
 
     private void next(View v) {
-        toNext(AcRegister.class);
+        toNext();
         // TODO: 2018/3/29 去掉注释
         /*
         String phone = metPhone.getText().toString();
         String code = metVertify.getText().toString();
         Logger.i("phone=%s,code=%s", phone, code);
         if (!phone.matches("1[0-9]{10}")) {
-            Toast.makeText(this, getResources().getString(R.string.phone_no_right), Toast.LENGTH_LONG).show();
+            ToastUtil.toast(this,getResources().getString(R.string.phone_no_right));
             return;
         }
         vertifyCode.vertifyCode(phone, code, this, ex -> {
             if (null == ex) {
-                toNext(AcRegister.class);
+                toNext();
                 return;
             }
-            Toast.makeText(this, getResources().getString(R.string.vertify_fail), Toast.LENGTH_LONG).show();
+            ToastUtil.toast(this,getResources().getString(R.string.vertify_fail));
         });
         */
     }
@@ -120,14 +119,24 @@ public class AcRegisterVertifyCode extends TopBarAppComptAcitity {
     }
 
     private void bindEvent() {
-        mivBack.setOnClickListener(v->finish());
-        mtvBack.setOnClickListener(v->finish());
+        mivBack.setOnClickListener(v -> finish());
+        mtvBack.setOnClickListener(v -> finish());
         mbtnGetVertify.setOnClickListener(this::sendCode);
         mbtnNext.setOnClickListener(this::next);
     }
 
-    private void toNext(Class<?> next) {
-        Intent intent = new Intent(this, next);
+    private void toNext() {
+        Intent intent;
+        String tag = getIntent().getStringExtra("next");
+        if (AcRegister.TAG.equals(tag)) {
+            intent = new Intent(this, AcRegister.class);
+        } else if (AcResetPass.TAG.equals(tag)) {
+            intent = new Intent(this, AcResetPass.class);
+        } else {
+            Logger.i("验证手机号界面，无法定位要跳转到哪个界面");
+            ToastUtil.toast(this,getResources().getString(R.string.tell_me_to_where));
+            return;
+        }
         startActivity(intent);
         finish();
     }

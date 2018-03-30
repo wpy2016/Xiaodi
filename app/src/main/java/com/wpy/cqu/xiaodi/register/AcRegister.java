@@ -39,6 +39,8 @@ public class AcRegister extends TopBarAppComptAcitity {
 
     private static final int STATUS_BAR_COLOR = Color.parseColor("#00dec9");
 
+    public static final String TAG = AcRegister.class.getName();
+
     private ImageView mivImg;
 
     private EditText metName;
@@ -256,11 +258,11 @@ public class AcRegister extends TopBarAppComptAcitity {
                 mdisplayPwd = true;
                 mivSee.setImageResource(R.drawable.eye);
                 metPass.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
-            } else {
-                mdisplayPwd = false;
-                mivSee.setImageResource(R.drawable.eye_close);
-                metPass.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                return;
             }
+            mdisplayPwd = false;
+            mivSee.setImageResource(R.drawable.eye_close);
+            metPass.setTransformationMethod(PasswordTransformationMethod.getInstance());
         });
         mbtnRegister.setOnClickListener(this::register);
     }

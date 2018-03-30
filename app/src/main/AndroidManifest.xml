@@ -48,12 +48,16 @@
             android:name=".home.AcHome"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".register.AcRegisterVertifyCode"
+            android:name=".vertifycode.AcVertifyCode"
             android:screenOrientation="portrait" />
         <activity
             android:name=".register.AcRegister"
             android:screenOrientation="portrait" />
-        <activity android:name=".clip.AcClipImg"
+        <activity
+            android:name=".clip.AcClipImg"
+            android:screenOrientation="portrait" />
+
+        <activity android:name=".resetpass.AcResetPass"
             android:screenOrientation="portrait"/>
     </application>
 

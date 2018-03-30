@@ -108,8 +108,8 @@
     <string name="error">错误</string>
     <string name="confirmpass.">确认密码:</string>
     <string name="confirmpass">确认密码</string>
-    <string name="new_pass">新密码:</string>
-    <string name="now_pass">现密码:</string>
+    <string name="new_pass">新密码</string>
+    <string name="now_pass">现密码</string>
     <string name="send">发送</string>
     <string name="only_phone">电话</string>
     <string name="take_photo">拍照</string>
@@ -220,4 +220,6 @@
     <string name="fifty_xd_point">5100笑点</string>
     <string name="next">下一步</string>
     <string name="clip">裁剪头像</string>
+    <string name="not_complate">未开通</string>
+    <string name="tell_me_to_where">不知去向</string>
 </resources>
