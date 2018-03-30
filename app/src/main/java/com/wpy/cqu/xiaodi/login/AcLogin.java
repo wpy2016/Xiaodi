@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.orhanobut.logger.Logger;
 import com.wpy.cqu.xiaodi.R;
 import com.wpy.cqu.xiaodi.base_activity.StatusBarAppComptActivity;
+import com.wpy.cqu.xiaodi.home.AcHome;
 import com.wpy.cqu.xiaodi.register.AcRegister;
 import com.wpy.cqu.xiaodi.resetpass.AcResetPass;
 import com.wpy.cqu.xiaodi.util.ToastUtil;
@@ -50,7 +51,7 @@ public class AcLogin extends StatusBarAppComptActivity {
     }
 
     private void login(View v) {
-
+        toNextAc(AcHome.class,null);
     }
 
     private void forgetPass(View v) {

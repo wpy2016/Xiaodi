@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,7 +29,11 @@ import com.wpy.cqu.xiaodi.util.BitmapUtil;
 
 import java.io.File;
 
-public abstract class ClipBaseActivity extends TopBarAppComptAcitity {
+/**
+ * Created by wangpeiyu on 2018/3/30.
+ */
+
+public abstract class ClipBaseFragment extends Fragment {
 
     //图片保存的文件夹
     private String PHOTOSAVEPATH = XiaodiApplication.IMG_SAVE_PATH + "/";
@@ -51,9 +56,9 @@ public abstract class ClipBaseActivity extends TopBarAppComptAcitity {
     private LayoutInflater mLayoutInflater;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mLayoutInflater = LayoutInflater.from(this);
+        mLayoutInflater = LayoutInflater.from(getActivity());
     }
 
     protected void showPopupWindow(ImageView img) {
@@ -109,7 +114,7 @@ public abstract class ClipBaseActivity extends TopBarAppComptAcitity {
 
     @TargetApi(Build.VERSION_CODES.KITKAT)
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode != Activity.RESULT_OK) {
             return;
@@ -122,12 +127,12 @@ public abstract class ClipBaseActivity extends TopBarAppComptAcitity {
                     // TODO: 2018/3/30  图片加载失败,提示
                     break;
                 }
-                if (DocumentsContract.isDocumentUri(this, uri)) {
+                if (DocumentsContract.isDocumentUri(getActivity(), uri)) {
                     String wholeID = DocumentsContract.getDocumentId(uri);
                     String id = wholeID.split(":")[1];
                     String[] column = {MediaStore.Images.Media.DATA};
                     String sel = MediaStore.Images.Media._ID + "=?";
-                    Cursor cursor = this.getContentResolver().query(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, column,
+                    Cursor cursor = getActivity().getContentResolver().query(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, column,
                             sel, new String[]{id}, null);
                     int columnIndex;
                     try {
@@ -142,7 +147,7 @@ public abstract class ClipBaseActivity extends TopBarAppComptAcitity {
                     cursor.close();
                 } else {
                     String[] projection = {MediaStore.Images.Media.DATA};
-                    Cursor cursor = this.getContentResolver().query(uri, projection, null, null, null);
+                    Cursor cursor = getActivity().getContentResolver().query(uri, projection, null, null, null);
                     int column_index;
                     try {
                         column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
@@ -155,19 +160,19 @@ public abstract class ClipBaseActivity extends TopBarAppComptAcitity {
                     cursor.close();
                 }
                 // 获取到照片之后调用裁剪acticity
-                Intent intentGalley = new Intent(this, AcClipImg.class);
+                Intent intentGalley = new Intent(getActivity(), AcClipImg.class);
                 intentGalley.putExtra("path", mPath);
                 startActivityForResult(intentGalley, PHOTOCOMPLETEBYGALLERY);
                 break;
             case PHOTOTACK:
                 mPath = PHOTOSAVEPATH + photoname;
-                Intent intentTake = new Intent(this, AcClipImg.class);
+                Intent intentTake = new Intent(getActivity(), AcClipImg.class);
                 intentTake.putExtra("path", mPath);
                 startActivityForResult(intentTake, PHOTOCOMPLETEBYTAKE);
                 break;
             case PHOTOCOMPLETEBYTAKE:
                 final String temppath = data.getStringExtra("path");
-                setImg(BitmapUtil.getBitmapFormPath(this, temppath));
+                setImg(BitmapUtil.getBitmapFormPath(getActivity(), temppath));
                 //删除旧文件
                 File file = new File(mPath);
                 file.delete();
@@ -175,7 +180,7 @@ public abstract class ClipBaseActivity extends TopBarAppComptAcitity {
                 break;
             case PHOTOCOMPLETEBYGALLERY:
                 final String temppathgallery = data.getStringExtra("path");
-                setImg(BitmapUtil.getBitmapFormPath(this, temppathgallery));
+                setImg(BitmapUtil.getBitmapFormPath(getActivity(), temppathgallery));
                 mPath = temppathgallery;
                 break;
         }
