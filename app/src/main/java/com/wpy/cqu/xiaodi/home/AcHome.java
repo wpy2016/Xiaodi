@@ -14,6 +14,7 @@ import com.wpy.cqu.xiaodi.R;
 import com.wpy.cqu.xiaodi.base_activity.CheckPermissionsActivity;
 import com.wpy.cqu.xiaodi.base_activity.StatusBarAppComptActivity;
 import com.wpy.cqu.xiaodi.base_activity.TopBarAppComptAcitity;
+import com.wpy.cqu.xiaodi.home.fragment.FgHall;
 import com.wpy.cqu.xiaodi.home.fragment.FgMy;
 
 import java.util.ArrayList;
@@ -64,8 +65,8 @@ public class AcHome extends TopBarAppComptAcitity {
 
     private void initView() {
         List<Fragment> list = new ArrayList<>();
-        list.add(FgMy.newInstance());
-        list.add(FgMy.newInstance());
+        list.add(FgHall.newInstance());
+        list.add(FgHall.newInstance());
         list.add(FgMy.newInstance());
         mAdaper = new HomePagerAdaper(list, getSupportFragmentManager());
         mvpFgs.setAdapter(mAdaper);
