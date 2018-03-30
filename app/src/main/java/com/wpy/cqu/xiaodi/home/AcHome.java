@@ -8,6 +8,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.wpy.cqu.xiaodi.R;
@@ -15,6 +16,7 @@ import com.wpy.cqu.xiaodi.base_activity.CheckPermissionsActivity;
 import com.wpy.cqu.xiaodi.base_activity.StatusBarAppComptActivity;
 import com.wpy.cqu.xiaodi.base_activity.TopBarAppComptAcitity;
 import com.wpy.cqu.xiaodi.home.fragment.FgHall;
+import com.wpy.cqu.xiaodi.home.fragment.FgMessage;
 import com.wpy.cqu.xiaodi.home.fragment.FgMy;
 
 import java.util.ArrayList;
@@ -33,12 +35,15 @@ public class AcHome extends TopBarAppComptAcitity {
 
     private ImageView mivHall;
     private TextView mtvHall;
+    private RelativeLayout mrlHall;
 
     private ImageView mivMessage;
     private TextView mtvMessage;
+    private RelativeLayout mrlMessage;
 
     private ImageView mivMy;
     private TextView mtvMy;
+    private RelativeLayout mrlMy;
 
     private HomePagerAdaper mAdaper;
 
@@ -66,7 +71,7 @@ public class AcHome extends TopBarAppComptAcitity {
     private void initView() {
         List<Fragment> list = new ArrayList<>();
         list.add(FgHall.newInstance());
-        list.add(FgHall.newInstance());
+        list.add(FgMessage.newInstance());
         list.add(FgMy.newInstance());
         mAdaper = new HomePagerAdaper(list, getSupportFragmentManager());
         mvpFgs.setAdapter(mAdaper);
@@ -80,29 +85,16 @@ public class AcHome extends TopBarAppComptAcitity {
         mtvMessage = (TextView) findViewById(R.id.id_homedown_communicate_tv);
         mivMy = (ImageView) findViewById(R.id.id_homedown_my_iv);
         mtvMy = (TextView) findViewById(R.id.id_homedown_my_tv);
+
+        mrlHall = (RelativeLayout) findViewById(R.id.id_ac_home_down_rl_hall);
+        mrlMessage = (RelativeLayout) findViewById(R.id.id_ac_home_down_rl_message);
+        mrlMy = (RelativeLayout) findViewById(R.id.id_ac_home_down_rl_my);
     }
 
     private void bindEvent() {
-        mivHall.setOnClickListener(v -> {
-            selectWhich(HALL);
-        });
-        mtvHall.setOnClickListener(v -> {
-            selectWhich(HALL);
-        });
-
-        mivMessage.setOnClickListener(v -> {
-            selectWhich(MESSAGE);
-        });
-        mtvMessage.setOnClickListener(v -> {
-            selectWhich(MESSAGE);
-        });
-        mivMy.setOnClickListener(v -> {
-            selectWhich(MY);
-        });
-        mtvMy.setOnClickListener(v -> {
-            selectWhich(MY);
-        });
-
+        mrlHall.setOnClickListener(v -> selectWhich(HALL));
+        mrlMessage.setOnClickListener(v -> selectWhich(MESSAGE));
+        mrlMy.setOnClickListener(v -> selectWhich(MY));
         mvpFgs.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
