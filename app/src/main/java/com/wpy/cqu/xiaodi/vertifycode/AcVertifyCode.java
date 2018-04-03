@@ -80,9 +80,6 @@ public class AcVertifyCode extends TopBarAppComptAcitity {
     }
 
     private void next(View v) {
-        toNext();
-        // TODO: 2018/3/29 去掉注释
-        /*
         String phone = metPhone.getText().toString();
         String code = metVertify.getText().toString();
         Logger.i("phone=%s,code=%s", phone, code);
@@ -97,7 +94,7 @@ public class AcVertifyCode extends TopBarAppComptAcitity {
             }
             ToastUtil.toast(this,getResources().getString(R.string.vertify_fail));
         });
-        */
+
     }
 
     private void bindView() {

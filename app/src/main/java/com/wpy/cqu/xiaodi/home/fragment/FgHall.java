@@ -1,15 +1,25 @@
 package com.wpy.cqu.xiaodi.home.fragment;
 
+import android.content.Intent;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.wpy.cqu.xiaodi.R;
+import com.wpy.cqu.xiaodi.home.AcHomeAdd;
+import com.wpy.cqu.xiaodi.util.DpUtil;
+import com.wpy.cqu.xiaodi.util.ToastUtil;
 import com.wpy.cqu.xiaodi.view.refreshListView;
 
 /**
@@ -17,6 +27,13 @@ import com.wpy.cqu.xiaodi.view.refreshListView;
  */
 
 public class FgHall extends Fragment {
+
+    private static enum ShowType {
+        NEWS,KEY_WORD,XIAODIAN_DEC,XIAODIAN_AEC
+    }
+
+    private static enum SERVICE_TYPE {REWARD,GOOUT}
+
 
 
     private TextView mtvContent;
@@ -32,6 +49,14 @@ public class FgHall extends Fragment {
     private TextView mtvSearch;
 
     private refreshListView mrefreshListView;
+
+    private PopupWindow mPopSearch;
+
+    private String msKeyWord;
+
+    private ShowType mShowType = ShowType.NEWS;
+
+    private SERVICE_TYPE mServiceType = SERVICE_TYPE.REWARD;
 
     public static FgHall newInstance() {
         FgHall fragment = new FgHall();
@@ -60,15 +85,16 @@ public class FgHall extends Fragment {
         bindEvent();
     }
 
-    private void bindEvent() {
-        mtvContent.setOnClickListener(this::changeType);
-        mivTypeDown.setOnClickListener(this::changeType);
-        mtvSortXiaodian.setOnClickListener(this::sortByXiaoDian);
-        mtvNearby.setOnClickListener(this::nearby);
-        mtvSearch.setOnClickListener(this::search);
-        mivAdd.setOnClickListener(v->{
+    @Override
+    public void onResume() {
+        super.onResume();
+        mivAdd.setVisibility(View.VISIBLE);
+    }
 
-        });
+    @Override
+    public void onPause() {
+        super.onPause();
+        mivAdd.setVisibility(View.INVISIBLE);
     }
 
     private void changeType(View view) {
@@ -84,8 +110,38 @@ public class FgHall extends Fragment {
 
     }
 
-    private void search(View view) {
+    private void SearchByKeyWord(String sKeyword) {
 
+    }
+
+    private void showPopSearch() {
+        if (null == mPopSearch) {
+            View popSearchView = LayoutInflater.from(getActivity()).inflate(R.layout.pop_search, null);
+            mPopSearch = new PopupWindow(popSearchView, LinearLayout.LayoutParams.MATCH_PARENT,
+                    LinearLayout.LayoutParams.MATCH_PARENT, true);
+            initPopSearch(popSearchView);
+        }
+        mPopSearch.showAsDropDown(mtvSearch, DpUtil.dip2px(getActivity(), 30), 0);
+    }
+
+    private void initPopSearch(View popSearchView) {
+        EditText etKeyWordSearch = (EditText) popSearchView.findViewById(R.id.id_pop_search_et_search);
+        Button btnMattch = (Button) popSearchView.findViewById(R.id.id_pop_btn_search);
+        ImageView ivClose = (ImageView) popSearchView.findViewById(R.id.id_pop_search_iv_close);
+        btnMattch.setOnClickListener(v -> {
+            String sKeyword = etKeyWordSearch.getText().toString();
+            if ("".equals(sKeyword)) {
+                ToastUtil.toast(getActivity(), getResources().getString(R.string.validator_empty));
+                return;
+            }
+            SearchByKeyWord(sKeyword);
+            msKeyWord = sKeyword;
+            mShowType = ShowType.KEY_WORD;
+            mPopSearch.dismiss();
+        });
+        ivClose.setOnClickListener(v->mPopSearch.dismiss());
+        mPopSearch.setOutsideTouchable(true);
+        mPopSearch.setBackgroundDrawable(new BitmapDrawable());
     }
 
     private void initView() {
@@ -106,5 +162,18 @@ public class FgHall extends Fragment {
         mrefreshListView = view.findViewById(R.id.id_fg_hall_lv_reward);
     }
 
+    private void bindEvent() {
+        mtvContent.setOnClickListener(this::changeType);
+        mivTypeDown.setOnClickListener(this::changeType);
+        mtvSortXiaodian.setOnClickListener(this::sortByXiaoDian);
+        mtvNearby.setOnClickListener(this::nearby);
+        mtvSearch.setOnClickListener(v->showPopSearch());
+        mivAdd.setOnClickListener(v -> toNext(AcHomeAdd.class,null));
+    }
 
+    private void toNext(Class<?> next,Bundle bundle) {
+        Intent intent = new Intent(getActivity(),next);
+        intent.putExtra("home",bundle);
+        startActivity(intent);
+    }
 }

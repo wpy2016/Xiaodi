@@ -56,9 +56,19 @@
         <activity
             android:name=".clip.AcClipImg"
             android:screenOrientation="portrait" />
-
-        <activity android:name=".resetpass.AcResetPass"
-            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".resetpass.AcResetPass"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".home.AcHomeAdd"
+            android:screenOrientation="portrait"
+            android:theme="@style/nobkdtheme" />
+        <activity
+            android:name=".reward.AcReward"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".goout.AcGoOut"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

@@ -224,4 +224,5 @@
     <string name="tell_me_to_where">不知去向</string>
     <string name="xiaodi_attestation">笑递员认证</string>
     <string name="xiaodi_attestation_not">笑递员未认证</string>
+    <string name="key_word_search">关键字搜索</string>
 </resources>
