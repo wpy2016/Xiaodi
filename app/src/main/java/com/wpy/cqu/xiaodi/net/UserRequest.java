@@ -1,7 +1,11 @@
 package com.wpy.cqu.xiaodi.net;
 
+import com.google.gson.Gson;
 import com.orhanobut.logger.Logger;
+import com.wpy.cqu.xiaodi.model.ResultResp;
+import com.wpy.cqu.xiaodi.model.UserResultResp;
 import com.wpy.cqu.xiaodi.net.request.IUserRequest;
+import com.wpy.cqu.xiaodi.net.resp.IUserResp;
 
 import java.io.File;
 import java.io.IOException;
@@ -21,7 +25,7 @@ import retrofit2.Retrofit;
 
 public class UserRequest {
 
-    public static void Register(String phone, String pass, String nickName, String imgPath) {
+    public static void Register(String phone, String pass, String nickName, String imgPath, IUserResp userResp) {
         MediaType textType = MediaType.parse("text/plain");
         RequestBody phoneBody = RequestBody.create(textType,phone);
         RequestBody passBody = RequestBody.create(textType, pass);
@@ -37,18 +41,31 @@ public class UserRequest {
         register.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                Logger.i("register success");
+                Gson gson = new Gson();
+                UserResultResp userResultResp = null;
                 try {
-                    String result = response.body().string();
-                    Logger.i(result);
+                     userResultResp = gson.fromJson(response.body().string(), UserResultResp.class);
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    Logger.e("%s",e.getMessage());
+                    ResultResp resultResp = new ResultResp(444,e.getMessage());
+                    userResp.fail(resultResp);
+                    return;
                 }
+
+                if (200 != userResultResp.getResultCode()) {
+                    ResultResp resultResp = new ResultResp(userResultResp.getResultCode(),userResultResp.getMessage());
+                    userResp.fail(resultResp);
+                    return;
+                }
+
+                userResp.success(userResultResp.getUser());
             }
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable throwable) {
-                Logger.e("register fail %s",throwable.toString());
+                Logger.e("%s",throwable.getMessage());
+                ResultResp resultResp = new ResultResp(444,throwable.getMessage());
+                userResp.fail(resultResp);
             }
         });
     }

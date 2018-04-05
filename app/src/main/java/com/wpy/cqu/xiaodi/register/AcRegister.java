@@ -1,6 +1,7 @@
 package com.wpy.cqu.xiaodi.register;
 
 import android.Manifest;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -21,7 +22,12 @@ import com.wpy.cqu.xiaodi.base_activity.CheckPermissionsActivity;
 import com.wpy.cqu.xiaodi.base_activity.ClipBaseActivity;
 import com.wpy.cqu.xiaodi.base_activity.StatusBarAppComptActivity;
 import com.wpy.cqu.xiaodi.encrypt.AESEncrypt;
+import com.wpy.cqu.xiaodi.home.AcHome;
+import com.wpy.cqu.xiaodi.model.ResultResp;
+import com.wpy.cqu.xiaodi.model.User;
 import com.wpy.cqu.xiaodi.net.UserRequest;
+import com.wpy.cqu.xiaodi.net.resp.IUserResp;
+import com.wpy.cqu.xiaodi.util.ToastUtil;
 
 public class AcRegister extends ClipBaseActivity {
 
@@ -79,7 +85,19 @@ public class AcRegister extends ClipBaseActivity {
         String nickName = metName.getText().toString();
         String pass = metPass.getText().toString();
         String encryptPass = AESEncrypt.Base64AESEncrypt(pass);
-        UserRequest.Register(phone,encryptPass,nickName,mImgPath);
+        UserRequest.Register(phone, encryptPass, nickName, mImgPath, new IUserResp() {
+            @Override
+            public void success(User user) {
+                Intent intent = new Intent(AcRegister.this, AcHome.class);
+                startActivity(intent);
+                finish();
+            }
+
+            @Override
+            public void fail(ResultResp resp) {
+                ToastUtil.toast(AcRegister.this,resp.message);
+            }
+        });
     }
 
 

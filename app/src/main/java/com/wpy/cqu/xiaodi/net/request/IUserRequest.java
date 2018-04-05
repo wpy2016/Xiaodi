@@ -1,5 +1,7 @@
 package com.wpy.cqu.xiaodi.net.request;
 
+import com.wpy.cqu.xiaodi.model.UserResultResp;
+
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;

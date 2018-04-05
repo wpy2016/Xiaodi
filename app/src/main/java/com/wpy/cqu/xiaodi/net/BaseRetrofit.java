@@ -16,7 +16,6 @@ public class BaseRetrofit {
              retrofit = new Retrofit.Builder()
                     .baseUrl("http://119.29.164.153:1688/") // 设置网络请求的Url地址
                     .addConverterFactory(GsonConverterFactory.create()) // 设置数据解析器
-                    //.addCallAdapterFactory(RxJavaCallAdapterFactory.create()) // 支持RxJava平台
                     .build();
         }
         return retrofit;
