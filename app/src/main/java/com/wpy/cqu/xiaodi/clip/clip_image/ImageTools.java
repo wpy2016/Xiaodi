@@ -2,8 +2,11 @@ package com.wpy.cqu.xiaodi.clip.clip_image;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
 import android.os.Environment;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -77,7 +80,6 @@ public class ImageTools {
         int width = options.outWidth;
         int height = options.outHeight;
         float scaleWidth = 1.0f, scaleHeight = 1.0f;
-        /*******************************dailijie*************************************/
         if (width > w || height > h) {
             scaleWidth = (float) width / w;
             scaleHeight = (float) height / h;
@@ -98,5 +100,21 @@ public class ImageTools {
 
     public static boolean checkSDCardIsAvailable() {
         return Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED);
+    }
+
+    public static Bitmap compressBitmap(Bitmap originBitmap) {
+        Matrix matrix = new Matrix();
+        matrix.setScale(0.25f, 0.25f);
+        Bitmap dstBitmap = Bitmap.createBitmap(originBitmap, 0, 0, originBitmap.getWidth(),
+                originBitmap.getHeight(), matrix, true);
+
+        BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inPreferredConfig = Bitmap.Config.RGB_565;
+
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        dstBitmap.compress(Bitmap.CompressFormat.PNG,50,byteArrayOutputStream);
+        byte[] bytes = byteArrayOutputStream.toByteArray();
+        dstBitmap = BitmapFactory.decodeByteArray(bytes,0,bytes.length,options);
+        return dstBitmap;
     }
 }

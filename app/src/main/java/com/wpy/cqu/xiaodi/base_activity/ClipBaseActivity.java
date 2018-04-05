@@ -167,7 +167,7 @@ public abstract class ClipBaseActivity extends TopBarAppComptAcitity {
                 break;
             case PHOTOCOMPLETEBYTAKE:
                 final String temppath = data.getStringExtra("path");
-                setImg(BitmapUtil.getBitmapFormPath(this, temppath));
+                setImg(BitmapUtil.getBitmapFormPath(this, temppath),temppath);
                 //删除旧文件
                 File file = new File(mPath);
                 file.delete();
@@ -175,7 +175,7 @@ public abstract class ClipBaseActivity extends TopBarAppComptAcitity {
                 break;
             case PHOTOCOMPLETEBYGALLERY:
                 final String temppathgallery = data.getStringExtra("path");
-                setImg(BitmapUtil.getBitmapFormPath(this, temppathgallery));
+                setImg(BitmapUtil.getBitmapFormPath(this, temppathgallery),temppathgallery);
                 mPath = temppathgallery;
                 break;
         }
@@ -183,5 +183,5 @@ public abstract class ClipBaseActivity extends TopBarAppComptAcitity {
 
     public abstract void errorLoadImg();
 
-    public abstract void setImg(Bitmap img);
+    public abstract void setImg(Bitmap img,String path);
 }

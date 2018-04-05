@@ -80,21 +80,21 @@ public class AcVertifyCode extends TopBarAppComptAcitity {
     }
 
     private void next(View v) {
-        String phone = metPhone.getText().toString();
-        String code = metVertify.getText().toString();
-        Logger.i("phone=%s,code=%s", phone, code);
-        if (!phone.matches("1[0-9]{10}")) {
-            ToastUtil.toast(this,getResources().getString(R.string.phone_no_right));
-            return;
-        }
-        vertifyCode.vertifyCode(phone, code, this, ex -> {
-            if (null == ex) {
-                toNext();
-                return;
-            }
-            ToastUtil.toast(this,getResources().getString(R.string.vertify_fail));
-        });
-
+        toNext();
+//        String phone = metPhone.getText().toString();
+//        String code = metVertify.getText().toString();
+//        Logger.i("phone=%s,code=%s", phone, code);
+//        if (!phone.matches("1[0-9]{10}")) {
+//            ToastUtil.toast(this,getResources().getString(R.string.phone_no_right));
+//            return;
+//        }
+//        vertifyCode.vertifyCode(phone, code, this, ex -> {
+//            if (null == ex) {
+//                toNext();
+//                return;
+//            }
+//            ToastUtil.toast(this,getResources().getString(R.string.vertify_fail));
+//        });
     }
 
     private void bindView() {
@@ -127,6 +127,7 @@ public class AcVertifyCode extends TopBarAppComptAcitity {
         String tag = getIntent().getStringExtra("next");
         if (AcRegister.TAG.equals(tag)) {
             intent = new Intent(this, AcRegister.class);
+            intent.putExtra("phone",metPhone.getText().toString());
         } else if (AcResetPass.TAG.equals(tag)) {
             intent = new Intent(this, AcResetPass.class);
         } else {

@@ -67,7 +67,7 @@ public class AcReward extends ClipBaseActivity {
     }
 
     @Override
-    public void setImg(Bitmap img) {
+    public void setImg(Bitmap img,String path) {
         mivTakeImg.setImageBitmap(img);
     }
 }

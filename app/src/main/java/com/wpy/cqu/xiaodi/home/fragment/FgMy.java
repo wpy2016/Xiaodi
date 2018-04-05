@@ -83,7 +83,7 @@ public class FgMy extends ClipBaseFragment {
     }
 
     @Override
-    public void setImg(Bitmap img) {
+    public void setImg(Bitmap img,String path) {
         mivImg.setImageBitmap(img);
     }
 

@@ -4,6 +4,8 @@ import android.Manifest;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Looper;
+import android.support.annotation.RequiresApi;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
 import android.view.View;
@@ -13,10 +15,13 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.orhanobut.logger.Logger;
 import com.wpy.cqu.xiaodi.R;
 import com.wpy.cqu.xiaodi.base_activity.CheckPermissionsActivity;
 import com.wpy.cqu.xiaodi.base_activity.ClipBaseActivity;
 import com.wpy.cqu.xiaodi.base_activity.StatusBarAppComptActivity;
+import com.wpy.cqu.xiaodi.encrypt.AESEncrypt;
+import com.wpy.cqu.xiaodi.net.UserRequest;
 
 public class AcRegister extends ClipBaseActivity {
 
@@ -44,6 +49,8 @@ public class AcRegister extends ClipBaseActivity {
 
     private boolean mdisplayPwd = false;
 
+    private String mImgPath = "";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Bundle bundle = new Bundle();
@@ -62,12 +69,17 @@ public class AcRegister extends ClipBaseActivity {
     }
 
     @Override
-    public void setImg(Bitmap img) {
+    public void setImg(Bitmap img,String path) {
         mivImg.setImageBitmap(img);
+        mImgPath = path;
     }
 
     private void register(View v) {
-
+        String phone = getIntent().getStringExtra("phone");
+        String nickName = metName.getText().toString();
+        String pass = metPass.getText().toString();
+        String encryptPass = AESEncrypt.Base64AESEncrypt(pass);
+        UserRequest.Register(phone,encryptPass,nickName,mImgPath);
     }
 
 

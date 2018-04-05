@@ -68,8 +68,9 @@ public class AcClipImg extends TopBarAppComptAcitity {
                     if (!file.exists()) {
                         file.mkdir();
                     }
+                    Bitmap compressBitmap = ImageTools.compressBitmap(clipBitmap);
                     String savePath = XiaodiApplication.IMG_SAVE_PATH + "/" + System.currentTimeMillis() + ".png";
-                    ImageTools.saveBitmapToSDCard(clipBitmap, savePath);
+                    ImageTools.saveBitmapToSDCard(compressBitmap, savePath);
                     return savePath;
                 })
                 .subscribeOn(AndroidSchedulers.mainThread())

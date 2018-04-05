@@ -172,7 +172,7 @@ public abstract class ClipBaseFragment extends Fragment {
                 break;
             case PHOTOCOMPLETEBYTAKE:
                 final String temppath = data.getStringExtra("path");
-                setImg(BitmapUtil.getBitmapFormPath(getActivity(), temppath));
+                setImg(BitmapUtil.getBitmapFormPath(getActivity(), temppath),temppath);
                 //删除旧文件
                 File file = new File(mPath);
                 file.delete();
@@ -180,7 +180,7 @@ public abstract class ClipBaseFragment extends Fragment {
                 break;
             case PHOTOCOMPLETEBYGALLERY:
                 final String temppathgallery = data.getStringExtra("path");
-                setImg(BitmapUtil.getBitmapFormPath(getActivity(), temppathgallery));
+                setImg(BitmapUtil.getBitmapFormPath(getActivity(), temppathgallery),temppathgallery);
                 mPath = temppathgallery;
                 break;
         }
@@ -188,5 +188,5 @@ public abstract class ClipBaseFragment extends Fragment {
 
     public abstract void errorLoadImg();
 
-    public abstract void setImg(Bitmap img);
+    public abstract void setImg(Bitmap img,String path);
 }
