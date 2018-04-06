@@ -69,6 +69,7 @@ public class AcLogin extends StatusBarAppComptActivity {
             @Override
             public void success(User user) {
                 XiaodiApplication.mCurrentUser = user;
+                user.Pass = encryptPass;
                 Observable.just("")
                         .doOnNext(s -> user.saveToLocalFile())
                         .subscribeOn(Schedulers.io())

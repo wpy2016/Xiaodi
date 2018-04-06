@@ -15,6 +15,8 @@ import com.wpy.cqu.xiaodi.base_activity.StatusBarAppComptActivity;
 import com.wpy.cqu.xiaodi.guide.AcGuide;
 import com.wpy.cqu.xiaodi.home.AcHome;
 import com.wpy.cqu.xiaodi.login.AcLogin;
+import com.wpy.cqu.xiaodi.model.User;
+import com.wpy.cqu.xiaodi.net.UserRequest;
 
 import java.util.concurrent.TimeUnit;
 
@@ -75,6 +77,11 @@ public class AcWelcome extends StatusBarAppComptActivity {
     }
 
     private boolean isHasAccount() {
-        return false;//// TODO: 2018/3/27
+        User user = User.loadFormFile();
+        if (null == user) {
+            return false;
+        }
+        XiaodiApplication.mCurrentUser = user;
+        return true;
     }
 }
