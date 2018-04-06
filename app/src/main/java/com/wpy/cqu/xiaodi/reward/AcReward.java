@@ -21,11 +21,11 @@ import com.wpy.cqu.xiaodi.application.XiaodiApplication;
 import com.wpy.cqu.xiaodi.base_activity.CheckPermissionsActivity;
 import com.wpy.cqu.xiaodi.base_activity.ClipBaseActivity;
 import com.wpy.cqu.xiaodi.base_activity.StatusBarAppComptActivity;
+import com.wpy.cqu.xiaodi.loading.Loading;
 import com.wpy.cqu.xiaodi.model.ResultResp;
 import com.wpy.cqu.xiaodi.model.Reward;
 import com.wpy.cqu.xiaodi.model.Thing;
 import com.wpy.cqu.xiaodi.net.RewardRequst;
-import com.wpy.cqu.xiaodi.net.resp.Error;
 import com.wpy.cqu.xiaodi.net.resp.IResp;
 import com.wpy.cqu.xiaodi.util.DpUtil;
 import com.wpy.cqu.xiaodi.util.ToastUtil;
@@ -33,6 +33,8 @@ import com.wpy.cqu.xiaodi.view.wheel.PlacePicker;
 import com.wpy.cqu.xiaodi.view.wheel.TimePicker;
 
 import java.util.Date;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class AcReward extends ClipBaseActivity {
 
@@ -101,15 +103,19 @@ public class AcReward extends ClipBaseActivity {
         if (!isavaliable) {
             return;
         }
+        PopupWindow popupWindow = Loading.showLoading(this,getWindow().getDecorView());
         Reward reward = createReward();
-        RewardRequst.SendReward(reward, XiaodiApplication.mCurrentUser.Id, XiaodiApplication.mCurrentUser.Token, new IResp<ResultResp>() {
+        RewardRequst.SendReward(reward, XiaodiApplication.mCurrentUser.Id,
+                XiaodiApplication.mCurrentUser.Token, new IResp<ResultResp>() {
             @Override
             public void success(ResultResp resp) {
-                finish();
+                //Loading.stopLoading(popupWindow);
+                //finish();
             }
 
             @Override
             public void fail(ResultResp resp) {
+                Loading.stopLoading(popupWindow);
                 ToastUtil.toast(AcReward.this, resp.message);
             }
         });
@@ -130,6 +136,10 @@ public class AcReward extends ClipBaseActivity {
         }
         if (TextUtils.isEmpty(metphone.getText().toString())) {
             ToastUtil.toast(this, getResources().getString(R.string.phone_no_null));
+            return false;
+        }
+        if (!Pattern.matches("^1[0-9]{10}$",metphone.getText().toString())) {
+            ToastUtil.toast(this, getResources().getString(R.string.phone_no_right));
             return false;
         }
         if (TextUtils.isEmpty(mtvStartPlace.getText().toString())) {
@@ -303,6 +313,7 @@ public class AcReward extends ClipBaseActivity {
         mtvBack.setText(getResources().getString(R.string.hall));
         mtvBack.setTextColor(Color.WHITE);
         mtvContent.setText(getResources().getString(R.string.send_reward));
+        metphone.setText(XiaodiApplication.mCurrentUser.Phone);
         resetImgBg();
     }
 
