@@ -5,8 +5,6 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.os.Looper;
-import android.support.annotation.RequiresApi;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
 import android.view.View;
@@ -16,7 +14,6 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.orhanobut.logger.Logger;
 import com.wpy.cqu.xiaodi.R;
 import com.wpy.cqu.xiaodi.base_activity.CheckPermissionsActivity;
 import com.wpy.cqu.xiaodi.base_activity.ClipBaseActivity;
@@ -26,7 +23,7 @@ import com.wpy.cqu.xiaodi.home.AcHome;
 import com.wpy.cqu.xiaodi.model.ResultResp;
 import com.wpy.cqu.xiaodi.model.User;
 import com.wpy.cqu.xiaodi.net.UserRequest;
-import com.wpy.cqu.xiaodi.net.resp.IUserResp;
+import com.wpy.cqu.xiaodi.net.resp.IResp;
 import com.wpy.cqu.xiaodi.util.ToastUtil;
 
 public class AcRegister extends ClipBaseActivity {
@@ -85,12 +82,11 @@ public class AcRegister extends ClipBaseActivity {
         String nickName = metName.getText().toString();
         String pass = metPass.getText().toString();
         String encryptPass = AESEncrypt.Base64AESEncrypt(pass);
-        UserRequest.Register(phone, encryptPass, nickName, mImgPath, new IUserResp() {
+        UserRequest.Register(phone, encryptPass, nickName, mImgPath, new IResp<User>() {
             @Override
             public void success(User user) {
-                Intent intent = new Intent(AcRegister.this, AcHome.class);
-                startActivity(intent);
-                finish();
+                saveUser(user);
+                toHome();
             }
 
             @Override
@@ -98,6 +94,10 @@ public class AcRegister extends ClipBaseActivity {
                 ToastUtil.toast(AcRegister.this,resp.message);
             }
         });
+    }
+
+    private void saveUser(User user) {
+
     }
 
 
@@ -136,5 +136,11 @@ public class AcRegister extends ClipBaseActivity {
             metPass.setTransformationMethod(PasswordTransformationMethod.getInstance());
         });
         mbtnRegister.setOnClickListener(this::register);
+    }
+
+    private void toHome() {
+        Intent intent = new Intent(AcRegister.this, AcHome.class);
+        startActivity(intent);
+        finish();
     }
 }
