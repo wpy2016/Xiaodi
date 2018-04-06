@@ -5,6 +5,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,13 +15,12 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.wpy.cqu.xiaodi.R;
 import com.wpy.cqu.xiaodi.home.AcHomeAdd;
 import com.wpy.cqu.xiaodi.util.DpUtil;
 import com.wpy.cqu.xiaodi.util.ToastUtil;
-import com.wpy.cqu.xiaodi.view.refreshListView;
 
 /**
  * Created by wangpeiyu on 2018/3/30.
@@ -48,7 +48,9 @@ public class FgHall extends Fragment {
 
     private TextView mtvSearch;
 
-    private refreshListView mrefreshListView;
+    private SmartRefreshLayout smartRefreshLayout;
+
+    private RecyclerView recyclerView;
 
     private PopupWindow mPopSearch;
 
@@ -114,6 +116,14 @@ public class FgHall extends Fragment {
 
     }
 
+    private void refresh() {
+        smartRefreshLayout.finishRefresh(2000);
+    }
+
+    private void loadMore() {
+        smartRefreshLayout.finishLoadMore(2000);
+    }
+
     private void showPopSearch() {
         if (null == mPopSearch) {
             View popSearchView = LayoutInflater.from(getActivity()).inflate(R.layout.pop_search, null);
@@ -152,6 +162,7 @@ public class FgHall extends Fragment {
         mivAdd.setImageResource(R.drawable.hall_add);
     }
 
+
     private void bindView(View view) {
         mtvContent = view.findViewById(R.id.id_top_tv_content);
         mivTypeDown = view.findViewById(R.id.id_top_iv_down);
@@ -159,8 +170,10 @@ public class FgHall extends Fragment {
         mtvNearby = view.findViewById(R.id.id_fg_hall_tv_nearby);
         mtvSearch = view.findViewById(R.id.id_fg_hall_tv_placematch);
         mivAdd = view.findViewById(R.id.id_top_right_iv_img);
-        mrefreshListView = view.findViewById(R.id.id_fg_hall_lv_reward);
+        smartRefreshLayout = view.findViewById(R.id.id_fg_hall_refreshlayout);
+        recyclerView = view.findViewById(R.id.id_fg_hall_refreshview);
     }
+
 
     private void bindEvent() {
         mtvContent.setOnClickListener(this::changeType);
@@ -169,6 +182,12 @@ public class FgHall extends Fragment {
         mtvNearby.setOnClickListener(this::nearby);
         mtvSearch.setOnClickListener(v->showPopSearch());
         mivAdd.setOnClickListener(v -> toNext(AcHomeAdd.class,null));
+        smartRefreshLayout.setOnRefreshListener(layout->{
+            refresh();
+        });
+        smartRefreshLayout.setOnLoadMoreListener(layout->{
+            loadMore();
+        });
     }
 
     private void toNext(Class<?> next,Bundle bundle) {

@@ -6,13 +6,27 @@
 
     <include layout="@layout/ac_top" />
 
-
-    <com.wpy.cqu.xiaodi.view.refreshListView
-        android:id="@+id/id_fg_communicate_lv_msg"
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        android:id="@+id/id_fg_message_refreshlayout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        android:divider="@drawable/line_thin_gray"
-        android:dividerHeight="1dp"
-        android:transcriptMode="normal" />
+        android:layout_weight="1">
+
+        <com.scwang.smartrefresh.header.DeliveryHeader
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/id_fg_message_refreshview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#fff"
+            android:overScrollMode="never" />
+
+        <com.scwang.smartrefresh.layout.footer.BallPulseFooter
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+
 </LinearLayout>
