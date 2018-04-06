@@ -32,6 +32,7 @@ public class Error {
                         resp.fail(new ResultResp(444, "网络错误"));
                         return;
                     }
+                    Logger.i("request fail");
                     resp.fail(new ResultResp(444, throwable.getMessage()));
                 }
             };

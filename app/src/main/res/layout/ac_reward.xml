@@ -275,7 +275,7 @@
                     android:layout_marginTop="10dp"
                     android:orientation="horizontal">
                     <TextView
-                        android:id="@+id/id_ac_send_reward_et_start_place"
+                        android:id="@+id/id_ac_send_reward_tv_start_place"
                         android:layout_width="wrap_content"
                         android:layout_height="30dp"
                         android:maxWidth="130dp"
@@ -295,7 +295,7 @@
                         android:layout_gravity="center"
                         android:background="@drawable/line_white" />
                     <TextView
-                        android:id="@+id/id_ac_send_reward_et_arrive_place"
+                        android:id="@+id/id_ac_send_reward_tv_arrive_place"
                         android:layout_width="wrap_content"
                         android:layout_height="30dp"
                         android:layout_marginRight="20dp"
