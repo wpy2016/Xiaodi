@@ -46,4 +46,19 @@ public class UserRequest {
                     userResp.success(resp.user);
                 }, Error.getErrorConsumer(userResp));
     }
+
+    public static void Login(String phone, String pass, IResp<User> userResp) {
+        Retrofit retrofit = BaseRetrofit.getInstance();
+        IUserRequest userRequest = retrofit.create(IUserRequest.class);
+        Observable<UserResultResp> login = userRequest.Login(phone, pass);
+        login.subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(resp -> {
+                    if (Error.SUCCESS != resp.getResultCode()) {
+                        userResp.fail(new ResultResp(resp.getResultCode(), resp.getMessage()));
+                        return;
+                    }
+                    userResp.success(resp.user);
+                }, Error.getErrorConsumer(userResp));
+    }
 }

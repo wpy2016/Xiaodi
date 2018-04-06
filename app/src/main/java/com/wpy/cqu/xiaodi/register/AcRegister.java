@@ -15,6 +15,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.wpy.cqu.xiaodi.R;
+import com.wpy.cqu.xiaodi.application.XiaodiApplication;
 import com.wpy.cqu.xiaodi.base_activity.CheckPermissionsActivity;
 import com.wpy.cqu.xiaodi.base_activity.ClipBaseActivity;
 import com.wpy.cqu.xiaodi.base_activity.StatusBarAppComptActivity;
@@ -85,6 +86,8 @@ public class AcRegister extends ClipBaseActivity {
         UserRequest.Register(phone, encryptPass, nickName, mImgPath, new IResp<User>() {
             @Override
             public void success(User user) {
+                user.ImgLocalPath = mImgPath;
+                user.Pass = encryptPass;
                 saveUser(user);
                 toHome();
             }
@@ -97,7 +100,8 @@ public class AcRegister extends ClipBaseActivity {
     }
 
     private void saveUser(User user) {
-
+        XiaodiApplication.mCurrentUser = user;
+        user.saveToLocalFile();
     }
 
 

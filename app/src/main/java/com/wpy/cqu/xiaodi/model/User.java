@@ -1,12 +1,27 @@
 package com.wpy.cqu.xiaodi.model;
 
+import com.google.gson.Gson;
 import com.google.gson.annotations.SerializedName;
+import com.orhanobut.logger.Logger;
+import com.wpy.cqu.xiaodi.application.XiaodiApplication;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 
 /**
  * Created by wangpeiyu on 2018/4/4.
  */
 
-public class User {
+public class User implements Serializable {
+
+    public static int NORMAL = 0;
+    public static int XIAODIYUAN = 1;
+
 
     @SerializedName("_id")
     public String Id;
@@ -35,6 +50,7 @@ public class User {
     @SerializedName("img")
     public String ImgUrl;//头像的网络路径
 
+    @SerializedName("img_local_path")
     public String ImgLocalPath;//头像的本地路径
 
     @SerializedName("gold_money")
@@ -49,9 +65,19 @@ public class User {
     @SerializedName("sign")
     public String Sign;
 
-    public User() {
+    @SerializedName("token")
+    public String Token;
+
+    public String getToken() {
+        return Token;
     }
 
+    public void setToken(String token) {
+        Token = token;
+    }
+
+    public User() {
+    }
 
 
     public String getId() {
@@ -171,8 +197,66 @@ public class User {
         Sign = sign;
     }
 
-    public ResultResp Update() {
+    public void saveToLocalFile() {
+        File userFile = new File(XiaodiApplication.USER_SAVE_FILEPATH);
+        if (userFile.exists()) {
+            userFile.delete();
+        }
+        ObjectOutputStream userOutput = null;
+        try {
+            userFile.createNewFile();
+            userOutput = new ObjectOutputStream(new FileOutputStream(userFile));
+            userOutput.writeObject(this);
+        } catch (IOException e) {
+            e.printStackTrace();
+            Logger.e(e.getMessage());
+        } finally {
+            if (null != userOutput) {
+                try {
+                    userOutput.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    Logger.e(e.getMessage());
+                }
+            }
+        }
+    }
 
-        return null;
+    public static User loadFormFile() {
+        File userFile = new File(XiaodiApplication.USER_SAVE_FILEPATH);
+        if (!userFile.exists()) {
+            return null;
+        }
+        ObjectInputStream userInput = null;
+        User user = null;
+        try {
+            userInput = new ObjectInputStream(new FileInputStream(userFile));
+            user = (User) userInput.readObject();
+        } catch (IOException e) {
+            e.printStackTrace();
+            Logger.e(e.getMessage());
+            return null;
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+            Logger.e(e.getMessage());
+            return null;
+        }finally {
+            if (null != userInput) {
+                try {
+                    userInput.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    Logger.e(e.getMessage());
+                }
+            }
+        }
+        return user;
+    }
+
+    @Override
+    public String toString() {
+        Gson gson = new Gson();
+        String s = gson.toJson(this);
+        return s;
     }
 }

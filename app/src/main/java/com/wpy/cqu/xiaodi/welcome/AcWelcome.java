@@ -10,6 +10,7 @@ import android.view.WindowManager;
 
 import com.orhanobut.logger.Logger;
 import com.wpy.cqu.xiaodi.R;
+import com.wpy.cqu.xiaodi.application.XiaodiApplication;
 import com.wpy.cqu.xiaodi.base_activity.StatusBarAppComptActivity;
 import com.wpy.cqu.xiaodi.guide.AcGuide;
 import com.wpy.cqu.xiaodi.home.AcHome;

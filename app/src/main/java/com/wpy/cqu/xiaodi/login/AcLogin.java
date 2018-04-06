@@ -13,12 +13,23 @@ import android.widget.Toast;
 
 import com.orhanobut.logger.Logger;
 import com.wpy.cqu.xiaodi.R;
+import com.wpy.cqu.xiaodi.application.XiaodiApplication;
 import com.wpy.cqu.xiaodi.base_activity.StatusBarAppComptActivity;
+import com.wpy.cqu.xiaodi.encrypt.AESEncrypt;
 import com.wpy.cqu.xiaodi.home.AcHome;
+import com.wpy.cqu.xiaodi.model.ResultResp;
+import com.wpy.cqu.xiaodi.model.User;
+import com.wpy.cqu.xiaodi.net.UserRequest;
+import com.wpy.cqu.xiaodi.net.resp.IResp;
 import com.wpy.cqu.xiaodi.register.AcRegister;
 import com.wpy.cqu.xiaodi.resetpass.AcResetPass;
 import com.wpy.cqu.xiaodi.util.ToastUtil;
 import com.wpy.cqu.xiaodi.vertifycode.AcVertifyCode;
+
+import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
 
 public class AcLogin extends StatusBarAppComptActivity {
 
@@ -51,7 +62,26 @@ public class AcLogin extends StatusBarAppComptActivity {
     }
 
     private void login(View v) {
-        toNextAc(AcHome.class,null);
+        String phone = metAccount.getText().toString();
+        String pass = metPass.getText().toString();
+        String encryptPass = AESEncrypt.Base64AESEncrypt(pass);
+        UserRequest.Login(phone, encryptPass, new IResp<User>() {
+            @Override
+            public void success(User user) {
+                XiaodiApplication.mCurrentUser = user;
+                Observable.just("")
+                        .doOnNext(s -> user.saveToLocalFile())
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(s -> Logger.i("login save user to path"));
+                toNextAc(AcHome.class, null);
+            }
+
+            @Override
+            public void fail(ResultResp resp) {
+                ToastUtil.toast(AcLogin.this, resp.message);
+            }
+        });
     }
 
     private void forgetPass(View v) {
@@ -69,11 +99,11 @@ public class AcLogin extends StatusBarAppComptActivity {
     }
 
     private void weiboLogin(View v) {
-
+        ToastUtil.toast(this, getResources().getString(R.string.not_complate));
     }
 
     private void weixinLogin(View v) {
-
+        ToastUtil.toast(this, getResources().getString(R.string.not_complate));
     }
 
     private void bindView() {

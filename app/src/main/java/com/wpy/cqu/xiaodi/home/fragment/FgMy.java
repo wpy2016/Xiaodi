@@ -12,13 +12,14 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
 import com.wpy.cqu.xiaodi.R;
+import com.wpy.cqu.xiaodi.application.XiaodiApplication;
 import com.wpy.cqu.xiaodi.base_activity.ClipBaseFragment;
+import com.wpy.cqu.xiaodi.model.User;
 import com.wpy.cqu.xiaodi.register.AcRegister;
 
 public class FgMy extends ClipBaseFragment {
-
-    private Context mContext;
 
     private TextView mtvContent;
 
@@ -44,6 +45,8 @@ public class FgMy extends ClipBaseFragment {
 
     private RelativeLayout mrlSetting;
 
+    private User user;
+
     public FgMy() {
     }
 
@@ -57,6 +60,7 @@ public class FgMy extends ClipBaseFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        user = XiaodiApplication.mCurrentUser;
     }
 
     @Override
@@ -75,15 +79,26 @@ public class FgMy extends ClipBaseFragment {
 
     private void initView() {
         mtvContent.setText(getResources().getString(R.string.my));
-        /**todo
-         * 设置用户的姓名
-         * 头像
-         * 认证状态
-         */
+        loadImg();
+        mtvNickName.setText(user.getNickName());
+        float money = user.getGoldMoney() + user.getSilverMoney();
+        mtvMoney.setText("" + money);
+        if (user.getUserType() == User.NORMAL) {
+            mtvAttestationStatus.setText(getResources().getString(R.string.xiaodi_attestation_not));
+            mtvRealName.setText(getResources().getString(R.string.no_real_name_identificate));
+            return;
+        }
+        mtvAttestationStatus.setText(getResources().getString(R.string.xiaodi_attestation));
+        mtvRealName.setText(user.getRealName());
+    }
+
+    // TODO: 2018/4/6  需要优化，当本地有图片时，不进行网络加载，本地没有图片时，网络加载并下载下来
+    private void loadImg() {
+        Picasso.with(getActivity()).load(user.ImgUrl).error(R.drawable.default_headimg).into(mivImg);
     }
 
     @Override
-    public void setImg(Bitmap img,String path) {
+    public void setImg(Bitmap img, String path) {
         mivImg.setImageBitmap(img);
     }
 
@@ -118,6 +133,7 @@ public class FgMy extends ClipBaseFragment {
         mtvNickName = view.findViewById(R.id.id_ac_my_me_tv_name);
         mrlSignature = view.findViewById(R.id.id_my_rl_everyday_sign);
         mrlMoney = view.findViewById(R.id.id_my_rl_wallet);
+        mtvMoney = view.findViewById(R.id.id_my_tv_wallet);
         mrlCarryRecord = view.findViewById(R.id.id_ac_my_rl_carryrecode);
         mrlAttestation = view.findViewById(R.id.id_fg_my_rl_xiaodi_attestation);
         mtvRealName = view.findViewById(R.id.id_ac_my_tv_realName);
