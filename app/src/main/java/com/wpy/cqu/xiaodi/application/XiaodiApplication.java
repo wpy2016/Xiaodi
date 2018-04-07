@@ -34,8 +34,8 @@ public class XiaodiApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        IMG_SAVE_PATH = getExternalFilesDir(null).getAbsolutePath() + "/crop_photo";
-        USER_SAVE_PATH = getExternalFilesDir(null).getAbsolutePath() + "/login_user";
+        IMG_SAVE_PATH = getFilesDir().getAbsolutePath() + "/crop_photo";
+        USER_SAVE_PATH = getFilesDir().getAbsolutePath() + "/login_user";
         USER_SAVE_FILEPATH = USER_SAVE_PATH + "/" + "user";
         confirmDirIsExist();
         initLogger();

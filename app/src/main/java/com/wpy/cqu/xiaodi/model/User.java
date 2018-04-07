@@ -19,8 +19,11 @@ import java.io.Serializable;
 
 public class User implements Serializable {
 
-    public static int NORMAL = 0;
-    public static int XIAODIYUAN = 1;
+    public static final int NORMAL = 0;
+
+    public static final int XIAODIYUAN = 1;
+
+    public static final String[] AuthStatus = {"未实名认证", "已实名认证"};
 
 
     @SerializedName("_id")
@@ -240,7 +243,7 @@ public class User implements Serializable {
             e.printStackTrace();
             Logger.e(e.getMessage());
             return null;
-        }finally {
+        } finally {
             if (null != userInput) {
                 try {
                     userInput.close();

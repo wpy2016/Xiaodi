@@ -32,7 +32,8 @@ public class Error {
                         resp.fail(new ResultResp(444, "网络错误"));
                         return;
                     }
-                    Logger.i("request fail");
+                    Logger.i("request fail %s, %s",throwable.getStackTrace().toString(),throwable.getMessage());
+                    throwable.printStackTrace();
                     resp.fail(new ResultResp(444, throwable.getMessage()));
                 }
             };

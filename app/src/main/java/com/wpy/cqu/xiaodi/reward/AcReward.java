@@ -15,6 +15,7 @@ import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.wpy.cqu.xiaodi.R;
 import com.wpy.cqu.xiaodi.application.XiaodiApplication;
@@ -28,12 +29,12 @@ import com.wpy.cqu.xiaodi.model.Thing;
 import com.wpy.cqu.xiaodi.net.RewardRequst;
 import com.wpy.cqu.xiaodi.net.resp.IResp;
 import com.wpy.cqu.xiaodi.util.DpUtil;
+import com.wpy.cqu.xiaodi.util.TimeUtils;
 import com.wpy.cqu.xiaodi.util.ToastUtil;
 import com.wpy.cqu.xiaodi.view.wheel.PlacePicker;
 import com.wpy.cqu.xiaodi.view.wheel.TimePicker;
 
 import java.util.Date;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class AcReward extends ClipBaseActivity {
@@ -84,6 +85,9 @@ public class AcReward extends ClipBaseActivity {
     private EditText metDescribe;
     private Button mbtnSend;
 
+    //Loading
+    private PopupWindow mLoadingPopWindow;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,58 +107,25 @@ public class AcReward extends ClipBaseActivity {
         if (!isavaliable) {
             return;
         }
-        PopupWindow popupWindow = Loading.showLoading(this,getWindow().getDecorView());
         Reward reward = createReward();
+        if (null == mLoadingPopWindow) {
+            mLoadingPopWindow = Loading.getLoadingPopwindown(this);
+        }
+        Loading.showLoading(this,mLoadingPopWindow);
         RewardRequst.SendReward(reward, XiaodiApplication.mCurrentUser.Id,
                 XiaodiApplication.mCurrentUser.Token, new IResp<ResultResp>() {
             @Override
             public void success(ResultResp resp) {
-                //Loading.stopLoading(popupWindow);
-                //finish();
+                mLoadingPopWindow.dismiss();
+                 finish();
             }
 
             @Override
             public void fail(ResultResp resp) {
-                Loading.stopLoading(popupWindow);
+                mLoadingPopWindow.dismiss();
                 ToastUtil.toast(AcReward.this, resp.message);
             }
         });
-    }
-
-    private boolean validateParams() {
-        if (-1 == miThingType) {
-            ToastUtil.toast(this, getResources().getString(R.string.please_select_good_type));
-            return false;
-        }
-        if (-1 == miWeight) {
-            ToastUtil.toast(this, getResources().getString(R.string.please_select_good_weight_type));
-            return false;
-        }
-        if (TextUtils.isEmpty(metXiaodian.getText().toString())) {
-            ToastUtil.toast(this, getResources().getString(R.string.please_give_smile_point));
-            return false;
-        }
-        if (TextUtils.isEmpty(metphone.getText().toString())) {
-            ToastUtil.toast(this, getResources().getString(R.string.phone_no_null));
-            return false;
-        }
-        if (!Pattern.matches("^1[0-9]{10}$",metphone.getText().toString())) {
-            ToastUtil.toast(this, getResources().getString(R.string.phone_no_right));
-            return false;
-        }
-        if (TextUtils.isEmpty(mtvStartPlace.getText().toString())) {
-            ToastUtil.toast(this, getResources().getString(R.string.good_start_or_end_place_null));
-            return false;
-        }
-        if (TextUtils.isEmpty(mtvDstPlace.getText().toString())) {
-            ToastUtil.toast(this, getResources().getString(R.string.good_start_or_end_place_null));
-            return false;
-        }
-        if (TextUtils.isEmpty(mtvDeadLine.getText().toString())) {
-            ToastUtil.toast(this, getResources().getString(R.string.good_start_or_end_place_null));
-            return false;
-        }
-        return true;
     }
 
     private Reward createReward() {
@@ -178,7 +149,6 @@ public class AcReward extends ClipBaseActivity {
         ToastUtil.toast(this, getResources().getString(R.string.photo_load_fail));
     }
 
-
     @Override
     public void setImg(Bitmap img, String path) {
         if (-1 == miThingType) {
@@ -189,6 +159,7 @@ public class AcReward extends ClipBaseActivity {
         ivs[miThingType].setImageBitmap(img);
         mThumbnail = path;
     }
+
 
     private void resetImgBg() {
         mivExpress.setBackground(new BitmapDrawable());
@@ -277,12 +248,6 @@ public class AcReward extends ClipBaseActivity {
         mPopSelectTime.setAnimationStyle(android.R.style.Animation_InputMethod);
     }
 
-    private void initData() {
-        msWeight = new String[]{getResources().getString(R.string.weight_light),
-                getResources().getString(R.string.weight_middle),
-                getResources().getString(R.string.weight_heavy)};
-    }
-
     private void bindView() {
         mivTakeImg = (ImageView) findViewById(R.id.id_ac_send_reward_iv_take_photo_img);
         mivBack = (ImageView) findViewById(R.id.id_top_back_iv_img);
@@ -308,15 +273,21 @@ public class AcReward extends ClipBaseActivity {
 
     }
 
+    private void initData() {
+        msWeight = new String[]{getResources().getString(R.string.weight_light),
+                getResources().getString(R.string.weight_middle),
+                getResources().getString(R.string.weight_heavy)};
+    }
+
     private void initView() {
         mivBack.setImageResource(R.drawable.go_back_white);
         mtvBack.setText(getResources().getString(R.string.hall));
         mtvBack.setTextColor(Color.WHITE);
         mtvContent.setText(getResources().getString(R.string.send_reward));
         metphone.setText(XiaodiApplication.mCurrentUser.Phone);
+        mtvDeadLine.setText(TimeUtils.getFormatTime());
         resetImgBg();
     }
-
 
     private void bindEvent() {
         mivTakeImg.setOnClickListener(v -> showPopupWindow(mivTakeImg));
@@ -343,5 +314,47 @@ public class AcReward extends ClipBaseActivity {
                     break;
             }
         });
+    }
+
+
+    private boolean validateParams() {
+        if (-1 == miThingType) {
+            ToastUtil.toast(this, getResources().getString(R.string.please_select_good_type));
+            return false;
+        }
+        if (-1 == miWeight) {
+            ToastUtil.toast(this, getResources().getString(R.string.please_select_good_weight_type));
+            return false;
+        }
+        if (TextUtils.isEmpty(metXiaodian.getText().toString())) {
+            ToastUtil.toast(this, getResources().getString(R.string.please_give_smile_point));
+            return false;
+        }
+        if (TextUtils.isEmpty(metphone.getText().toString())) {
+            ToastUtil.toast(this, getResources().getString(R.string.phone_no_null));
+            return false;
+        }
+        if (!Pattern.matches("^1[0-9]{10}$",metphone.getText().toString())) {
+            ToastUtil.toast(this, getResources().getString(R.string.phone_no_right));
+            return false;
+        }
+        if (TextUtils.isEmpty(mtvStartPlace.getText().toString())) {
+            ToastUtil.toast(this, getResources().getString(R.string.good_start_or_end_place_null));
+            return false;
+        }
+        if (TextUtils.isEmpty(mtvDstPlace.getText().toString())) {
+            ToastUtil.toast(this, getResources().getString(R.string.good_start_or_end_place_null));
+            return false;
+        }
+        if (TextUtils.isEmpty(mtvDeadLine.getText().toString())) {
+            ToastUtil.toast(this, getResources().getString(R.string.set_deadline));
+            return false;
+        }
+
+        if (!TimeUtils.TimeOverNow(mtvDeadLine.getText().toString())) {
+            ToastUtil.toast(this,getResources().getString(R.string.time_over_now));
+            return false;
+        }
+        return true;
     }
 }

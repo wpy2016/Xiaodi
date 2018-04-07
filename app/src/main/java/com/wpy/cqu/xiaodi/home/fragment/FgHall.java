@@ -5,6 +5,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,11 +17,21 @@ import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
+import com.orhanobut.logger.Logger;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.wpy.cqu.xiaodi.R;
+import com.wpy.cqu.xiaodi.adapter.recycler.RewardAdapter;
+import com.wpy.cqu.xiaodi.application.XiaodiApplication;
 import com.wpy.cqu.xiaodi.home.AcHomeAdd;
+import com.wpy.cqu.xiaodi.model.ResultResp;
+import com.wpy.cqu.xiaodi.model.Reward;
+import com.wpy.cqu.xiaodi.net.RewardRequst;
+import com.wpy.cqu.xiaodi.net.resp.IResp;
+import com.wpy.cqu.xiaodi.reward.AcRewardDetail;
 import com.wpy.cqu.xiaodi.util.DpUtil;
 import com.wpy.cqu.xiaodi.util.ToastUtil;
+
+import java.util.List;
 
 /**
  * Created by wangpeiyu on 2018/3/30.
@@ -52,6 +63,8 @@ public class FgHall extends Fragment {
 
     private RecyclerView recyclerView;
 
+    private RewardAdapter rewardAdapter;
+
     private PopupWindow mPopSearch;
 
     private String msKeyWord;
@@ -59,6 +72,9 @@ public class FgHall extends Fragment {
     private ShowType mShowType = ShowType.NEWS;
 
     private SERVICE_TYPE mServiceType = SERVICE_TYPE.REWARD;
+
+    //标记加载第几页数据，随着loadmore的进行会不断增大
+    private int mPage = 0;
 
     public static FgHall newInstance() {
         FgHall fragment = new FgHall();
@@ -85,6 +101,7 @@ public class FgHall extends Fragment {
         super.onActivityCreated(savedInstanceState);
         initView();
         bindEvent();
+        refresh();
     }
 
     @Override
@@ -117,11 +134,39 @@ public class FgHall extends Fragment {
     }
 
     private void refresh() {
-        smartRefreshLayout.finishRefresh(2000);
+        mPage = 0;
+        RewardRequst.ShowRewards(mPage, XiaodiApplication.mCurrentUser.Id,
+                XiaodiApplication.mCurrentUser.Token, new IResp<List<Reward>>() {
+                    @Override
+                    public void success(List<Reward> rewards) {
+                        smartRefreshLayout.finishRefresh();
+                        rewardAdapter.refresh(rewards);
+                    }
+
+                    @Override
+                    public void fail(ResultResp resp) {
+                        smartRefreshLayout.finishRefresh();
+                        ToastUtil.toast(getActivity(),resp.message);
+                    }
+                });
     }
 
     private void loadMore() {
-        smartRefreshLayout.finishLoadMore(2000);
+        mPage++;
+        RewardRequst.ShowRewards(mPage, XiaodiApplication.mCurrentUser.Id,
+                XiaodiApplication.mCurrentUser.Token, new IResp<List<Reward>>() {
+                    @Override
+                    public void success(List<Reward> rewards) {
+                        smartRefreshLayout.finishLoadMore();
+                        rewardAdapter.loadMore(rewards);
+                    }
+
+                    @Override
+                    public void fail(ResultResp resp) {
+                        smartRefreshLayout.finishLoadMore();
+                        ToastUtil.toast(getActivity(),resp.message);
+                    }
+                });
     }
 
     private void showPopSearch() {
@@ -188,6 +233,18 @@ public class FgHall extends Fragment {
         smartRefreshLayout.setOnLoadMoreListener(layout->{
             loadMore();
         });
+
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
+        recyclerView.setLayoutManager(linearLayoutManager);
+        rewardAdapter = new RewardAdapter(getContext());
+        recyclerView.setAdapter(rewardAdapter);
+        rewardAdapter.setOnItemClickListener(this::toDetail);
+    }
+
+    private void toDetail(Reward reward) {
+        Intent intent = new Intent(getActivity(), AcRewardDetail.class);
+        intent.putExtra("reward",reward);
+        startActivity(intent);
     }
 
     private void toNext(Class<?> next,Bundle bundle) {

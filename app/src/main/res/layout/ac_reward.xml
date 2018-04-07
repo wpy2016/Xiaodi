@@ -342,6 +342,7 @@
                         android:background="@drawable/circle_white_35"
                         android:inputType="number"
                         android:paddingLeft="20dp"
+                        android:maxLength="5"
                         android:singleLine="true"
                         android:textColor="@color/text_color_heavy_gray"
                         android:textSize="@dimen/small_textsize" />
@@ -367,6 +368,7 @@
                     android:layout_weight="1"
                     android:background="@drawable/circle_white_35"
                     android:inputType="number"
+                    android:maxLength="11"
                     android:paddingLeft="10dp"
                     android:singleLine="true"
                     android:textColor="@color/text_color_heavy_gray"

@@ -76,6 +76,7 @@ public class AcLogin extends StatusBarAppComptActivity {
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(s -> Logger.i("login save user to path"));
                 toNextAc(AcHome.class, null);
+                finish();
             }
 
             @Override

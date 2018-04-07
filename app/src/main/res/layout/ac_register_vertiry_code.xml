@@ -25,6 +25,7 @@
             android:background="@null"
             android:drawableBottom="@drawable/line_heavy_gray_200"
             android:hint="@string/onlycellphone"
+            android:maxLength="11"
             android:inputType="phone"
             android:paddingLeft="@dimen/dimen_40"
             android:singleLine="true"

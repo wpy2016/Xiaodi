@@ -148,6 +148,7 @@
                     android:layout_height="30dp"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="10dp"
+                    android:maxLength="11"
                     android:layout_weight="1"
                     android:singleLine="true"
                     android:background="@drawable/circle_white_35"

@@ -1,7 +1,7 @@
 package com.wpy.cqu.xiaodi.net.request;
 
 import com.wpy.cqu.xiaodi.model.ResultResp;
-import com.wpy.cqu.xiaodi.model.UserResultResp;
+import com.wpy.cqu.xiaodi.model.ShowReward;
 
 import io.reactivex.Observable;
 import okhttp3.MultipartBody;
@@ -33,4 +33,12 @@ public interface IRewardRequest {
                                                 @Field("dead_line") String deadLine, @Field("origin_location") String originLocation,
                                                 @Field("dst_location") String dstLocation, @Field("describe") String describe,
                                                 @Field("thing_type") int ThingType, @Field("weight") String Weight);
+
+    @POST("/reward/show")
+    @FormUrlEncoded
+    Observable<ShowReward> ShowRewards(@Field("pages") int pages,@Field("user_id") String userId,@Field("token") String token);
+
+    @POST("/reward/carry")
+    @FormUrlEncoded
+    Observable<ResultResp> CarryReward(@Field("_id") String id,@Field("user_id") String userId,@Field("token") String token);
 }

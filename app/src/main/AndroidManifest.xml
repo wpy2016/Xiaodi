@@ -69,6 +69,9 @@
         <activity
             android:name=".goout.AcGoOut"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".reward.AcRewardDetail"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -21,6 +22,7 @@ import com.wpy.cqu.xiaodi.base_activity.ClipBaseActivity;
 import com.wpy.cqu.xiaodi.base_activity.StatusBarAppComptActivity;
 import com.wpy.cqu.xiaodi.encrypt.AESEncrypt;
 import com.wpy.cqu.xiaodi.home.AcHome;
+import com.wpy.cqu.xiaodi.loading.Loading;
 import com.wpy.cqu.xiaodi.model.ResultResp;
 import com.wpy.cqu.xiaodi.model.User;
 import com.wpy.cqu.xiaodi.net.UserRequest;
@@ -55,6 +57,8 @@ public class AcRegister extends ClipBaseActivity {
 
     private String mImgPath = "";
 
+    private PopupWindow mLoadingPopWindow;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Bundle bundle = new Bundle();
@@ -83,9 +87,15 @@ public class AcRegister extends ClipBaseActivity {
         String nickName = metName.getText().toString();
         String pass = metPass.getText().toString();
         String encryptPass = AESEncrypt.Base64AESEncrypt(pass);
+
+        if (null == mLoadingPopWindow) {
+            mLoadingPopWindow = Loading.getLoadingPopwindown(this);
+        }
+        Loading.showLoading(this,mLoadingPopWindow);
         UserRequest.Register(phone, encryptPass, nickName, mImgPath, new IResp<User>() {
             @Override
             public void success(User user) {
+                mLoadingPopWindow.dismiss();
                 user.ImgLocalPath = mImgPath;
                 user.Pass = encryptPass;
                 saveUser(user);
@@ -94,6 +104,7 @@ public class AcRegister extends ClipBaseActivity {
 
             @Override
             public void fail(ResultResp resp) {
+                mLoadingPopWindow.dismiss();
                 ToastUtil.toast(AcRegister.this,resp.message);
             }
         });

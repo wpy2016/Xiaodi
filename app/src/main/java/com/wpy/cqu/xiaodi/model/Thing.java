@@ -1,17 +1,23 @@
 package com.wpy.cqu.xiaodi.model;
 
 import com.google.gson.Gson;
+import com.google.gson.annotations.SerializedName;
+
+import java.io.Serializable;
 
 /**
  * Created by wangpeiyu on 2018/4/6.
  */
 
-public class Thing {
+public class Thing implements Serializable{
 
+    @SerializedName("thing_type")
     public int type;
 
+    @SerializedName("thumbnail")
     public String thumbnail;
 
+    @SerializedName("weight")
     public String weight;
 
     public Thing() {

@@ -3,11 +3,13 @@ package com.wpy.cqu.xiaodi.model;
 import com.google.gson.Gson;
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
+
 /**
  * Created by wangpeiyu on 2018/4/6.
  */
 
-public class BaseUser {
+public class BaseUser implements Serializable{
     @SerializedName("_id")
     public String Id;
 

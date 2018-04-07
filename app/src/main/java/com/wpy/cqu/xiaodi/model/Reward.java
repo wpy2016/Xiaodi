@@ -2,12 +2,20 @@ package com.wpy.cqu.xiaodi.model;
 
 import com.google.gson.Gson;
 import com.google.gson.annotations.SerializedName;
+import com.wpy.cqu.xiaodi.R;
+
+import java.io.Serializable;
 
 /**
  * Created by wangpeiyu on 2018/4/6.
  */
 
-public class Reward {
+public class Reward implements Serializable {
+
+    public static int[] DEFAULT_TYPE_IMG = {R.drawable.good_type_express, R.drawable.good_type_food,
+            R.drawable.good_type_paper, R.drawable.good_type_other};
+
+    public static String[] THING_TYPE = {"快递", "餐饮", "纸质", "其他"};
 
     //类型
     public static final int EXPRESS = 0;
@@ -59,10 +67,24 @@ public class Reward {
     @SerializedName("thing")
     public Thing thing;
 
+    @SerializedName("create_time")
+    public String createTIme;
+
+    public String getCreateTIme() {
+        return createTIme;
+    }
+
+    public void setCreateTIme(String createTIme) {
+        this.createTIme = createTIme;
+    }
+
     public Reward() {
     }
 
-    public Reward(String id, BaseUser publisher, int state, String phone, int xiaodian, String deadline, String originLocation, String dstLocation, BaseUser receiver, float publisherGrade, float receiveGrade, String describe, Thing thing) {
+    public Reward(String id, BaseUser publisher, int state, String phone, int xiaodian,
+                  String deadline, String originLocation, String dstLocation, BaseUser receiver,
+                  float publisherGrade, float receiveGrade, String describe,
+                  Thing thing, String createTIme) {
         this.id = id;
         Publisher = publisher;
         this.state = state;
@@ -76,6 +98,7 @@ public class Reward {
         this.receiveGrade = receiveGrade;
         this.describe = describe;
         this.thing = thing;
+        this.createTIme = createTIme;
     }
 
     public String getId() {
