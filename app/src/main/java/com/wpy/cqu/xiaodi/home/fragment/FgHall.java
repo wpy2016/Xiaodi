@@ -5,6 +5,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -205,6 +206,12 @@ public class FgHall extends Fragment {
         mivTypeDown.setImageResource(R.drawable.hall_down_green);
         mivAdd.setVisibility(View.VISIBLE);
         mivAdd.setImageResource(R.drawable.hall_add);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
+        recyclerView.setLayoutManager(linearLayoutManager);
+        rewardAdapter = new RewardAdapter(getContext());
+        recyclerView.setAdapter(rewardAdapter);
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(getContext(),DividerItemDecoration.VERTICAL);
+        recyclerView.addItemDecoration(dividerItemDecoration);
     }
 
 
@@ -234,10 +241,6 @@ public class FgHall extends Fragment {
             loadMore();
         });
 
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
-        recyclerView.setLayoutManager(linearLayoutManager);
-        rewardAdapter = new RewardAdapter(getContext());
-        recyclerView.setAdapter(rewardAdapter);
         rewardAdapter.setOnItemClickListener(this::toDetail);
     }
 

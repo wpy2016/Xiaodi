@@ -28,6 +28,7 @@
             android:layout_height="wrap_content"
             android:ellipsize="start"
             android:gravity="center"
+            android:visibility="gone"
             android:singleLine="false"
             android:text="@string/default_time"
             android:textColor="@color/text_color_thin_gray"
@@ -105,32 +106,37 @@
 
             <TextView
                 android:id="@+id/id_reward_tv_start_place"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
                 android:ellipsize="start"
                 android:maxWidth="85dp"
+                android:gravity="left"
                 android:singleLine="true"
                 android:text="@string/default_user_name"
                 android:textColor="@color/text_color_thin_gray"
-                android:textSize="@dimen/hall_option_type_tv_size" />
+                android:textSize="12sp" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="—"
-                android:textColor="@color/text_color_thin_gray"
-                android:textSize="@dimen/hall_option_type_tv_size" />
+            <ImageView
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:src="@drawable/plane_to"
+                android:scaleType="fitXY" />
 
             <TextView
                 android:id="@+id/id_reward_tv_end_place"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="wrap_content"
+                android:gravity="right"
+                android:layout_gravity="center_vertical"
                 android:ellipsize="start"
                 android:maxWidth="85dp"
                 android:singleLine="true"
                 android:text="@string/default_user_name"
                 android:textColor="@color/text_color_thin_gray"
-                android:textSize="@dimen/hall_option_type_tv_size" />
+                android:textSize="12sp" />
         </LinearLayout>
 
         <LinearLayout

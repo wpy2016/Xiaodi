@@ -62,11 +62,12 @@ public class RewardAdapter extends RecyclerView.Adapter<RewardHolder> {
     }
 
     public void refresh(List<Reward> rewardList) {
+        rewards.clear();
         if (null == rewardList || rewardList.isEmpty()) {
+            notifyDataSetChanged();
             ToastUtil.toast(mContext, mContext.getResources().getString(R.string.no_more_data));
             return;
         }
-        rewards.clear();
         rewards.addAll(rewardList);
         notifyDataSetChanged();
     }
