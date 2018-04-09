@@ -11,7 +11,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.orhanobut.logger.Logger;
 import com.wpy.cqu.xiaodi.R;
 import com.wpy.cqu.xiaodi.adapter.recycler.RewardAdapter;
 import com.wpy.cqu.xiaodi.application.XiaodiApplication;
@@ -19,10 +18,9 @@ import com.wpy.cqu.xiaodi.model.ResultResp;
 import com.wpy.cqu.xiaodi.model.Reward;
 import com.wpy.cqu.xiaodi.net.RewardRequst;
 import com.wpy.cqu.xiaodi.net.resp.IResp;
-import com.wpy.cqu.xiaodi.resetpass.AcEditPass;
 import com.wpy.cqu.xiaodi.reward.AcCarryRecord;
 import com.wpy.cqu.xiaodi.reward.AcEditReward;
-import com.wpy.cqu.xiaodi.reward.AcRewardDetail;
+import com.wpy.cqu.xiaodi.reward.AcRewardDetailCanNotCarry;
 import com.wpy.cqu.xiaodi.util.ToastUtil;
 
 import java.util.List;
@@ -114,14 +112,14 @@ public class FgCarry extends Fragment {
     private void itemClick(Reward reward) {
         switch (carryRecordType) {
             case AcCarryRecord.MyCarry:
-                toNext(reward,AcRewardDetail.class);
+                toNext(reward,AcRewardDetailCanNotCarry.class);
                 break;
             case AcCarryRecord.MySend:
                 if (Reward.REWARD_STATE_SEND == reward.state) {
                     toNext(reward,AcEditReward.class);
                     return;
                 }
-                toNext(reward,AcRewardDetail.class);
+                toNext(reward,AcRewardDetailCanNotCarry.class);
                 break;
         }
     }

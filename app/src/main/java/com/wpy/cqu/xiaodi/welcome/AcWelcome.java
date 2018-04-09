@@ -36,7 +36,11 @@ public class AcWelcome extends StatusBarAppComptActivity {
         super.onCreate(bundle);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.ac_welcome);
+    }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
         if (isFirstTimeUse()) {
             closeFirstUse();
             delayToNextAc(AcGuide.class);

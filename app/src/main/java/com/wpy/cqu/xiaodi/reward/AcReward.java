@@ -151,10 +151,6 @@ public class AcReward extends ClipBaseActivity {
 
     @Override
     public void setImg(Bitmap img, String path) {
-        if (-1 == miThingType) {
-            ToastUtil.toast(this, getResources().getString(R.string.please_select_good_type));
-            return;
-        }
         ImageView[] ivs = {mivExpress, mivFood, mivPaper, mivOther};
         ivs[miThingType].setImageBitmap(img);
         mThumbnail = path;
@@ -290,7 +286,13 @@ public class AcReward extends ClipBaseActivity {
     }
 
     private void bindEvent() {
-        mivTakeImg.setOnClickListener(v -> showPopupWindow(mivTakeImg));
+        mivTakeImg.setOnClickListener(v ->{
+            if (-1 == miThingType) {
+                ToastUtil.toast(this, getResources().getString(R.string.please_select_good_type));
+                return;
+            }
+            showPopupWindow(mivTakeImg);
+        });
         mivBack.setOnClickListener(v -> finish());
         mtvBack.setOnClickListener(v -> finish());
         mivExpress.setOnClickListener(v -> selectThingType(mivExpress, Thing.EXPRESS));

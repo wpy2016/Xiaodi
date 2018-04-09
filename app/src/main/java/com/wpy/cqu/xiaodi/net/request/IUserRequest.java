@@ -1,5 +1,6 @@
 package com.wpy.cqu.xiaodi.net.request;
 
+import com.wpy.cqu.xiaodi.model.ResultResp;
 import com.wpy.cqu.xiaodi.model.UserResultResp;
 
 import io.reactivex.Observable;
@@ -21,11 +22,21 @@ public interface IUserRequest {
 
     @POST("user/register")
     @Multipart
-    Observable<UserResultResp> Register(@Part("phone") RequestBody phone, @Part("pass")RequestBody pass,
+    Observable<UserResultResp> Register(@Part("phone") RequestBody phone, @Part("pass") RequestBody pass,
                                         @Part("nick_name") RequestBody nickName, @Part MultipartBody.Part img);
 
     @POST("user/login")
     @FormUrlEncoded
-    Observable<UserResultResp> Login(@Field("phone") String phone,@Field("pass") String pass);
+    Observable<UserResultResp> Login(@Field("phone") String phone, @Field("pass") String pass);
+
+    @POST("user/auth")
+    @FormUrlEncoded
+    Observable<ResultResp> Auth(@Field("user_id") String userId, @Field("token") String token,
+                                @Field("school_id") String schoolId,
+                                @Field("school_pass") String schoolPass, @Field("real_name") String realName);
+
+    @POST("user/get")
+    @FormUrlEncoded
+    Observable<UserResultResp> Get(@Field("user_id") String userId, @Field("token") String token);
 
 }

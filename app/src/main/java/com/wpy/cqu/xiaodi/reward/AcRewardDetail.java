@@ -61,7 +61,7 @@ public class AcRewardDetail extends TopBarAppComptAcitity {
 
     private TextView mtvCredit;
 
-    private Button mbtnArray;
+    protected Button mbtnArray;
 
     private Reward reward;
 

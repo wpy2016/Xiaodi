@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.media.session.MediaControllerCompat;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -69,12 +70,8 @@ public class AcLogin extends StatusBarAppComptActivity {
             @Override
             public void success(User user) {
                 XiaodiApplication.mCurrentUser = user;
-                user.Pass = encryptPass;
-                Observable.just("")
-                        .doOnNext(s -> user.saveToLocalFile())
-                        .subscribeOn(Schedulers.io())
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(s -> Logger.i("login save user to path"));
+                XiaodiApplication.mCurrentUser.Pass = encryptPass;
+                XiaodiApplication.mCurrentUser.saveToLocalFile();
                 toNextAc(AcHome.class, null);
                 finish();
             }

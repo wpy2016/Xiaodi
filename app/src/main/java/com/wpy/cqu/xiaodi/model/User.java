@@ -13,6 +13,9 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
+import io.reactivex.Observable;
+import io.reactivex.schedulers.Schedulers;
+
 /**
  * Created by wangpeiyu on 2018/4/4.
  */
@@ -200,7 +203,7 @@ public class User implements Serializable {
         Sign = sign;
     }
 
-    public static void deleteUserLocalFile(){
+    public static void deleteUserLocalFile() {
         File userFile = new File(XiaodiApplication.USER_SAVE_FILEPATH);
         if (userFile.exists()) {
             userFile.delete();
@@ -208,6 +211,13 @@ public class User implements Serializable {
     }
 
     public void saveToLocalFile() {
+        Observable.just("")
+                .doOnNext(s -> save())
+                .subscribeOn(Schedulers.io())
+                .subscribe();
+    }
+
+    private void save() {
         File userFile = new File(XiaodiApplication.USER_SAVE_FILEPATH);
         if (userFile.exists()) {
             userFile.delete();
@@ -221,14 +231,16 @@ public class User implements Serializable {
             e.printStackTrace();
             Logger.e(e.getMessage());
         } finally {
-            if (null != userOutput) {
-                try {
-                    userOutput.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    Logger.e(e.getMessage());
-                }
+            if (null == userOutput) {
+                return;
             }
+            try {
+                userOutput.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+                Logger.e(e.getMessage());
+            }
+
         }
     }
 
@@ -251,13 +263,14 @@ public class User implements Serializable {
             Logger.e(e.getMessage());
             return null;
         } finally {
-            if (null != userInput) {
-                try {
-                    userInput.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    Logger.e(e.getMessage());
-                }
+            if (null == userInput) {
+                return user;
+            }
+            try {
+                userInput.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+                Logger.e(e.getMessage());
             }
         }
         return user;

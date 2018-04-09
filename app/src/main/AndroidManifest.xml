@@ -94,7 +94,8 @@
         <activity
             android:name=".wallet.AcWallet"
             android:screenOrientation="portrait" />
-        <activity android:name=".reward.AcEditReward"></activity>
+        <activity android:name=".reward.AcEditReward" />
+        <activity android:name=".reward.AcRewardDetailCanNotCarry"></activity>
     </application>
 
 </manifest>

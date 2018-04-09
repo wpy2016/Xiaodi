@@ -1,16 +1,19 @@
 package com.wpy.cqu.xiaodi.net;
 
+import com.orhanobut.logger.Logger;
 import com.wpy.cqu.xiaodi.model.ResultResp;
 import com.wpy.cqu.xiaodi.model.User;
 import com.wpy.cqu.xiaodi.model.UserResultResp;
 import com.wpy.cqu.xiaodi.net.request.IUserRequest;
 import com.wpy.cqu.xiaodi.net.resp.Error;
 import com.wpy.cqu.xiaodi.net.resp.IResp;
+import com.wpy.cqu.xiaodi.net.resp.ResultRespConsumer;
 
 import java.io.File;
 
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -38,13 +41,7 @@ public class UserRequest {
         Observable<UserResultResp> register = userRequest.Register(phoneBody, passBody, nickNameBody, imgData);
         register.subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(resp -> {
-                    if (Error.SUCCESS != resp.getResultCode()) {
-                        userResp.fail(new ResultResp(resp.getResultCode(), resp.getMessage()));
-                        return;
-                    }
-                    userResp.success(resp.user);
-                }, Error.getErrorConsumer(userResp));
+                .subscribe(new UserConsumer("Register", userResp), Error.getErrorConsumer(userResp));
     }
 
     public static void Login(String phone, String pass, IResp<User> userResp) {
@@ -53,12 +50,50 @@ public class UserRequest {
         Observable<UserResultResp> login = userRequest.Login(phone, pass);
         login.subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(resp -> {
-                    if (Error.SUCCESS != resp.getResultCode()) {
-                        userResp.fail(new ResultResp(resp.getResultCode(), resp.getMessage()));
-                        return;
-                    }
-                    userResp.success(resp.user);
-                }, Error.getErrorConsumer(userResp));
+                .subscribe(new UserConsumer("Login", userResp), Error.getErrorConsumer(userResp));
+    }
+
+    public static void Auth(String userId, String token, String schoolId, String schoolPass, String realName, IResp<ResultResp> userResp) {
+        Retrofit retrofit = BaseRetrofit.getInstance();
+        IUserRequest userRequest = retrofit.create(IUserRequest.class);
+        Observable<ResultResp> authObservable = userRequest.Auth(userId, token, schoolId, schoolPass, realName);
+        authObservable.subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new ResultRespConsumer("Auth", userResp), Error.getErrorConsumer(userResp));
+
+
+    }
+
+    public static void Get(String userId, String token, IResp<User> userResp) {
+        Retrofit retrofit = BaseRetrofit.getInstance();
+        IUserRequest userRequest = retrofit.create(IUserRequest.class);
+        Observable<UserResultResp> getObservable = userRequest.Get(userId, token);
+        getObservable.subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new UserConsumer("Get", userResp), Error.getErrorConsumer(userResp));
+
+
+    }
+
+    private static class UserConsumer implements Consumer<UserResultResp> {
+
+        private String method;
+
+        private IResp<User> resp;
+
+        private UserConsumer(String methodStr, IResp<User> iResp) {
+            this.method = methodStr;
+            this.resp = iResp;
+        }
+
+        @Override
+        public void accept(UserResultResp resonce) {
+            Logger.i(method + " sussess.code is %d message is %s", resonce.ResultCode, resonce.message);
+            if (Error.SUCCESS != resonce.ResultCode) {
+                resp.fail(new ResultResp(resonce.ResultCode, resonce.message));
+                return;
+            }
+            resp.success(resonce.user);
+        }
     }
 }

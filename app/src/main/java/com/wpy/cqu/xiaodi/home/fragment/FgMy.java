@@ -77,8 +77,13 @@ public class FgMy extends ClipBaseFragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        initView();
         bindEvent();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        initView();
     }
 
     private void initView() {
