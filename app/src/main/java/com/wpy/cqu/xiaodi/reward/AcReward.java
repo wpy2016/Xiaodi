@@ -293,10 +293,10 @@ public class AcReward extends ClipBaseActivity {
         mivTakeImg.setOnClickListener(v -> showPopupWindow(mivTakeImg));
         mivBack.setOnClickListener(v -> finish());
         mtvBack.setOnClickListener(v -> finish());
-        mivExpress.setOnClickListener(v -> selectThingType(mivExpress, Reward.EXPRESS));
-        mivFood.setOnClickListener(v -> selectThingType(mivFood, Reward.FOOD));
-        mivPaper.setOnClickListener(v -> selectThingType(mivPaper, Reward.PAPER));
-        mivOther.setOnClickListener(v -> selectThingType(mivOther, Reward.OTHER));
+        mivExpress.setOnClickListener(v -> selectThingType(mivExpress, Thing.EXPRESS));
+        mivFood.setOnClickListener(v -> selectThingType(mivFood, Thing.FOOD));
+        mivPaper.setOnClickListener(v -> selectThingType(mivPaper, Thing.PAPER));
+        mivOther.setOnClickListener(v -> selectThingType(mivOther, Thing.OTHER));
         mtvStartPlace.setOnClickListener(v -> showSelectPlaceWithIndex(R.id.id_ac_send_reward_tv_start_place));
         mtvDstPlace.setOnClickListener(v -> showSelectPlaceWithIndex(R.id.id_ac_send_reward_tv_arrive_place));
         mtvDeadLine.setOnClickListener(v -> showPopSelectTime());
@@ -304,13 +304,13 @@ public class AcReward extends ClipBaseActivity {
         mrgWeight.setOnCheckedChangeListener((radioGroup, checkId) -> {
             switch (checkId) {
                 case R.id.id_ac_send_reward_rb_light:
-                    miWeight = Reward.IWEIGHT_LIGHT_INT;
+                    miWeight = Thing.IWEIGHT_LIGHT_INT;
                     break;
                 case R.id.id_ac_send_reward_rb_medium:
-                    miWeight = Reward.IWEIGHT_MEDIUM_INT;
+                    miWeight = Thing.IWEIGHT_MEDIUM_INT;
                     break;
                 case R.id.id_ac_send_reward_rb_heavy:
-                    miWeight = Reward.IWEIGHT_HEAVY_INT;
+                    miWeight = Thing.IWEIGHT_HEAVY_INT;
                     break;
             }
         });

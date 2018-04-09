@@ -143,19 +143,13 @@ public class AcHome extends TopBarAppComptAcitity {
         mtvMy.setTextColor(TEXT_COLOR_GRAY);
     }
 
-    /**
-     * 首次进入时viewPager的adapter
-     */
-    public class HomePagerAdaper extends FragmentPagerAdapter {
+    private class HomePagerAdaper extends FragmentPagerAdapter {
 
         private List<Fragment> mFragments;
-
-        private FragmentManager mFragmentManager;
 
         public HomePagerAdaper(List<Fragment> fragments, FragmentManager fragmentManager) {
             super(fragmentManager);
             this.mFragments = fragments;
-            this.mFragmentManager = fragmentManager;
         }
 
         @Override

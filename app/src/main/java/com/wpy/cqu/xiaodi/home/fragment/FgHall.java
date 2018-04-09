@@ -251,11 +251,11 @@ public class FgHall extends Fragment {
 
     private class RewardResp implements IResp<List<Reward>> {
 
-        private boolean isFresh = true;
+        private boolean isRefresh = true;
 
         @Override
         public void success(List<Reward> rewards) {
-            if (isFresh) {
+            if (isRefresh) {
                 smartRefreshLayout.finishRefresh();
                 rewardAdapter.refresh(rewards);
                 return;
@@ -266,8 +266,10 @@ public class FgHall extends Fragment {
 
         @Override
         public void fail(ResultResp resp) {
-            ToastUtil.toast(getActivity(), resp.message);
-            if (isFresh) {
+            if (FgHall.this.isResumed()) {
+                ToastUtil.toast(getActivity(), resp.message);
+            }
+            if (isRefresh) {
                 smartRefreshLayout.finishRefresh();
                 return;
             }
@@ -275,7 +277,7 @@ public class FgHall extends Fragment {
         }
 
         private IResp<List<Reward>> setIsRefresh(boolean isRefresh) {
-            this.isFresh = isRefresh;
+            this.isRefresh = isRefresh;
             return this;
         }
     }

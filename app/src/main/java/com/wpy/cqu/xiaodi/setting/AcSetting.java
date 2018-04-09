@@ -50,6 +50,7 @@ public class AcSetting extends TopBarAppComptAcitity {
                 .doOnNext(s -> User.deleteUserLocalFile())
                 .subscribeOn(Schedulers.io())
                 .subscribe();
+        // TODO: 2018/4/9 清空Activity栈
         //ActivityManager.getActivityManager().popAllActivityExceptTop(this);
         Intent intent = new Intent(this, AcLogin.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);

@@ -9,12 +9,14 @@ import com.wpy.cqu.xiaodi.model.ShowReward;
 import com.wpy.cqu.xiaodi.net.request.IRewardRequest;
 import com.wpy.cqu.xiaodi.net.resp.Error;
 import com.wpy.cqu.xiaodi.net.resp.IResp;
+import com.wpy.cqu.xiaodi.net.resp.ResultRespConsumer;
 
 import java.io.File;
 import java.util.List;
 
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -33,14 +35,7 @@ public class RewardRequst {
         Observable<ResultResp> carryRewardObservable = iRewardRequest.CarryReward(id, userId, token);
         carryRewardObservable.subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(responce -> {
-                    Logger.i("carry rewards request sussess.code is %d message is %s", responce.ResultCode, responce.message);
-                    if (Error.SUCCESS != responce.ResultCode) {
-                        resp.fail(new ResultResp(responce.ResultCode, responce.message));
-                        return;
-                    }
-                    resp.success(responce);
-                }, Error.getErrorConsumer(resp));
+                .subscribe(new ResultRespConsumer("CarryRewards", resp), Error.getErrorConsumer(resp));
     }
 
     public static void ShowRewardsSortXiaodian(int pages, String userId, String token, IResp<List<Reward>> resp) {
@@ -49,14 +44,7 @@ public class RewardRequst {
         Observable<ShowReward> showRewardSortXiaodianObservable = iRewardRequest.ShowRewardsSortXiaodian(pages, userId, token);
         showRewardSortXiaodianObservable.subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(responce -> {
-                    Logger.i("show rewards request sussess.code is %d message is %s", responce.ResultCode, responce.message);
-                    if (Error.SUCCESS != responce.ResultCode) {
-                        resp.fail(new ResultResp(responce.ResultCode, responce.message));
-                        return;
-                    }
-                    resp.success(responce.rewards);
-                }, Error.getErrorConsumer(resp));
+                .subscribe(new ShowRewardConsumer("ShowRewardsSortXiaodian", resp), Error.getErrorConsumer(resp));
     }
 
     public static void ShowRewardsKeyword(int pages, String keyword, String userId, String token, IResp<List<Reward>> resp) {
@@ -65,14 +53,25 @@ public class RewardRequst {
         Observable<ShowReward> showRewardKeywordObservable = iRewardRequest.ShowRewardsKeyword(pages, keyword, userId, token);
         showRewardKeywordObservable.subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(responce -> {
-                    Logger.i("show rewards request sussess.code is %d message is %s", responce.ResultCode, responce.message);
-                    if (Error.SUCCESS != responce.ResultCode) {
-                        resp.fail(new ResultResp(responce.ResultCode, responce.message));
-                        return;
-                    }
-                    resp.success(responce.rewards);
-                }, Error.getErrorConsumer(resp));
+                .subscribe(new ShowRewardConsumer("ShowRewardsKeyword", resp), Error.getErrorConsumer(resp));
+    }
+
+    public static void ShowRewardsMySend(String userId, String token, IResp<List<Reward>> resp) {
+        Retrofit retrofit = BaseRetrofit.getInstance();
+        IRewardRequest iRewardRequest = retrofit.create(IRewardRequest.class);
+        Observable<ShowReward> showRewardMysend = iRewardRequest.ShowRewardsMySend(userId, token);
+        showRewardMysend.subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new ShowRewardConsumer("ShowRewardsMySend", resp), Error.getErrorConsumer(resp));
+    }
+
+    public static void ShowRewardsMyCarry(String userId, String token, IResp<List<Reward>> resp) {
+        Retrofit retrofit = BaseRetrofit.getInstance();
+        IRewardRequest iRewardRequest = retrofit.create(IRewardRequest.class);
+        Observable<ShowReward> showRewardMyCarry = iRewardRequest.ShowRewardsMyCarry(userId, token);
+        showRewardMyCarry.subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new ShowRewardConsumer("ShowRewardsMyCarry", resp), Error.getErrorConsumer(resp));
     }
 
     public static void ShowRewards(int pages, String userId, String token, IResp<List<Reward>> resp) {
@@ -81,14 +80,7 @@ public class RewardRequst {
         Observable<ShowReward> showRewardObservable = iRewardRequest.ShowRewards(pages, userId, token);
         showRewardObservable.subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(responce -> {
-                    Logger.i("show rewards request sussess.code is %d message is %s", responce.ResultCode, responce.message);
-                    if (Error.SUCCESS != responce.ResultCode) {
-                        resp.fail(new ResultResp(responce.ResultCode, responce.message));
-                        return;
-                    }
-                    resp.success(responce.rewards);
-                }, Error.getErrorConsumer(resp));
+                .subscribe(new ShowRewardConsumer("ShowRewards", resp), Error.getErrorConsumer(resp));
     }
 
     public static void SendReward(Reward reward, String userId, String token, IResp<ResultResp> resp) {
@@ -123,14 +115,7 @@ public class RewardRequst {
                 thingTypeBody, weightBody, imgData);
         sendRequest.subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(responce -> {
-                    Logger.i("send request sussess.code is %d message is %s", responce.ResultCode, responce.message);
-                    if (Error.SUCCESS != responce.ResultCode) {
-                        resp.fail(new ResultResp(responce.ResultCode, responce.message));
-                        return;
-                    }
-                    resp.success(responce);
-                }, Error.getErrorConsumer(resp));
+                .subscribe(new ResultRespConsumer("SendRewardWithThumbnail", resp), Error.getErrorConsumer(resp));
     }
 
     private static void SendRewardWithOutThumbnail(Reward reward, String userId, String token, IResp<ResultResp> resp) {
@@ -141,15 +126,29 @@ public class RewardRequst {
                 reward.describe, reward.thing.type, reward.thing.weight);
         sendRequest.subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(responce -> {
-                    Logger.i("send request sussess.code is %d message is %s", responce.ResultCode, responce.message);
-                    if (Error.SUCCESS != responce.ResultCode) {
-                        resp.fail(new ResultResp(responce.ResultCode, responce.message));
-                        return;
-                    }
-                    resp.success(responce);
-                }, Error.getErrorConsumer(resp));
+                .subscribe(new ResultRespConsumer("SendRewardWithOutThumbnail", resp), Error.getErrorConsumer(resp));
     }
 
+    private static class ShowRewardConsumer implements Consumer<ShowReward> {
+
+        private String method;
+
+        private IResp<List<Reward>> resp;
+
+        private ShowRewardConsumer(String methodStr, IResp<List<Reward>> iResp) {
+            this.method = methodStr;
+            this.resp = iResp;
+        }
+
+        @Override
+        public void accept(ShowReward showReward) {
+            Logger.i(method + " sussess.code is %d message is %s", showReward.ResultCode, showReward.message);
+            if (Error.SUCCESS != showReward.ResultCode) {
+                resp.fail(new ResultResp(showReward.ResultCode, showReward.message));
+                return;
+            }
+            resp.success(showReward.rewards);
+        }
+    }
 
 }

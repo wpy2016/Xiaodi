@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import com.squareup.picasso.Picasso;
 import com.wpy.cqu.xiaodi.R;
 import com.wpy.cqu.xiaodi.model.Reward;
+import com.wpy.cqu.xiaodi.model.Thing;
 import com.wpy.cqu.xiaodi.util.ToastUtil;
 
 import java.util.ArrayList;
@@ -40,10 +41,10 @@ public class RewardAdapter extends RecyclerView.Adapter<RewardHolder> {
     @Override
     public void onBindViewHolder(RewardHolder holder, int position) {
         Reward reward = rewards.get(position);
-        holder.mivImg.setImageResource(Reward.DEFAULT_TYPE_IMG[reward.thing.type]);
+        holder.mivImg.setImageResource(Thing.DEFAULT_TYPE_IMG[reward.thing.type]);
         Picasso.with(mContext).load(reward.thing.thumbnail).
-                error(Reward.DEFAULT_TYPE_IMG[reward.thing.type]).into(holder.mivImg);
-        holder.mtvThingType.setText(Reward.THING_TYPE[reward.thing.type]);
+                error(Thing.DEFAULT_TYPE_IMG[reward.thing.type]).into(holder.mivImg);
+        holder.mtvThingType.setText(Thing.THING_TYPE[reward.thing.type]);
         holder.mtvThingWeight.setText(reward.thing.weight);
         holder.mtvStartPlace.setText(reward.originLocation);
         holder.mtvDstPlace.setText(reward.dstLocation);

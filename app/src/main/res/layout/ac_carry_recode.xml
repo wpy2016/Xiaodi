@@ -8,48 +8,37 @@
     <include layout="@layout/ac_top" />
 
     <LinearLayout
-        android:id="@+id/id_ac_carry_record_send"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:orientation="horizontal">
 
-        <ImageView
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="@dimen/dimen_10"
-            android:src="@drawable/publish" />
-
         <TextView
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginLeft="@dimen/dimen_20"
-            android:gravity="center_vertical"
+            android:id="@+id/id_fg_carry_record_tv_my_send"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:background="@color/background_color_gary"
             android:text="@string/my_publish_record"
-            android:textSize="18sp" />
-    </LinearLayout>
-
-
-    <LinearLayout
-        android:id="@+id/id_ac_carry_record_carry"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <ImageView
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="@dimen/dimen_10"
-            android:src="@drawable/receive" />
-
+            android:textColor="@color/text_color_heavy_gray"
+            android:textSize="@dimen/hall_option_type_tv_size" />
         <TextView
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginLeft="@dimen/dimen_20"
-            android:gravity="center_vertical"
+            android:id="@+id/id_fg_carry_record_tv_my_carry"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:background="@color/background_color_gary"
             android:text="@string/my_receive_record"
-            android:textSize="18sp" />
+            android:textColor="@color/text_color_heavy_gray"
+            android:textSize="@dimen/hall_option_type_tv_size" />
+
     </LinearLayout>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/id_fg_carry_record_tv_viewPager"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
 
 </LinearLayout>

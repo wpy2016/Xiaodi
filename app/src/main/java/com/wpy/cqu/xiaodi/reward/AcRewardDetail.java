@@ -1,7 +1,6 @@
 package com.wpy.cqu.xiaodi.reward;
 
 import android.Manifest;
-import android.app.Activity;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
@@ -19,6 +18,7 @@ import com.wpy.cqu.xiaodi.base_activity.TopBarAppComptAcitity;
 import com.wpy.cqu.xiaodi.loading.Loading;
 import com.wpy.cqu.xiaodi.model.ResultResp;
 import com.wpy.cqu.xiaodi.model.Reward;
+import com.wpy.cqu.xiaodi.model.Thing;
 import com.wpy.cqu.xiaodi.model.User;
 import com.wpy.cqu.xiaodi.net.RewardRequst;
 import com.wpy.cqu.xiaodi.net.resp.IResp;
@@ -70,8 +70,8 @@ public class AcRewardDetail extends TopBarAppComptAcitity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Bundle bundle = new Bundle();
-        bundle.putInt(StatusBarAppComptActivity.STATUS_COLOR_STR,STATUS_BAR_COLOR);
-        bundle.putStringArray(CheckPermissionsActivity.PEMISSION,PERMISSION);
+        bundle.putInt(StatusBarAppComptActivity.STATUS_COLOR_STR, STATUS_BAR_COLOR);
+        bundle.putStringArray(CheckPermissionsActivity.PEMISSION, PERMISSION);
         super.onCreate(bundle);
         setContentView(R.layout.ac_details);
         bindView();
@@ -81,26 +81,26 @@ public class AcRewardDetail extends TopBarAppComptAcitity {
 
     private void carryReward(View view) {
         if (XiaodiApplication.mCurrentUser.Id.equals(reward.Publisher.Id)) {
-            ToastUtil.toast(this,getResources().getString(R.string.can_not_carry_owner));
+            ToastUtil.toast(this, getResources().getString(R.string.can_not_carry_owner));
             return;
         }
         if (null == mLoadingPopWindow) {
             mLoadingPopWindow = Loading.getLoadingPopwindown(this);
         }
-        Loading.showLoading(this,mLoadingPopWindow);
+        Loading.showLoading(this, mLoadingPopWindow);
         RewardRequst.CarryRewards(reward.id, XiaodiApplication.mCurrentUser.Id,
                 XiaodiApplication.mCurrentUser.Token, new IResp<ResultResp>() {
                     @Override
                     public void success(ResultResp object) {
                         mLoadingPopWindow.dismiss();
-                        ToastUtil.toast(AcRewardDetail.this,getResources().getString(R.string.carry_success));
+                        ToastUtil.toast(AcRewardDetail.this, getResources().getString(R.string.carry_success));
                         finish();
                     }
 
                     @Override
                     public void fail(ResultResp resp) {
                         mLoadingPopWindow.dismiss();
-                        ToastUtil.toast(AcRewardDetail.this,resp.message);
+                        ToastUtil.toast(AcRewardDetail.this, resp.message);
                     }
                 });
 
@@ -115,13 +115,13 @@ public class AcRewardDetail extends TopBarAppComptAcitity {
 
         Serializable serializable = getIntent().getSerializableExtra("reward");
         if (null == serializable || !(serializable instanceof Reward)) {
-            ToastUtil.toast(this,getResources().getString(R.string.no_such_reward));
+            ToastUtil.toast(this, getResources().getString(R.string.no_such_reward));
             finish();
             return;
         }
-        reward = (Reward)serializable;
-        mivThingImg.setImageResource(Reward.DEFAULT_TYPE_IMG[reward.thing.type]);
-        Picasso.with(this).load(reward.thing.thumbnail).error(Reward.DEFAULT_TYPE_IMG[reward.thing.type]).into(mivThingImg);
+        reward = (Reward) serializable;
+        mivThingImg.setImageResource(Thing.DEFAULT_TYPE_IMG[reward.thing.type]);
+        Picasso.with(this).load(reward.thing.thumbnail).error(Thing.DEFAULT_TYPE_IMG[reward.thing.type]).into(mivThingImg);
         mtvXiaodian.setText(reward.xiaodian + "");
         mtvWeight.setText(reward.thing.weight);
         mtvStartPlace.setText(reward.originLocation);
@@ -145,7 +145,7 @@ public class AcRewardDetail extends TopBarAppComptAcitity {
         mtvDescribe = (TextView) findViewById(R.id.id_ac_details_tv_text_des);
         mivPublisherImg = (ImageView) findViewById(R.id.id_ac_details_iv_head_picture);
         mtvPublisherNickName = (TextView) findViewById(R.id.id_ac_details_tv_owner_name);
-        mtvAuthStatus= (TextView) findViewById(R.id.id_xd_des_tv_real_name);
+        mtvAuthStatus = (TextView) findViewById(R.id.id_xd_des_tv_real_name);
         mtvCredit = (TextView) findViewById(R.id.id_xd_des_tv_credit);
         mbtnArray = (Button) findViewById(R.id.id_xd_des_btn_receive);
         mtvBack = (TextView) findViewById(R.id.id_top_back_tv);
@@ -154,8 +154,8 @@ public class AcRewardDetail extends TopBarAppComptAcitity {
     }
 
     private void bindEvent() {
-        mtvBack.setOnClickListener(v->finish());
-        mivBack.setOnClickListener(v->finish());
+        mtvBack.setOnClickListener(v -> finish());
+        mivBack.setOnClickListener(v -> finish());
         mbtnArray.setOnClickListener(this::carryReward);
     }
 }
