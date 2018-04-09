@@ -1,6 +1,7 @@
 package com.wpy.cqu.xiaodi.home.fragment;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -18,7 +19,6 @@ import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
-import com.orhanobut.logger.Logger;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.wpy.cqu.xiaodi.R;
 import com.wpy.cqu.xiaodi.adapter.recycler.RewardAdapter;
@@ -41,11 +41,10 @@ import java.util.List;
 public class FgHall extends Fragment {
 
     private static enum ShowType {
-        NEWS,KEY_WORD,XIAODIAN_DEC,XIAODIAN_AEC
+        NEWS, KEY_WORD, XIAODIAN_DEC
     }
 
-    private static enum SERVICE_TYPE {REWARD,GOOUT}
-
+    private static enum SERVICE_TYPE {REWARD, GOOUT}
 
 
     private TextView mtvContent;
@@ -68,8 +67,6 @@ public class FgHall extends Fragment {
 
     private PopupWindow mPopSearch;
 
-    private String msKeyWord;
-
     private ShowType mShowType = ShowType.NEWS;
 
     private SERVICE_TYPE mServiceType = SERVICE_TYPE.REWARD;
@@ -77,12 +74,18 @@ public class FgHall extends Fragment {
     //标记加载第几页数据，随着loadmore的进行会不断增大
     private int mPage = 0;
 
+    private ShowType mshowType = ShowType.NEWS;
+
+    private String mKeyword = "";
+
     public static FgHall newInstance() {
         FgHall fragment = new FgHall();
         Bundle args = new Bundle();
         fragment.setArguments(args);
         return fragment;
     }
+
+    private RewardResp rewardResp = new RewardResp();
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -121,53 +124,50 @@ public class FgHall extends Fragment {
 
     }
 
-    private void sortByXiaoDian(View view) {
-
-
-    }
-
     private void nearby(View view) {
 
     }
 
-    private void SearchByKeyWord(String sKeyword) {
+    private void sortByXiaoDian(View view) {
+        mShowType = ShowType.XIAODIAN_DEC;
+        mPage = 0;
+        mtvSortXiaodian.setBackgroundColor(Color.parseColor("#ffdab9"));
+        RewardRequst.ShowRewardsSortXiaodian(mPage, XiaodiApplication.mCurrentUser.Id,
+                XiaodiApplication.mCurrentUser.Token, rewardResp.setIsRefresh(true));
+    }
 
+    private void SearchByKeyWord(String sKeyword) {
+        mKeyword = sKeyword;
+        mShowType = ShowType.KEY_WORD;
+        mPage = 0;
+        RewardRequst.ShowRewardsKeyword(mPage, sKeyword, XiaodiApplication.mCurrentUser.Id,
+                XiaodiApplication.mCurrentUser.Token, rewardResp.setIsRefresh(true));
     }
 
     private void refresh() {
+        mShowType = ShowType.NEWS;
         mPage = 0;
+        mtvSortXiaodian.setBackgroundResource(R.color.background_color_gary);
         RewardRequst.ShowRewards(mPage, XiaodiApplication.mCurrentUser.Id,
-                XiaodiApplication.mCurrentUser.Token, new IResp<List<Reward>>() {
-                    @Override
-                    public void success(List<Reward> rewards) {
-                        smartRefreshLayout.finishRefresh();
-                        rewardAdapter.refresh(rewards);
-                    }
-
-                    @Override
-                    public void fail(ResultResp resp) {
-                        smartRefreshLayout.finishRefresh();
-                        ToastUtil.toast(getActivity(),resp.message);
-                    }
-                });
+                XiaodiApplication.mCurrentUser.Token, rewardResp.setIsRefresh(true));
     }
 
     private void loadMore() {
         mPage++;
-        RewardRequst.ShowRewards(mPage, XiaodiApplication.mCurrentUser.Id,
-                XiaodiApplication.mCurrentUser.Token, new IResp<List<Reward>>() {
-                    @Override
-                    public void success(List<Reward> rewards) {
-                        smartRefreshLayout.finishLoadMore();
-                        rewardAdapter.loadMore(rewards);
-                    }
-
-                    @Override
-                    public void fail(ResultResp resp) {
-                        smartRefreshLayout.finishLoadMore();
-                        ToastUtil.toast(getActivity(),resp.message);
-                    }
-                });
+        switch (mShowType) {
+            case NEWS:
+                RewardRequst.ShowRewards(mPage, XiaodiApplication.mCurrentUser.Id,
+                        XiaodiApplication.mCurrentUser.Token, rewardResp.setIsRefresh(false));
+                break;
+            case XIAODIAN_DEC:
+                RewardRequst.ShowRewardsSortXiaodian(mPage, XiaodiApplication.mCurrentUser.Id,
+                        XiaodiApplication.mCurrentUser.Token, rewardResp.setIsRefresh(false));
+                break;
+            case KEY_WORD:
+                RewardRequst.ShowRewardsKeyword(mPage, mKeyword, XiaodiApplication.mCurrentUser.Id,
+                        XiaodiApplication.mCurrentUser.Token, rewardResp.setIsRefresh(false));
+                break;
+        }
     }
 
     private void showPopSearch() {
@@ -191,11 +191,9 @@ public class FgHall extends Fragment {
                 return;
             }
             SearchByKeyWord(sKeyword);
-            msKeyWord = sKeyword;
-            mShowType = ShowType.KEY_WORD;
             mPopSearch.dismiss();
         });
-        ivClose.setOnClickListener(v->mPopSearch.dismiss());
+        ivClose.setOnClickListener(v -> mPopSearch.dismiss());
         mPopSearch.setOutsideTouchable(true);
         mPopSearch.setBackgroundDrawable(new BitmapDrawable());
     }
@@ -210,7 +208,7 @@ public class FgHall extends Fragment {
         recyclerView.setLayoutManager(linearLayoutManager);
         rewardAdapter = new RewardAdapter(getContext());
         recyclerView.setAdapter(rewardAdapter);
-        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(getContext(),DividerItemDecoration.VERTICAL);
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL);
         recyclerView.addItemDecoration(dividerItemDecoration);
     }
 
@@ -232,27 +230,53 @@ public class FgHall extends Fragment {
         mivTypeDown.setOnClickListener(this::changeType);
         mtvSortXiaodian.setOnClickListener(this::sortByXiaoDian);
         mtvNearby.setOnClickListener(this::nearby);
-        mtvSearch.setOnClickListener(v->showPopSearch());
-        mivAdd.setOnClickListener(v -> toNext(AcHomeAdd.class,null));
-        smartRefreshLayout.setOnRefreshListener(layout->{
-            refresh();
-        });
-        smartRefreshLayout.setOnLoadMoreListener(layout->{
-            loadMore();
-        });
-
+        mtvSearch.setOnClickListener(v -> showPopSearch());
+        mivAdd.setOnClickListener(v -> toNext(AcHomeAdd.class, null));
+        smartRefreshLayout.setOnRefreshListener(layout -> refresh());
+        smartRefreshLayout.setOnLoadMoreListener(layout -> loadMore());
         rewardAdapter.setOnItemClickListener(this::toDetail);
     }
 
     private void toDetail(Reward reward) {
         Intent intent = new Intent(getActivity(), AcRewardDetail.class);
-        intent.putExtra("reward",reward);
+        intent.putExtra("reward", reward);
         startActivity(intent);
     }
 
-    private void toNext(Class<?> next,Bundle bundle) {
-        Intent intent = new Intent(getActivity(),next);
-        intent.putExtra("home",bundle);
+    private void toNext(Class<?> next, Bundle bundle) {
+        Intent intent = new Intent(getActivity(), next);
+        intent.putExtra("home", bundle);
         startActivity(intent);
+    }
+
+    private class RewardResp implements IResp<List<Reward>> {
+
+        private boolean isFresh = true;
+
+        @Override
+        public void success(List<Reward> rewards) {
+            if (isFresh) {
+                smartRefreshLayout.finishRefresh();
+                rewardAdapter.refresh(rewards);
+                return;
+            }
+            smartRefreshLayout.finishLoadMore();
+            rewardAdapter.loadMore(rewards);
+        }
+
+        @Override
+        public void fail(ResultResp resp) {
+            ToastUtil.toast(getActivity(), resp.message);
+            if (isFresh) {
+                smartRefreshLayout.finishRefresh();
+                return;
+            }
+            smartRefreshLayout.finishLoadMore();
+        }
+
+        private IResp<List<Reward>> setIsRefresh(boolean isRefresh) {
+            this.isFresh = isRefresh;
+            return this;
+        }
     }
 }

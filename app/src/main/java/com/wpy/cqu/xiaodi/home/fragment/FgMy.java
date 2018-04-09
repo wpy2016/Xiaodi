@@ -15,9 +15,13 @@ import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 import com.wpy.cqu.xiaodi.R;
 import com.wpy.cqu.xiaodi.application.XiaodiApplication;
+import com.wpy.cqu.xiaodi.auth.AcAuth;
 import com.wpy.cqu.xiaodi.base_activity.ClipBaseFragment;
 import com.wpy.cqu.xiaodi.model.User;
 import com.wpy.cqu.xiaodi.register.AcRegister;
+import com.wpy.cqu.xiaodi.reward.AcCarryRecord;
+import com.wpy.cqu.xiaodi.setting.AcSetting;
+import com.wpy.cqu.xiaodi.wallet.AcWallet;
 
 public class FgMy extends ClipBaseFragment {
 
@@ -94,6 +98,7 @@ public class FgMy extends ClipBaseFragment {
 
     // TODO: 2018/4/6  需要优化，当本地有图片时，不进行网络加载，本地没有图片时，网络加载并下载下来
     private void loadImg() {
+        mivImg.setImageResource(R.drawable.default_headimg);
         Picasso.with(getActivity()).load(user.ImgUrl).error(R.drawable.default_headimg).into(mivImg);
     }
 
@@ -114,12 +119,11 @@ public class FgMy extends ClipBaseFragment {
     private void bindEvent() {
         mivSetImg.setOnClickListener(v -> showPopupWindow(mivImg));
         mtvNickName.setOnClickListener(this::setNickName);
-        // TODO: 2018/3/30
-        mrlSetting.setOnClickListener(v -> toNext(AcRegister.class));
+        mrlSetting.setOnClickListener(v -> toNext(AcSetting.class));
+        mrlAttestation.setOnClickListener(v -> toNext(AcAuth.class));
+        mrlMoney.setOnClickListener(v -> toNext(AcWallet.class));
+        mrlCarryRecord.setOnClickListener(v -> toNext(AcCarryRecord.class));
         mrlSignature.setOnClickListener(v -> toNext(AcRegister.class));
-        mrlMoney.setOnClickListener(v -> toNext(AcRegister.class));
-        mrlCarryRecord.setOnClickListener(v -> toNext(AcRegister.class));
-        mrlAttestation.setOnClickListener(v -> toNext(AcRegister.class));
     }
 
     private void toNext(Class<?> next) {

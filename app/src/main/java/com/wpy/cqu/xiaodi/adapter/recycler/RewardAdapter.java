@@ -40,6 +40,7 @@ public class RewardAdapter extends RecyclerView.Adapter<RewardHolder> {
     @Override
     public void onBindViewHolder(RewardHolder holder, int position) {
         Reward reward = rewards.get(position);
+        holder.mivImg.setImageResource(Reward.DEFAULT_TYPE_IMG[reward.thing.type]);
         Picasso.with(mContext).load(reward.thing.thumbnail).
                 error(Reward.DEFAULT_TYPE_IMG[reward.thing.type]).into(holder.mivImg);
         holder.mtvThingType.setText(Reward.THING_TYPE[reward.thing.type]);

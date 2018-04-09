@@ -214,6 +214,7 @@
                         android:text="@string/qzone"
                         android:textColor="@color/text_color_heavy_gray"
                         android:textSize="@dimen/small_textsize" />
+
                 </RelativeLayout>
 
 

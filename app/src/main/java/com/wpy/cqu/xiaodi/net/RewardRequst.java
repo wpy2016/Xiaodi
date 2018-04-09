@@ -43,6 +43,38 @@ public class RewardRequst {
                 }, Error.getErrorConsumer(resp));
     }
 
+    public static void ShowRewardsSortXiaodian(int pages, String userId, String token, IResp<List<Reward>> resp) {
+        Retrofit retrofit = BaseRetrofit.getInstance();
+        IRewardRequest iRewardRequest = retrofit.create(IRewardRequest.class);
+        Observable<ShowReward> showRewardSortXiaodianObservable = iRewardRequest.ShowRewardsSortXiaodian(pages, userId, token);
+        showRewardSortXiaodianObservable.subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(responce -> {
+                    Logger.i("show rewards request sussess.code is %d message is %s", responce.ResultCode, responce.message);
+                    if (Error.SUCCESS != responce.ResultCode) {
+                        resp.fail(new ResultResp(responce.ResultCode, responce.message));
+                        return;
+                    }
+                    resp.success(responce.rewards);
+                }, Error.getErrorConsumer(resp));
+    }
+
+    public static void ShowRewardsKeyword(int pages, String keyword, String userId, String token, IResp<List<Reward>> resp) {
+        Retrofit retrofit = BaseRetrofit.getInstance();
+        IRewardRequest iRewardRequest = retrofit.create(IRewardRequest.class);
+        Observable<ShowReward> showRewardKeywordObservable = iRewardRequest.ShowRewardsKeyword(pages, keyword, userId, token);
+        showRewardKeywordObservable.subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(responce -> {
+                    Logger.i("show rewards request sussess.code is %d message is %s", responce.ResultCode, responce.message);
+                    if (Error.SUCCESS != responce.ResultCode) {
+                        resp.fail(new ResultResp(responce.ResultCode, responce.message));
+                        return;
+                    }
+                    resp.success(responce.rewards);
+                }, Error.getErrorConsumer(resp));
+    }
+
     public static void ShowRewards(int pages, String userId, String token, IResp<List<Reward>> resp) {
         Retrofit retrofit = BaseRetrofit.getInstance();
         IRewardRequest iRewardRequest = retrofit.create(IRewardRequest.class);

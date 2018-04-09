@@ -11,12 +11,12 @@ import com.wpy.cqu.xiaodi.R;
  * Created by wangpeiyu on 2018/3/28.
  */
 
-public class SlideAppCompatActivity extends AppCompatActivity {
+public class SlideAppCompatActivity extends BaseActivity {
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState, @Nullable PersistableBundle persistentState) {
         super.onCreate(savedInstanceState, persistentState);
-        overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
     }
 
 }

@@ -17,6 +17,13 @@
         <item name="android:windowBackground">@drawable/welcome_logo</item>
     </style>
 
+    <!--全屏的样式，没有title，没有actionbar-->
+    <style name="AppTheme.Setting" parent="AppTheme">
+        <item name="android:windowActionBar">false</item>
+        <item name="android:windowNoTitle">true</item>
+
+    </style>
+
     <!--下面是背景透明的界面，在activity中设置主题来实现activity的背景透明 -->
     <style name="nobkdtheme" parent="AppTheme">
         <item name="android:windowBackground">@color/transparent_background</item>

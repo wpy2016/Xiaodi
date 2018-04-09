@@ -200,6 +200,13 @@ public class User implements Serializable {
         Sign = sign;
     }
 
+    public static void deleteUserLocalFile(){
+        File userFile = new File(XiaodiApplication.USER_SAVE_FILEPATH);
+        if (userFile.exists()) {
+            userFile.delete();
+        }
+    }
+
     public void saveToLocalFile() {
         File userFile = new File(XiaodiApplication.USER_SAVE_FILEPATH);
         if (userFile.exists()) {

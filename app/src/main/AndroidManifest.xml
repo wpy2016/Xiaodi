@@ -72,6 +72,28 @@
         <activity
             android:name=".reward.AcRewardDetail"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".setting.AcSetting"
+            android:theme="@style/AppTheme"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".about.AcAbout"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".auth.AcAuth"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".resetpass.AcEditPass"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".setting.AcMsgSetting"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".reward.AcCarryRecord"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".wallet.AcWallet"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

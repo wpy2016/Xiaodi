@@ -30,7 +30,11 @@ public class CheckPermissionsActivity extends StatusBarAppComptActivity
 	 * 需要进行检测的权限数组
 	 */
 	protected String[] needPermissions = {
-			Manifest.permission.INTERNET
+			Manifest.permission.WRITE_EXTERNAL_STORAGE,
+			Manifest.permission.INTERNET,
+			Manifest.permission.ACCESS_WIFI_STATE,
+			Manifest.permission.ACCESS_NETWORK_STATE,
+			Manifest.permission.READ_PHONE_STATE,
 			};
 	/**
 	 * 子Activity传入的perimission

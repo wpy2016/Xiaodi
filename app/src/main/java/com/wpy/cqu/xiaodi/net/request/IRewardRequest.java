@@ -41,4 +41,12 @@ public interface IRewardRequest {
     @POST("/reward/carry")
     @FormUrlEncoded
     Observable<ResultResp> CarryReward(@Field("_id") String id,@Field("user_id") String userId,@Field("token") String token);
+
+    @POST("/reward/show/xiaodian")
+    @FormUrlEncoded
+    Observable<ShowReward> ShowRewardsSortXiaodian(@Field("pages") int pages,@Field("user_id") String userId,@Field("token") String token);
+
+    @POST("/reward/show/keyword")
+    @FormUrlEncoded
+    Observable<ShowReward> ShowRewardsKeyword(@Field("pages") int pages,@Field("keyword") String keyword, @Field("user_id") String userId,@Field("token") String token);
 }
