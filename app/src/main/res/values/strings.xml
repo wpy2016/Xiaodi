@@ -232,4 +232,8 @@
     <string name="set_deadline">设置截至时间</string>
     <string name="can_not_carry_owner">不能领取自己的悬赏哦</string>
     <string name="carry_success">领取成功</string>
+    <string name="edit_reward">编辑悬赏</string>
+    <string name="update">更新</string>
+    <string name="edit_reward_success">修改成功</string>
+    <string name="please_wait">请稍后...</string>
 </resources>

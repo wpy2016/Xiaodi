@@ -36,25 +36,46 @@ public interface IRewardRequest {
 
     @POST("/reward/show")
     @FormUrlEncoded
-    Observable<ShowReward> ShowRewards(@Field("pages") int pages,@Field("user_id") String userId,@Field("token") String token);
+    Observable<ShowReward> ShowRewards(@Field("pages") int pages, @Field("user_id") String userId, @Field("token") String token);
 
     @POST("/reward/carry")
     @FormUrlEncoded
-    Observable<ResultResp> CarryReward(@Field("_id") String id,@Field("user_id") String userId,@Field("token") String token);
+    Observable<ResultResp> CarryReward(@Field("_id") String id, @Field("user_id") String userId, @Field("token") String token);
 
     @POST("/reward/show/xiaodian")
     @FormUrlEncoded
-    Observable<ShowReward> ShowRewardsSortXiaodian(@Field("pages") int pages,@Field("user_id") String userId,@Field("token") String token);
+    Observable<ShowReward> ShowRewardsSortXiaodian(@Field("pages") int pages, @Field("user_id") String userId, @Field("token") String token);
 
     @POST("/reward/show/keyword")
     @FormUrlEncoded
-    Observable<ShowReward> ShowRewardsKeyword(@Field("pages") int pages,@Field("keyword") String keyword, @Field("user_id") String userId,@Field("token") String token);
+    Observable<ShowReward> ShowRewardsKeyword(@Field("pages") int pages, @Field("keyword") String keyword, @Field("user_id") String userId, @Field("token") String token);
 
     @POST("/reward/show/my/send")
     @FormUrlEncoded
-    Observable<ShowReward> ShowRewardsMySend(@Field("user_id") String userId,@Field("token") String token);
+    Observable<ShowReward> ShowRewardsMySend(@Field("user_id") String userId, @Field("token") String token);
 
     @POST("/reward/show/my/carry")
     @FormUrlEncoded
-    Observable<ShowReward> ShowRewardsMyCarry(@Field("user_id") String userId,@Field("token") String token);
+    Observable<ShowReward> ShowRewardsMyCarry(@Field("user_id") String userId, @Field("token") String token);
+
+    @POST("/reward/delete")
+    @FormUrlEncoded
+    Observable<ResultResp> DeleteReward(@Field("reward_id") String rewardId, @Field("user_id") String userId, @Field("token") String token);
+
+    @POST("/reward/update")
+    @Multipart
+    Observable<ResultResp> UpdateWithThumbnail(@Part("reward_id") RequestBody rewardId, @Part("user_id") RequestBody userId, @Part("token") RequestBody token,
+                                               @Part("phone") RequestBody phone, @Part("xiaodian") RequestBody xiaodian,
+                                               @Part("dead_line") RequestBody deadLine, @Part("origin_location") RequestBody originLocation,
+                                               @Part("dst_location") RequestBody dstLocation, @Part("describe") RequestBody describe,
+                                               @Part("thing_type") RequestBody ThingType, @Part("weight") RequestBody Weight,
+                                               @Part MultipartBody.Part thumbnail);
+
+    @POST("/reward/update")
+    @FormUrlEncoded
+    Observable<ResultResp> UpdateWithOutThumbnail(@Field("reward_id") String rewardId, @Field("user_id") String userId, @Field("token") String token,
+                                                  @Field("phone") String phone, @Field("xiaodian") int xiaodian,
+                                                  @Field("dead_line") String deadLine, @Field("origin_location") String originLocation,
+                                                  @Field("dst_location") String dstLocation, @Field("describe") String describe,
+                                                  @Field("thing_type") int ThingType, @Field("weight") String Weight);
 }

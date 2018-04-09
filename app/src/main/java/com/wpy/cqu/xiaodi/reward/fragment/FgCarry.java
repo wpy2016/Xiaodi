@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.orhanobut.logger.Logger;
 import com.wpy.cqu.xiaodi.R;
 import com.wpy.cqu.xiaodi.adapter.recycler.RewardAdapter;
 import com.wpy.cqu.xiaodi.application.XiaodiApplication;
@@ -18,7 +19,9 @@ import com.wpy.cqu.xiaodi.model.ResultResp;
 import com.wpy.cqu.xiaodi.model.Reward;
 import com.wpy.cqu.xiaodi.net.RewardRequst;
 import com.wpy.cqu.xiaodi.net.resp.IResp;
+import com.wpy.cqu.xiaodi.resetpass.AcEditPass;
 import com.wpy.cqu.xiaodi.reward.AcCarryRecord;
+import com.wpy.cqu.xiaodi.reward.AcEditReward;
 import com.wpy.cqu.xiaodi.reward.AcRewardDetail;
 import com.wpy.cqu.xiaodi.util.ToastUtil;
 
@@ -111,20 +114,20 @@ public class FgCarry extends Fragment {
     private void itemClick(Reward reward) {
         switch (carryRecordType) {
             case AcCarryRecord.MyCarry:
-                toDetailAc(reward);
+                toNext(reward,AcRewardDetail.class);
                 break;
             case AcCarryRecord.MySend:
-                if (Reward.REWARD_STATE_SEND == reward.thing.type) {
-                    // TODO: 2018/4/9 去修改界面
+                if (Reward.REWARD_STATE_SEND == reward.state) {
+                    toNext(reward,AcEditReward.class);
                     return;
                 }
-                toDetailAc(reward);
+                toNext(reward,AcRewardDetail.class);
                 break;
         }
     }
 
-    private void toDetailAc(Reward reward) {
-        Intent intent = new Intent(getContext(), AcRewardDetail.class);
+    private void toNext(Reward reward,Class<?> next) {
+        Intent intent = new Intent(getContext(), next);
         intent.putExtra("reward", reward);
         startActivity(intent);
     }

@@ -50,43 +50,43 @@ public class AcReward extends ClipBaseActivity {
     };
 
     private ImageView mivTakeImg;
-    private ImageView mivExpress;
-    private ImageView mivFood;
-    private ImageView mivPaper;
-    private ImageView mivOther;
-    private RadioGroup mrgWeight;
+    protected ImageView mivExpress;
+    protected ImageView mivFood;
+    protected ImageView mivPaper;
+    protected ImageView mivOther;
+    protected RadioGroup mrgWeight;
 
 
     //物品类型头像
-    private int miThingType = -1;
-    private String mThumbnail = "";
+    protected int miThingType = -1;
+    protected String mThumbnail = "";
 
     //重量级
-    private int miWeight = -1;
+    protected int miWeight = -1;
     private String msWeight[] = null;
 
     //出发地目的地
     private int miPlaceSelect = -1;
     private PopupWindow mPopSelectPlace;
     private PlacePicker mplacePicker;
-    private TextView mtvStartPlace;
-    private TextView mtvDstPlace;
+    protected TextView mtvStartPlace;
+    protected TextView mtvDstPlace;
     private String msStartPlace;
     private String msDstPlace;
 
     //截止时间
     private PopupWindow mPopSelectTime;
-    private TextView mtvDeadLine;
+    protected TextView mtvDeadLine;
     private String msDeadLine;
 
     //笑点
-    private EditText metXiaodian;
-    private EditText metphone;
-    private EditText metDescribe;
-    private Button mbtnSend;
+    protected EditText metXiaodian;
+    protected EditText metphone;
+    protected EditText metDescribe;
+    protected Button mbtnSend;
 
     //Loading
-    private PopupWindow mLoadingPopWindow;
+    protected PopupWindow mLoadingPopWindow;
 
 
     @Override
@@ -128,7 +128,7 @@ public class AcReward extends ClipBaseActivity {
         });
     }
 
-    private Reward createReward() {
+    protected Reward createReward() {
         Reward reward = new Reward();
         Thing thing = new Thing();
         reward.thing = thing;
@@ -317,7 +317,7 @@ public class AcReward extends ClipBaseActivity {
     }
 
 
-    private boolean validateParams() {
+    protected boolean validateParams() {
         if (-1 == miThingType) {
             ToastUtil.toast(this, getResources().getString(R.string.please_select_good_type));
             return false;

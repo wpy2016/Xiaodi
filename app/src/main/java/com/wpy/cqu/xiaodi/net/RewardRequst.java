@@ -83,6 +83,15 @@ public class RewardRequst {
                 .subscribe(new ShowRewardConsumer("ShowRewards", resp), Error.getErrorConsumer(resp));
     }
 
+    public static void DeleteRewards(String rewardId, String userId, String token, IResp<ResultResp> resp) {
+        Retrofit retrofit = BaseRetrofit.getInstance();
+        IRewardRequest iRewardRequest = retrofit.create(IRewardRequest.class);
+        Observable<ResultResp> deleteRewardObservable = iRewardRequest.DeleteReward(rewardId, userId, token);
+        deleteRewardObservable .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new ResultRespConsumer("DeleteRewards", resp), Error.getErrorConsumer(resp));
+    }
+
     public static void SendReward(Reward reward, String userId, String token, IResp<ResultResp> resp) {
         if (TextUtils.isEmpty(reward.thing.thumbnail)) {
             SendRewardWithOutThumbnail(reward, userId, token, resp);
@@ -127,6 +136,54 @@ public class RewardRequst {
         sendRequest.subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new ResultRespConsumer("SendRewardWithOutThumbnail", resp), Error.getErrorConsumer(resp));
+    }
+
+    public static void UpdateReward(Reward reward, String userId, String token, IResp<ResultResp> resp) {
+        if (TextUtils.isEmpty(reward.thing.thumbnail)) {
+            UpdateRewardWithOutThumbnail(reward, userId, token, resp);
+            return;
+        }
+        UpdateRewardWithThumbnail(reward, userId, token, resp);
+    }
+
+    private static void UpdateRewardWithThumbnail(Reward reward, String userId, String token, IResp<ResultResp> resp) {
+        MediaType textType = MediaType.parse("text/plain");
+        RequestBody rewardIdBody = RequestBody.create(textType,reward.id);
+        RequestBody userIdBody = RequestBody.create(textType, userId);
+        RequestBody tokenBody = RequestBody.create(textType, token);
+        RequestBody phoneBody = RequestBody.create(textType, reward.phone);
+        RequestBody xiaodianBody = RequestBody.create(textType, reward.xiaodian + "");
+        RequestBody deadlineBody = RequestBody.create(textType, reward.deadline);
+        RequestBody originLocationBody = RequestBody.create(textType, reward.originLocation);
+        RequestBody dstLocationBody = RequestBody.create(textType, reward.dstLocation);
+        RequestBody decribeBody = RequestBody.create(textType, reward.describe);
+        RequestBody thingTypeBody = RequestBody.create(textType, reward.thing.type + "");
+        RequestBody weightBody = RequestBody.create(textType, reward.thing.weight);
+
+        MediaType fileType = MediaType.parse("multipart/form-data");
+        File imgFile = new File(reward.thing.thumbnail);
+        RequestBody imgBody = RequestBody.create(fileType, imgFile);
+        MultipartBody.Part imgData = MultipartBody.Part.createFormData("thumbnail", "thumbnail.png", imgBody);
+
+        Retrofit retrofit = BaseRetrofit.getInstance();
+        IRewardRequest iRewardRequest = retrofit.create(IRewardRequest.class);
+        Observable<ResultResp> updateRequest = iRewardRequest.UpdateWithThumbnail(rewardIdBody,userIdBody, tokenBody,
+                phoneBody, xiaodianBody, deadlineBody, originLocationBody, dstLocationBody, decribeBody,
+                thingTypeBody, weightBody, imgData);
+        updateRequest.subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new ResultRespConsumer("UpdateRewardWithThumbnail", resp), Error.getErrorConsumer(resp));
+    }
+
+    private static void UpdateRewardWithOutThumbnail(Reward reward, String userId, String token, IResp<ResultResp> resp) {
+        Retrofit retrofit = BaseRetrofit.getInstance();
+        IRewardRequest iRewardRequest = retrofit.create(IRewardRequest.class);
+        Observable<ResultResp> updateRequest = iRewardRequest.UpdateWithOutThumbnail(reward.id,userId, token,
+                reward.phone, reward.xiaodian, reward.deadline, reward.originLocation, reward.dstLocation,
+                reward.describe, reward.thing.type, reward.thing.weight);
+        updateRequest.subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new ResultRespConsumer("UpdateRewardWithOutThumbnail", resp), Error.getErrorConsumer(resp));
     }
 
     private static class ShowRewardConsumer implements Consumer<ShowReward> {
