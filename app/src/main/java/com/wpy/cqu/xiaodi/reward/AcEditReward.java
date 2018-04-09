@@ -133,16 +133,18 @@ public class AcEditReward extends AcReward {
             @Override
             public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
                 Observable.just("")
-                        .doOnNext(s -> {
-                            File file = new File(XiaodiApplication.IMG_SAVE_PATH);
-                            if (!file.exists()) {
-                                file.mkdir();
-                            }
-                            AcEditReward.this.mThumbnail = XiaodiApplication.IMG_SAVE_PATH + "/" + System.currentTimeMillis() + ".png";
-                            ImageTools.saveBitmapToSDCard(bitmap, mThumbnail);
-                        })
+                        .doOnNext(s -> save(bitmap))
                         .subscribeOn(Schedulers.io())
                         .subscribe(s -> isImgDownload = true);
+            }
+
+            private void save(Bitmap bitmap) {
+                File file = new File(XiaodiApplication.IMG_SAVE_PATH);
+                if (!file.exists()) {
+                    file.mkdir();
+                }
+                AcEditReward.this.mThumbnail = XiaodiApplication.IMG_SAVE_PATH + "/" + System.currentTimeMillis() + ".png";
+                ImageTools.saveBitmapToSDCard(bitmap, mThumbnail);
             }
 
             @Override
@@ -153,7 +155,6 @@ public class AcEditReward extends AcReward {
 
             @Override
             public void onPrepareLoad(Drawable placeHolderDrawable) {
-
             }
         };
         Picasso.with(this).load(thumbnail).error(Thing.DEFAULT_TYPE_IMG[thingtype]).into(target);

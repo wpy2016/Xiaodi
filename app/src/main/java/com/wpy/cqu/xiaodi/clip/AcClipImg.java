@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.orhanobut.logger.Logger;
 import com.wpy.cqu.xiaodi.R;
 import com.wpy.cqu.xiaodi.application.XiaodiApplication;
 import com.wpy.cqu.xiaodi.base_activity.CheckPermissionsActivity;
@@ -61,7 +62,6 @@ public class AcClipImg extends TopBarAppComptAcitity {
     private void saveImg() {
         mProgressDialog.show();
         Observable.just("")
-                .observeOn(Schedulers.io())
                 .map(s -> {
                     Bitmap clipBitmap = mClipImageLayout.clip();
                     File file = new File(XiaodiApplication.IMG_SAVE_PATH);
@@ -73,7 +73,8 @@ public class AcClipImg extends TopBarAppComptAcitity {
                     ImageTools.saveBitmapToSDCard(compressBitmap, savePath);
                     return savePath;
                 })
-                .subscribeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(savePath -> {
                     mProgressDialog.dismiss();
                     Intent intent = new Intent();
