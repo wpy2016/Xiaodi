@@ -12,6 +12,7 @@ import com.squareup.picasso.Target;
 import com.wpy.cqu.xiaodi.R;
 import com.wpy.cqu.xiaodi.application.XiaodiApplication;
 import com.wpy.cqu.xiaodi.clip.clip_image.ImageTools;
+import com.wpy.cqu.xiaodi.listener.DoubleClickDoListener;
 import com.wpy.cqu.xiaodi.model.ResultResp;
 import com.wpy.cqu.xiaodi.model.Reward;
 import com.wpy.cqu.xiaodi.model.Thing;
@@ -125,7 +126,7 @@ public class AcEditReward extends AcReward {
 
     private void newBindEvent() {
         mbtnSend.setOnClickListener(this::updateReward);
-        mivDelete.setOnClickListener(this::deleteReward);
+        mivDelete.setOnClickListener(new DoubleClickDoListener(this,this::deleteReward,getResources().getString(R.string.double_click_to_delete)));
     }
 
     private void download(String thumbnail, int thingtype) {

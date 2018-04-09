@@ -257,7 +257,7 @@ public class FgHall extends Fragment {
         public void success(List<Reward> rewards) {
             if (isRefresh) {
                 smartRefreshLayout.finishRefresh();
-                rewardAdapter.refresh(rewards);
+                rewardAdapter.refresh(rewards,FgHall.this.getUserVisibleHint());
                 return;
             }
             smartRefreshLayout.finishLoadMore();
@@ -266,7 +266,7 @@ public class FgHall extends Fragment {
 
         @Override
         public void fail(ResultResp resp) {
-            if (FgHall.this.isResumed()) {
+            if (FgHall.this.getUserVisibleHint()) {
                 ToastUtil.toast(getActivity(), resp.message);
             }
             if (isRefresh) {

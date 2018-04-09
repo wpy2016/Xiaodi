@@ -42,12 +42,12 @@ public class FgCarry extends Fragment {
     private IResp<List<Reward>> resp = new IResp<List<Reward>>() {
         @Override
         public void success(List<Reward> rewards) {
-            rewardAdapter.refresh(rewards);
+            rewardAdapter.refresh(rewards,FgCarry.this.getUserVisibleHint());
         }
 
         @Override
         public void fail(ResultResp resp) {
-            if (FgCarry.this.isResumed()) {
+            if (FgCarry.this.getUserVisibleHint()) {
                 ToastUtil.toast(getActivity(),resp.message);
             }
         }

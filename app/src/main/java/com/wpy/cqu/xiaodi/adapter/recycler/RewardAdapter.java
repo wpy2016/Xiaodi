@@ -63,11 +63,18 @@ public class RewardAdapter extends RecyclerView.Adapter<RewardHolder> {
         return rewards.size();
     }
 
-    public void refresh(List<Reward> rewardList) {
+    /**
+     *
+     * @param rewardList
+     * @param isShowTip 保证在fragment不可见时不进行提示
+     */
+    public void refresh(List<Reward> rewardList,boolean isShowTip) {
         rewards.clear();
         if (null == rewardList || rewardList.isEmpty()) {
             notifyDataSetChanged();
-            ToastUtil.toast(mContext, mContext.getResources().getString(R.string.no_more_data));
+            if (isShowTip){
+                ToastUtil.toast(mContext, mContext.getResources().getString(R.string.no_more_data));
+            }
             return;
         }
         rewards.addAll(rewardList);
