@@ -74,6 +74,17 @@ public class User implements Serializable {
     @SerializedName("token")
     public String Token;
 
+    public void setRongyunToken(String rongyunToken) {
+        RongyunToken = rongyunToken;
+    }
+
+    @SerializedName("rongyun_token")
+    public String RongyunToken;
+
+    public String getRongyunToken() {
+        return RongyunToken;
+    }
+
     public String getToken() {
         return Token;
     }
