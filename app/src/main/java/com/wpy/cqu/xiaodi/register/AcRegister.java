@@ -22,6 +22,7 @@ import com.wpy.cqu.xiaodi.base_activity.ClipBaseActivity;
 import com.wpy.cqu.xiaodi.base_activity.StatusBarAppComptActivity;
 import com.wpy.cqu.xiaodi.encrypt.AESEncrypt;
 import com.wpy.cqu.xiaodi.home.AcHome;
+import com.wpy.cqu.xiaodi.im_chat.Rongyun;
 import com.wpy.cqu.xiaodi.loading.Loading;
 import com.wpy.cqu.xiaodi.model.ResultResp;
 import com.wpy.cqu.xiaodi.model.User;
@@ -99,7 +100,7 @@ public class AcRegister extends ClipBaseActivity {
                 user.ImgLocalPath = mImgPath;
                 user.Pass = encryptPass;
                 saveUser(user);
-                toHome();
+                Rongyun.toHomeAc(AcRegister.this,true,true);
             }
 
             @Override

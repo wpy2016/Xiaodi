@@ -14,6 +14,7 @@ import com.wpy.cqu.xiaodi.application.XiaodiApplication;
 import com.wpy.cqu.xiaodi.base_activity.StatusBarAppComptActivity;
 import com.wpy.cqu.xiaodi.guide.AcGuide;
 import com.wpy.cqu.xiaodi.home.AcHome;
+import com.wpy.cqu.xiaodi.im_chat.Rongyun;
 import com.wpy.cqu.xiaodi.login.AcLogin;
 import com.wpy.cqu.xiaodi.model.User;
 import com.wpy.cqu.xiaodi.net.UserRequest;
@@ -48,7 +49,10 @@ public class AcWelcome extends StatusBarAppComptActivity {
         }
 
         if (isHasAccount()) {
-            delayToNextAc(AcHome.class);
+            Observable.timer(DELAY_SECONDS_TO_NEXT_AC, TimeUnit.SECONDS)
+                    .subscribeOn(AndroidSchedulers.mainThread())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(i -> Rongyun.toHomeAc(this,true,true));
             return;
         }
         delayToNextAc(AcLogin.class);

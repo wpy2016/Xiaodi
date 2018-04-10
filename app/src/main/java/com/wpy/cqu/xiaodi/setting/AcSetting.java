@@ -55,7 +55,6 @@ public class AcSetting extends TopBarAppComptAcitity {
         Intent intent = new Intent(this, AcLogin.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
-        finish();
     }
 
     private void bindView() {

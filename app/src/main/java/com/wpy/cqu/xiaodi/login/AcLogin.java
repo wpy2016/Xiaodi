@@ -18,6 +18,7 @@ import com.wpy.cqu.xiaodi.application.XiaodiApplication;
 import com.wpy.cqu.xiaodi.base_activity.StatusBarAppComptActivity;
 import com.wpy.cqu.xiaodi.encrypt.AESEncrypt;
 import com.wpy.cqu.xiaodi.home.AcHome;
+import com.wpy.cqu.xiaodi.im_chat.Rongyun;
 import com.wpy.cqu.xiaodi.model.ResultResp;
 import com.wpy.cqu.xiaodi.model.User;
 import com.wpy.cqu.xiaodi.net.UserRequest;
@@ -72,8 +73,7 @@ public class AcLogin extends StatusBarAppComptActivity {
                 XiaodiApplication.mCurrentUser = user;
                 XiaodiApplication.mCurrentUser.Pass = encryptPass;
                 XiaodiApplication.mCurrentUser.saveToLocalFile();
-                toNextAc(AcHome.class, null);
-                finish();
+                Rongyun.toHomeAc(AcLogin.this,true,false);
             }
 
             @Override
