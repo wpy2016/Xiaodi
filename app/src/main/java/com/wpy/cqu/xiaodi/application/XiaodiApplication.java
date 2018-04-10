@@ -20,6 +20,8 @@ import com.wpy.cqu.xiaodi.model.User;
 
 import java.io.File;
 
+import io.rong.imkit.RongIM;
+
 
 public class XiaodiApplication extends Application {
 
@@ -39,6 +41,9 @@ public class XiaodiApplication extends Application {
         USER_SAVE_FILEPATH = USER_SAVE_PATH + "/" + "user";
         confirmDirIsExist();
         initLogger();
+
+        //初始化融云即时通讯
+        RongIM.init(this);
     }
 
     private void confirmDirIsExist() {

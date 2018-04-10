@@ -94,8 +94,22 @@
         <activity
             android:name=".wallet.AcWallet"
             android:screenOrientation="portrait" />
-        <activity android:name=".reward.AcEditReward" />
-        <activity android:name=".reward.AcRewardDetailCanNotCarry"></activity>
-    </application>
+        <activity
+            android:name=".reward.AcEditReward"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".reward.AcRewardDetailCanNotCarry"
+            android:screenOrientation="portrait" />
 
+        <provider
+        android:name="android.support.v4.content.FileProvider"
+        android:authorities="com.wpy.cqu.xiaodi.FileProvider"
+        android:grantUriPermissions="true"
+        android:exported="false">
+        <meta-data
+        android:name="android.support.FILE_PROVIDER_PATHS"
+        android:resource="@xml/rc_file_path"/>
+        </provider>
+
+    </application>
 </manifest>

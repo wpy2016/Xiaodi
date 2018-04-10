@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 26
-    buildToolsVersion "26.0.1"
+    buildToolsVersion '27.0.0'
     defaultConfig {
         applicationId "com.wpy.cqu.xiaodi"
         minSdkVersion 21
@@ -22,6 +22,11 @@ android {
         sourceCompatibility org.gradle.api.JavaVersion.VERSION_1_8;
         targetCompatibility org.gradle.api.JavaVersion.VERSION_1_8;
     }
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+        }
+    }
 }
 
 dependencies {
@@ -30,10 +35,7 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     compile project(':vertifycode')
-
     //没有使用特殊Header，可以不加这行
-
-
     compile files('libs/commons-codec-1.11-javadoc.jar')
     compile files('libs/commons-codec-1.11.jar')
     compile 'com.squareup.picasso:picasso:2.5.2'
@@ -51,4 +53,14 @@ dependencies {
     compile 'com.android.support:design:26.+'
     compile 'com.ldoublem.loadingview:loadingviewlib:1.0'
     testCompile 'junit:junit:4.12'
+    compile project(':IMKit')
+}
+
+repositories {
+    jcenter()
+    mavenCentral()
+    maven {
+        url 'https://maven.google.com/'
+        name 'Google'
+    }
 }
