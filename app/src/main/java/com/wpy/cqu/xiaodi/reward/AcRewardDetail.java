@@ -26,6 +26,8 @@ import com.wpy.cqu.xiaodi.util.ToastUtil;
 
 import java.io.Serializable;
 
+import io.rong.imkit.RongIM;
+
 public class AcRewardDetail extends TopBarAppComptAcitity {
 
     private static final int STATUS_BAR_COLOR = Color.parseColor("#00dec9");
@@ -91,10 +93,8 @@ public class AcRewardDetail extends TopBarAppComptAcitity {
         RewardRequst.CarryRewards(reward.id, XiaodiApplication.mCurrentUser.Id,
                 XiaodiApplication.mCurrentUser.Token, new IResp<ResultResp>() {
                     @Override
-                    public void success(ResultResp object) {
-                        mLoadingPopWindow.dismiss();
-                        ToastUtil.toast(AcRewardDetail.this, getResources().getString(R.string.carry_success));
-                        finish();
+                    public void success(ResultResp resp) {
+                        carrySuccess();
                     }
 
                     @Override
@@ -104,6 +104,15 @@ public class AcRewardDetail extends TopBarAppComptAcitity {
                     }
                 });
 
+    }
+
+    private void carrySuccess() {
+        mLoadingPopWindow.dismiss();
+        ToastUtil.toast(AcRewardDetail.this, getResources().getString(R.string.carry_success));
+        if (null != RongIM.getInstance()) {
+            RongIM.getInstance().startPrivateChat(AcRewardDetail.this, reward.Publisher.Id, reward.Publisher.NickName);
+        }
+        finish();
     }
 
     private void initView() {

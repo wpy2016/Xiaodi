@@ -37,6 +37,10 @@ public interface IUserRequest {
 
     @POST("user/get")
     @FormUrlEncoded
-    Observable<UserResultResp> Get(@Field("user_id") String userId, @Field("token") String token);
+    Observable<UserResultResp> GetMyInfo(@Field("user_id") String userId, @Field("token") String token);
+
+    @POST("user/get/id")
+    @FormUrlEncoded
+    Observable<UserResultResp> GetUserInfo(@Field("user_id") String userId, @Field("token") String token,@Field("_id") String id);
 
 }

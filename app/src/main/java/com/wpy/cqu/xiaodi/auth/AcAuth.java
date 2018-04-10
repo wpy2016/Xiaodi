@@ -72,7 +72,7 @@ public class AcAuth extends TopBarAppComptAcitity {
 
     private void authSuccess() {
         ToastUtil.toast(AcAuth.this, getResources().getString(R.string.identificate_success));
-        UserRequest.Get(XiaodiApplication.mCurrentUser.Id, XiaodiApplication.mCurrentUser.Token, new IResp<User>() {
+        UserRequest.GetMyInfo(XiaodiApplication.mCurrentUser.Id, XiaodiApplication.mCurrentUser.Token, new IResp<User>() {
             @Override
             public void success(User user) {
                 XiaodiApplication.mCurrentUser = user;

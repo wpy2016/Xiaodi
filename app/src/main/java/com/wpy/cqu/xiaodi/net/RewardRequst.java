@@ -65,6 +65,15 @@ public class RewardRequst {
                 .subscribe(new ShowRewardConsumer("ShowRewardsMySend", resp), Error.getErrorConsumer(resp));
     }
 
+    public static void ShowRewardsOurNotFinish(String userId, String receiveId,String token, IResp<List<Reward>> resp) {
+        Retrofit retrofit = BaseRetrofit.getInstance();
+        IRewardRequest iRewardRequest = retrofit.create(IRewardRequest.class);
+        Observable<ShowReward> showRewardOur = iRewardRequest.ShowRewardsOurNotFinish(userId,receiveId,token);
+        showRewardOur.subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new ShowRewardConsumer("ShowRewardsMySend", resp), Error.getErrorConsumer(resp));
+    }
+
     public static void ShowRewardsMyCarry(String userId, String token, IResp<List<Reward>> resp) {
         Retrofit retrofit = BaseRetrofit.getInstance();
         IRewardRequest iRewardRequest = retrofit.create(IRewardRequest.class);

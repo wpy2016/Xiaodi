@@ -78,4 +78,9 @@ public interface IRewardRequest {
                                                   @Field("dead_line") String deadLine, @Field("origin_location") String originLocation,
                                                   @Field("dst_location") String dstLocation, @Field("describe") String describe,
                                                   @Field("thing_type") int ThingType, @Field("weight") String Weight);
+
+
+    @POST("/reward/show/our_not_finish")
+    @FormUrlEncoded
+    Observable<ShowReward> ShowRewardsOurNotFinish(@Field("user_id") String userId, @Field("receive_id") String receiveId, @Field("token") String token);
 }

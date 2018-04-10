@@ -1,65 +1,95 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@id/rc_content"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <LinearLayout
-        android:id="@+id/rc_status_bar"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="46dp"
-        android:background="#ffdfdf"
-        android:orientation="horizontal"
-        android:visibility="gone">
-        <ImageView
-            android:id="@+id/rc_status_bar_image"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingLeft="27dp"
-            android:layout_gravity="center_vertical"
-            android:indeterminateDrawable="@drawable/rc_notification_network_available"/>
-        <TextView
-            android:id="@+id/rc_status_bar_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingLeft="25dp"
-            android:layout_gravity="center_vertical"
-            android:text="@string/rc_notice_network_unavailable"
-            android:textColor="#776868"
-            android:textSize="14sp"/>
-    </LinearLayout>
-
-    <ListView
-        android:id="@id/rc_list"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/rc_status_bar"
-        android:divider="@color/rc_conversation_list_divider_color"
-        android:dividerHeight="0.5dp"
-        android:background="@color/rc_text_color_primary_inverse" />
-
-
-    <LinearLayout
-        android:id="@+id/rc_conversation_list_empty_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:visibility="gone"
-        android:orientation="vertical"
-        android:layout_marginTop="127dp">
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/rc_conversation_list_empty"/>
+        android:layout_height="50dp"
+        android:layout_alignParentTop="true"
+        android:background="#00dec9">
 
         <TextView
-            android:id="@+id/rc_empty_tv"
+            android:id="@+id/id_top_tv_content"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="#999999"
-            android:text="@string/rc_conversation_list_empty_prompt"
-            android:textSize="14sp" />
-    </LinearLayout>
+            android:layout_centerInParent="true"
+            android:background="@android:color/transparent"
+            android:text="消息"
+            android:textColor="@android:color/white"
+            android:textSize="20sp" />
 
-</RelativeLayout>
+    </RelativeLayout>
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@id/rc_content"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:id="@+id/rc_status_bar"
+            android:layout_width="match_parent"
+            android:layout_height="46dp"
+            android:background="#ffdfdf"
+            android:orientation="horizontal"
+            android:visibility="gone">
+
+            <ImageView
+                android:id="@+id/rc_status_bar_image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:indeterminateDrawable="@drawable/rc_notification_network_available"
+                android:paddingLeft="27dp" />
+
+            <TextView
+                android:id="@+id/rc_status_bar_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:paddingLeft="25dp"
+                android:text="@string/rc_notice_network_unavailable"
+                android:textColor="#776868"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <ListView
+            android:id="@id/rc_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/rc_status_bar"
+            android:background="@color/rc_text_color_primary_inverse"
+            android:divider="@color/rc_conversation_list_divider_color"
+            android:dividerHeight="0.5dp" />
+
+
+        <LinearLayout
+            android:id="@+id/rc_conversation_list_empty_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="127dp"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/rc_conversation_list_empty" />
+
+            <TextView
+                android:id="@+id/rc_empty_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/rc_conversation_list_empty_prompt"
+                android:textColor="#999999"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</LinearLayout>
+

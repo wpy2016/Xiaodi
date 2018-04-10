@@ -3,6 +3,8 @@ package com.wpy.cqu.xiaodi.im_chat;
 import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 
 import com.orhanobut.logger.Logger;
@@ -13,7 +15,10 @@ import com.wpy.cqu.xiaodi.net.resp.IResp;
 import com.wpy.cqu.xiaodi.util.ToastUtil;
 
 import io.rong.imkit.RongIM;
+import io.rong.imkit.fragment.ConversationFragment;
+import io.rong.imkit.fragment.ConversationListFragment;
 import io.rong.imlib.RongIMClient;
+import io.rong.imlib.model.Conversation;
 
 
 /**
@@ -21,6 +26,8 @@ import io.rong.imlib.RongIMClient;
  */
 
 public class Rongyun {
+
+    private static ConversationListFragment listFragment;
 
     /**
      * 登陆调用
@@ -68,6 +75,9 @@ public class Rongyun {
 
             @Override
             public void onSuccess(String userid) {
+                RongIM.setUserInfoProvider(new UserProvider(), true);
+                RongIM.getInstance().enableNewComingMessageIcon(true);//显示新消息提醒
+                RongIM.getInstance().enableUnreadMessageIcon(true);//显示未读消息数目
                 resp.success(userid);
             }
 
@@ -87,6 +97,25 @@ public class Rongyun {
             }
         }
         return null;
+    }
+
+    public static Fragment getMessageFragment(AppCompatActivity activity) {
+        if (null == listFragment) {
+            listFragment = new ConversationListFragment();
+            Uri uri = Uri.parse("rong://" + activity.getApplicationInfo().packageName).buildUpon()
+                    .appendPath("conversationlist")
+                    .appendQueryParameter(Conversation.ConversationType.PRIVATE.getName(), "false") //设置私聊会话是否聚合显示
+                    .appendQueryParameter(Conversation.ConversationType.PUBLIC_SERVICE.getName(), "true")//公共服务号
+                    .appendQueryParameter(Conversation.ConversationType.SYSTEM.getName(), "true")//系统
+                    .build();
+            listFragment.setUri(uri);
+        }
+        return listFragment;
+    }
+
+    public static ConversationFragment getConversationFragment(AppCompatActivity activity) {
+        ConversationFragment conversationFragment = new ConversationFragment();
+        return conversationFragment;
     }
 
 }

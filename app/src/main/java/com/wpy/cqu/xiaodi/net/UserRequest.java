@@ -64,13 +64,24 @@ public class UserRequest {
 
     }
 
-    public static void Get(String userId, String token, IResp<User> userResp) {
+    public static void GetMyInfo(String userId, String token, IResp<User> userResp) {
         Retrofit retrofit = BaseRetrofit.getInstance();
         IUserRequest userRequest = retrofit.create(IUserRequest.class);
-        Observable<UserResultResp> getObservable = userRequest.Get(userId, token);
+        Observable<UserResultResp> getObservable = userRequest.GetMyInfo(userId, token);
         getObservable.subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new UserConsumer("Get", userResp), Error.getErrorConsumer(userResp));
+                .subscribe(new UserConsumer("GetMyInfo", userResp), Error.getErrorConsumer(userResp));
+
+
+    }
+
+    public static void GetUserInfo(String userId, String token, String id, IResp<User> userResp) {
+        Retrofit retrofit = BaseRetrofit.getInstance();
+        IUserRequest userRequest = retrofit.create(IUserRequest.class);
+        Observable<UserResultResp> getUserInfoObservable = userRequest.GetUserInfo(userId, token, id);
+        getUserInfoObservable.subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new UserConsumer("GetUserInfo", userResp), Error.getErrorConsumer(userResp));
 
 
     }

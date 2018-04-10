@@ -240,4 +240,6 @@
     <string name="write_real_name">请填写实名</string>
     <string name="write_school_id">请填写学号</string>
     <string name="write_school_pass">请填写教务网密码</string>
+    <string name="system_msg">系统消息</string>
+    <string name="loading">正在加载...</string>
 </resources>
