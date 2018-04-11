@@ -65,7 +65,7 @@ public class AcRewardDetail extends TopBarAppComptAcitity {
 
     protected Button mbtnArray;
 
-    private Reward reward;
+    protected Reward reward;
 
     private PopupWindow mLoadingPopWindow;
 
