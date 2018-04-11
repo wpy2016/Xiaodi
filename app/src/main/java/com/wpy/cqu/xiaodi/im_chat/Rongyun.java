@@ -62,6 +62,12 @@ public class Rongyun {
         });
     }
 
+    public static void logout(){
+        if(null != RongIM.getInstance()){
+            RongIM.getInstance().logout();
+        }
+    }
+
     private static void connect(String token, Context context, IResp<String> resp) {
         if (!context.getApplicationInfo().packageName.equals(getCurProcessName(context.getApplicationContext()))) {
             resp.fail(new ResultResp(444, "链接融云失败，进程不一致"));
@@ -117,5 +123,4 @@ public class Rongyun {
         ConversationFragment conversationFragment = new ConversationFragment();
         return conversationFragment;
     }
-
 }

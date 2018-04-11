@@ -40,7 +40,15 @@ public interface IRewardRequest {
 
     @POST("/reward/carry")
     @FormUrlEncoded
-    Observable<ResultResp> CarryReward(@Field("_id") String id, @Field("user_id") String userId, @Field("token") String token);
+    Observable<ResultResp> CarryReward(@Field("reward_id") String rewardid, @Field("user_id") String userId, @Field("token") String token);
+
+    @POST("/reward/delivery")
+    @FormUrlEncoded
+    Observable<ResultResp> DeliveryReward(@Field("reward_id") String rewardid, @Field("user_id") String userId, @Field("token") String token);
+
+    @POST("/reward/finish")
+    @FormUrlEncoded
+    Observable<ResultResp> FinishReward(@Field("reward_id") String rewardid, @Field("user_id") String userId, @Field("token") String token);
 
     @POST("/reward/show/xiaodian")
     @FormUrlEncoded

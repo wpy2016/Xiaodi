@@ -242,4 +242,12 @@
     <string name="write_school_pass">请填写教务网密码</string>
     <string name="system_msg">系统消息</string>
     <string name="loading">正在加载...</string>
+    <string name="my_carry_not_finish_reward">我领取的未完成的悬赏</string>
+    <string name="my_send_not_finish_reward">我发布的未完成的悬赏</string>
+    <string name="wait_ta_arrive">等待对方送达</string>
+    <string name="arrive">送达</string>
+    <string name="finish"><![CDATA[ 完成]]></string>
+    <string name="wait_ta_finish">等待对方点击完成</string>
+    <string name="already_arrive">已送达</string>
+    <string name="already_finish">已完成</string>
 </resources>

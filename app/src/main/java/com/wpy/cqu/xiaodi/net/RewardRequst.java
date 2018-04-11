@@ -29,13 +29,32 @@ import retrofit2.Retrofit;
 
 public class RewardRequst {
 
-    public static void CarryRewards(String id, String userId, String token, IResp<ResultResp> resp) {
+    public static void CarryRewards(String rewardId, String userId, String token, IResp<ResultResp> resp) {
         Retrofit retrofit = BaseRetrofit.getInstance();
         IRewardRequest iRewardRequest = retrofit.create(IRewardRequest.class);
-        Observable<ResultResp> carryRewardObservable = iRewardRequest.CarryReward(id, userId, token);
+        Observable<ResultResp> carryRewardObservable = iRewardRequest.CarryReward(rewardId, userId, token);
         carryRewardObservable.subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new ResultRespConsumer("CarryRewards", resp), Error.getErrorConsumer(resp));
+    }
+
+    public static void DeliveryRewards(String rewardId, String userId, String token, IResp<ResultResp> resp) {
+        Retrofit retrofit = BaseRetrofit.getInstance();
+        IRewardRequest iRewardRequest = retrofit.create(IRewardRequest.class);
+        Observable<ResultResp> deliveryRewardObservable = iRewardRequest.DeliveryReward(rewardId, userId, token);
+        deliveryRewardObservable.subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new ResultRespConsumer("DeliveryRewards", resp), Error.getErrorConsumer(resp));
+    }
+
+
+    public static void FinishRewards(String rewardId, String userId, String token, IResp<ResultResp> resp) {
+        Retrofit retrofit = BaseRetrofit.getInstance();
+        IRewardRequest iRewardRequest = retrofit.create(IRewardRequest.class);
+        Observable<ResultResp> finishRewardObservable = iRewardRequest.FinishReward(rewardId, userId, token);
+        finishRewardObservable.subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new ResultRespConsumer("DeliveryRewards", resp), Error.getErrorConsumer(resp));
     }
 
     public static void ShowRewardsSortXiaodian(int pages, String userId, String token, IResp<List<Reward>> resp) {
@@ -65,10 +84,10 @@ public class RewardRequst {
                 .subscribe(new ShowRewardConsumer("ShowRewardsMySend", resp), Error.getErrorConsumer(resp));
     }
 
-    public static void ShowRewardsOurNotFinish(String userId, String receiveId,String token, IResp<List<Reward>> resp) {
+    public static void ShowRewardsOurNotFinish(String userId, String receiveId, String token, IResp<List<Reward>> resp) {
         Retrofit retrofit = BaseRetrofit.getInstance();
         IRewardRequest iRewardRequest = retrofit.create(IRewardRequest.class);
-        Observable<ShowReward> showRewardOur = iRewardRequest.ShowRewardsOurNotFinish(userId,receiveId,token);
+        Observable<ShowReward> showRewardOur = iRewardRequest.ShowRewardsOurNotFinish(userId, receiveId, token);
         showRewardOur.subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new ShowRewardConsumer("ShowRewardsMySend", resp), Error.getErrorConsumer(resp));
@@ -96,7 +115,7 @@ public class RewardRequst {
         Retrofit retrofit = BaseRetrofit.getInstance();
         IRewardRequest iRewardRequest = retrofit.create(IRewardRequest.class);
         Observable<ResultResp> deleteRewardObservable = iRewardRequest.DeleteReward(rewardId, userId, token);
-        deleteRewardObservable .subscribeOn(Schedulers.newThread())
+        deleteRewardObservable.subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new ResultRespConsumer("DeleteRewards", resp), Error.getErrorConsumer(resp));
     }
@@ -157,7 +176,7 @@ public class RewardRequst {
 
     private static void UpdateRewardWithThumbnail(Reward reward, String userId, String token, IResp<ResultResp> resp) {
         MediaType textType = MediaType.parse("text/plain");
-        RequestBody rewardIdBody = RequestBody.create(textType,reward.id);
+        RequestBody rewardIdBody = RequestBody.create(textType, reward.id);
         RequestBody userIdBody = RequestBody.create(textType, userId);
         RequestBody tokenBody = RequestBody.create(textType, token);
         RequestBody phoneBody = RequestBody.create(textType, reward.phone);
@@ -176,7 +195,7 @@ public class RewardRequst {
 
         Retrofit retrofit = BaseRetrofit.getInstance();
         IRewardRequest iRewardRequest = retrofit.create(IRewardRequest.class);
-        Observable<ResultResp> updateRequest = iRewardRequest.UpdateWithThumbnail(rewardIdBody,userIdBody, tokenBody,
+        Observable<ResultResp> updateRequest = iRewardRequest.UpdateWithThumbnail(rewardIdBody, userIdBody, tokenBody,
                 phoneBody, xiaodianBody, deadlineBody, originLocationBody, dstLocationBody, decribeBody,
                 thingTypeBody, weightBody, imgData);
         updateRequest.subscribeOn(Schedulers.newThread())
@@ -187,7 +206,7 @@ public class RewardRequst {
     private static void UpdateRewardWithOutThumbnail(Reward reward, String userId, String token, IResp<ResultResp> resp) {
         Retrofit retrofit = BaseRetrofit.getInstance();
         IRewardRequest iRewardRequest = retrofit.create(IRewardRequest.class);
-        Observable<ResultResp> updateRequest = iRewardRequest.UpdateWithOutThumbnail(reward.id,userId, token,
+        Observable<ResultResp> updateRequest = iRewardRequest.UpdateWithOutThumbnail(reward.id, userId, token,
                 reward.phone, reward.xiaodian, reward.deadline, reward.originLocation, reward.dstLocation,
                 reward.describe, reward.thing.type, reward.thing.weight);
         updateRequest.subscribeOn(Schedulers.newThread())

@@ -17,6 +17,7 @@ import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
 import com.scwang.smartrefresh.layout.header.ClassicsHeader;
 import com.wpy.cqu.xiaodi.R;
 import com.wpy.cqu.xiaodi.model.User;
+import com.wpy.cqu.xiaodi.net.UserRequest;
 
 import java.io.File;
 
@@ -44,6 +45,9 @@ public class XiaodiApplication extends Application {
 
         //初始化融云即时通讯
         RongIM.init(this);
+
+        //定时更新用户数据
+        UserRequest.intervalUpdateUserInfo();
     }
 
     private void confirmDirIsExist() {

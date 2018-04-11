@@ -16,8 +16,10 @@ import com.wpy.cqu.xiaodi.guide.AcGuide;
 import com.wpy.cqu.xiaodi.home.AcHome;
 import com.wpy.cqu.xiaodi.im_chat.Rongyun;
 import com.wpy.cqu.xiaodi.login.AcLogin;
+import com.wpy.cqu.xiaodi.model.ResultResp;
 import com.wpy.cqu.xiaodi.model.User;
 import com.wpy.cqu.xiaodi.net.UserRequest;
+import com.wpy.cqu.xiaodi.net.resp.IResp;
 
 import java.util.concurrent.TimeUnit;
 
@@ -49,6 +51,20 @@ public class AcWelcome extends StatusBarAppComptActivity {
         }
 
         if (isHasAccount()) {
+            UserRequest.GetMyInfo(XiaodiApplication.mCurrentUser.Id,
+                    XiaodiApplication.mCurrentUser.Token, new IResp<User>() {
+                        @Override
+                        public void success(User user) {
+                            XiaodiApplication.mCurrentUser = user;
+                            XiaodiApplication.mCurrentUser.saveToLocalFile();
+                        }
+
+                        @Override
+                        public void fail(ResultResp resp) {
+                            Logger.i("auto update userinfo fail=%s",resp.message);
+                        }
+                    });
+
             Observable.timer(DELAY_SECONDS_TO_NEXT_AC, TimeUnit.SECONDS)
                     .subscribeOn(AndroidSchedulers.mainThread())
                     .observeOn(AndroidSchedulers.mainThread())

@@ -13,9 +13,9 @@ import java.io.Serializable;
 public class Reward implements Serializable {
 
     public static final int REWARD_STATE_SEND = 0;
-    public static final int REWARD_STATE_Carry = 0;
-    public static final int REWARD_STATE_ARRIVE = 0;
-    public static final int REWARD_STATE_FINISH = 0;
+    public static final int REWARD_STATE_Carry = 1;
+    public static final int REWARD_STATE_ARRIVE = 2;
+    public static final int REWARD_STATE_FINISH = 3;
 
     @SerializedName("_id")
     public String id;

@@ -13,6 +13,7 @@ import com.wpy.cqu.xiaodi.about.AcAbout;
 import com.wpy.cqu.xiaodi.application.XiaodiApplication;
 import com.wpy.cqu.xiaodi.base_activity.StatusBarAppComptActivity;
 import com.wpy.cqu.xiaodi.base_activity.TopBarAppComptAcitity;
+import com.wpy.cqu.xiaodi.im_chat.Rongyun;
 import com.wpy.cqu.xiaodi.login.AcLogin;
 import com.wpy.cqu.xiaodi.model.User;
 import com.wpy.cqu.xiaodi.resetpass.AcEditPass;
@@ -20,6 +21,7 @@ import com.wpy.cqu.xiaodi.util.ActivityManager;
 
 import io.reactivex.Observable;
 import io.reactivex.schedulers.Schedulers;
+import io.rong.imkit.RongIM;
 
 public class AcSetting extends TopBarAppComptAcitity {
 
@@ -52,6 +54,7 @@ public class AcSetting extends TopBarAppComptAcitity {
                 .subscribe();
         // TODO: 2018/4/9 清空Activity栈
         //ActivityManager.getActivityManager().popAllActivityExceptTop(this);
+        Rongyun.logout();
         Intent intent = new Intent(this, AcLogin.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
@@ -88,5 +91,4 @@ public class AcSetting extends TopBarAppComptAcitity {
         Intent intent = new Intent(this,next);
         startActivity(intent);
     }
-
 }

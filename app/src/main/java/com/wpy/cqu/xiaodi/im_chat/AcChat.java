@@ -26,7 +26,12 @@ import com.wpy.cqu.xiaodi.util.ToastUtil;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
+import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 import io.rong.imkit.fragment.ConversationFragment;
 
 /**
@@ -51,6 +56,13 @@ public class AcChat extends TopBarAppComptAcitity {
 
     private ConversationFragment conversationFragment;
 
+    private int chatFgPos = 0;
+
+    private ViewPager.OnPageChangeListener onPageChangeListener;
+
+    //取消订阅者
+    private Disposable disposable;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         Bundle bundle = new Bundle();
@@ -69,17 +81,25 @@ public class AcChat extends TopBarAppComptAcitity {
         initViewPager();
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (null != disposable) {
+            disposable.dispose();
+        }
+    }
+
     private void bindView() {
         mtvBack = (TextView) findViewById(R.id.id_top_back_tv);
         mivBack = (ImageView) findViewById(R.id.id_top_back_iv_img);
         mtvContent = (TextView) findViewById(R.id.id_top_tv_content);
-
         mvpChat = (ViewPager) findViewById(R.id.id_ac_chat_viewpager);
     }
 
     private void bindEvent() {
         mtvBack.setOnClickListener(view -> finish());
         mivBack.setOnClickListener(view -> finish());
+
     }
 
     private void initView() {
@@ -132,7 +152,6 @@ public class AcChat extends TopBarAppComptAcitity {
         rewards.clear();
 
         List<Fragment> fragments = new ArrayList<>();
-        int chatFgPos = 0;
         //在左边设置为我领取的未完成的订单
         for (Reward myCarryReward : myCarryNotFinishRewards) {
             Fragment fragment = new FgRewardDetail();
@@ -142,7 +161,6 @@ public class AcChat extends TopBarAppComptAcitity {
             fragments.add(fragment);
             chatFgPos++;
         }
-
         fragments.add(conversationFragment);
 
         //在右边设置为我发布的未完成的订单
@@ -154,9 +172,18 @@ public class AcChat extends TopBarAppComptAcitity {
             fragments.add(fragment);
         }
 
-        mAdaper.mFragments = fragments;
-        mAdaper.notifyDataSetChanged();
-        mvpChat.setCurrentItem(chatFgPos);
+        //延迟2s更新，防止出现更新太快，屏幕闪一下
+        disposable = Observable.timer(3, TimeUnit.SECONDS)
+                .subscribeOn(Schedulers.computation())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(l -> {
+                    mAdaper.mFragments = fragments;
+                    mAdaper.notifyDataSetChanged();
+                    mvpChat.setCurrentItem(chatFgPos);
+                    //切换时，更新title
+                    onPageChangeListener = new ChatChangeListener();
+                    mvpChat.addOnPageChangeListener(onPageChangeListener);
+                });
     }
 
     /**
@@ -185,6 +212,34 @@ public class AcChat extends TopBarAppComptAcitity {
         @Override
         public int getItemPosition(Object object) {
             return POSITION_NONE;
+        }
+    }
+
+    private class ChatChangeListener implements ViewPager.OnPageChangeListener {
+
+        @Override
+        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+        }
+
+        @Override
+        public void onPageSelected(int position) {
+            if (position == chatFgPos) {
+                String targetName = getIntent().getData().getQueryParameter("title");
+                mtvContent.setText(targetName);
+                return;
+            }
+            if (position < chatFgPos) {
+                mtvContent.setText(getResources().getString(R.string.my_carry_not_finish_reward));
+                return;
+            }
+
+            mtvContent.setText(getResources().getString(R.string.my_send_not_finish_reward));
+        }
+
+        @Override
+        public void onPageScrollStateChanged(int state) {
+
         }
     }
 }

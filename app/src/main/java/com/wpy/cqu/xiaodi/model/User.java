@@ -60,10 +60,10 @@ public class User implements Serializable {
     public String ImgLocalPath;//头像的本地路径
 
     @SerializedName("gold_money")
-    public float GoldMoney;
+    public int GoldMoney;
 
     @SerializedName("silver_money")
-    public float SilverMoney;
+    public int SilverMoney;
 
     @SerializedName("creditibility")
     public float Creditibility;
@@ -83,6 +83,14 @@ public class User implements Serializable {
 
     public String getRongyunToken() {
         return RongyunToken;
+    }
+
+    public void setGoldMoney(int goldMoney) {
+        GoldMoney = goldMoney;
+    }
+
+    public void setSilverMoney(int silverMoney) {
+        SilverMoney = silverMoney;
     }
 
     public String getToken() {
@@ -137,11 +145,11 @@ public class User implements Serializable {
         return ImgLocalPath;
     }
 
-    public float getGoldMoney() {
+    public int getGoldMoney() {
         return GoldMoney;
     }
 
-    public float getSilverMoney() {
+    public int getSilverMoney() {
         return SilverMoney;
     }
 
@@ -198,13 +206,7 @@ public class User implements Serializable {
         ImgLocalPath = imgLocalPath;
     }
 
-    public void setGoldMoney(float goldMoney) {
-        GoldMoney = goldMoney;
-    }
 
-    public void setSilverMoney(float silverMoney) {
-        SilverMoney = silverMoney;
-    }
 
     public void setCreditibility(float creditibility) {
         Creditibility = creditibility;

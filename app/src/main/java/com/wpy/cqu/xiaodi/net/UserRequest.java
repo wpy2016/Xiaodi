@@ -1,6 +1,7 @@
 package com.wpy.cqu.xiaodi.net;
 
 import com.orhanobut.logger.Logger;
+import com.wpy.cqu.xiaodi.application.XiaodiApplication;
 import com.wpy.cqu.xiaodi.model.ResultResp;
 import com.wpy.cqu.xiaodi.model.User;
 import com.wpy.cqu.xiaodi.model.UserResultResp;
@@ -10,6 +11,7 @@ import com.wpy.cqu.xiaodi.net.resp.IResp;
 import com.wpy.cqu.xiaodi.net.resp.ResultRespConsumer;
 
 import java.io.File;
+import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -60,8 +62,6 @@ public class UserRequest {
         authObservable.subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new ResultRespConsumer("Auth", userResp), Error.getErrorConsumer(userResp));
-
-
     }
 
     public static void GetMyInfo(String userId, String token, IResp<User> userResp) {
@@ -71,8 +71,6 @@ public class UserRequest {
         getObservable.subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new UserConsumer("GetMyInfo", userResp), Error.getErrorConsumer(userResp));
-
-
     }
 
     public static void GetUserInfo(String userId, String token, String id, IResp<User> userResp) {
@@ -82,8 +80,6 @@ public class UserRequest {
         getUserInfoObservable.subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new UserConsumer("GetUserInfo", userResp), Error.getErrorConsumer(userResp));
-
-
     }
 
     private static class UserConsumer implements Consumer<UserResultResp> {
@@ -106,5 +102,36 @@ public class UserRequest {
             }
             resp.success(resonce.user);
         }
+    }
+
+    /**
+     * 每隔60s更新用户数据
+     */
+    public static void intervalUpdateUserInfo() {
+        Observable.interval(0, 60, TimeUnit.SECONDS)
+                .doOnNext(l -> {
+                    if (null == XiaodiApplication.mCurrentUser) {
+                        return;
+                    }
+                    updateUserInfo();
+                })
+                .subscribeOn(Schedulers.computation())
+                .subscribe();
+    }
+
+    private static void updateUserInfo() {
+        UserRequest.GetMyInfo(XiaodiApplication.mCurrentUser.Id,
+                XiaodiApplication.mCurrentUser.Token,
+                new IResp<User>() {
+                    @Override
+                    public void success(User user) {
+                        XiaodiApplication.mCurrentUser = user;
+                    }
+
+                    @Override
+                    public void fail(ResultResp resp) {
+
+                    }
+                });
     }
 }
