@@ -91,4 +91,8 @@ public interface IRewardRequest {
     @POST("/reward/show/our_not_finish")
     @FormUrlEncoded
     Observable<ShowReward> ShowRewardsOurNotFinish(@Field("user_id") String userId, @Field("receive_id") String receiveId, @Field("token") String token);
+
+    @POST("/reward/evaluate")
+    @FormUrlEncoded
+    Observable<ResultResp> EvaluateReward(@Field("reward_id") String rewardId, @Field("evaluate") float evaluate, @Field("user_id") String userId, @Field("token") String token);
 }

@@ -57,6 +57,15 @@ public class RewardRequst {
                 .subscribe(new ResultRespConsumer("DeliveryRewards", resp), Error.getErrorConsumer(resp));
     }
 
+    public static void EvaluateRewards(String rewardId, float evaluate, String userId, String token, IResp<ResultResp> resp) {
+        Retrofit retrofit = BaseRetrofit.getInstance();
+        IRewardRequest iRewardRequest = retrofit.create(IRewardRequest.class);
+        Observable<ResultResp> evaluateRewardObservable = iRewardRequest.EvaluateReward(rewardId, evaluate, userId, token);
+        evaluateRewardObservable.subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new ResultRespConsumer("DeliveryRewards", resp), Error.getErrorConsumer(resp));
+    }
+
     public static void ShowRewardsSortXiaodian(int pages, String userId, String token, IResp<List<Reward>> resp) {
         Retrofit retrofit = BaseRetrofit.getInstance();
         IRewardRequest iRewardRequest = retrofit.create(IRewardRequest.class);

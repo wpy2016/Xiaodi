@@ -108,7 +108,7 @@ public class UserRequest {
      * 每隔60s更新用户数据
      */
     public static void intervalUpdateUserInfo() {
-        Observable.interval(0, 60, TimeUnit.SECONDS)
+        Observable.interval(0, 30, TimeUnit.SECONDS)
                 .doOnNext(l -> {
                     if (null == XiaodiApplication.mCurrentUser) {
                         return;

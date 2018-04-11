@@ -1,5 +1,6 @@
 package com.wpy.cqu.xiaodi.im_chat;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -14,6 +15,7 @@ import com.orhanobut.logger.Logger;
 import com.squareup.picasso.Picasso;
 import com.wpy.cqu.xiaodi.R;
 import com.wpy.cqu.xiaodi.application.XiaodiApplication;
+import com.wpy.cqu.xiaodi.evaluate.AcEvaluate;
 import com.wpy.cqu.xiaodi.model.ResultResp;
 import com.wpy.cqu.xiaodi.model.Reward;
 import com.wpy.cqu.xiaodi.model.Thing;
@@ -192,7 +194,9 @@ public class FgRewardDetail extends Fragment {
 
     //去评价
     private void toEvaluate() {
-
+        Intent intent = new Intent(getActivity(), AcEvaluate.class);
+        intent.putExtra("reward",reward);
+        startActivity(intent);
     }
 
     private boolean isMySendAndRewardIsCarry(Reward reward) {

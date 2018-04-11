@@ -24,6 +24,14 @@
 
     </style>
 
+    <!-- 自定义的ratingbat的样式，进度为星形-->
+    <style name="love_ratingbar" parent="Base.Widget.AppCompat.RatingBar">
+
+        <item name="android:progressDrawable">@drawable/love_ratingbar</item>
+        <item name="android:maxHeight">32dp</item>
+        <item name="android:minHeight">32dp</item>
+    </style>
+
     <!--下面是背景透明的界面，在activity中设置主题来实现activity的背景透明 -->
     <style name="nobkdtheme" parent="AppTheme">
         <item name="android:windowBackground">@color/transparent_background</item>

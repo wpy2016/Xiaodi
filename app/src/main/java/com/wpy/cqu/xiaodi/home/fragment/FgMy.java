@@ -64,7 +64,6 @@ public class FgMy extends ClipBaseFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        user = XiaodiApplication.mCurrentUser;
     }
 
     @Override
@@ -83,6 +82,7 @@ public class FgMy extends ClipBaseFragment {
     @Override
     public void onResume() {
         super.onResume();
+        user = XiaodiApplication.mCurrentUser;
         initView();
     }
 
