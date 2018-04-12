@@ -9,6 +9,9 @@ import com.wpy.cqu.xiaodi.R;
 import com.wpy.cqu.xiaodi.application.XiaodiApplication;
 import com.wpy.cqu.xiaodi.evaluate.AcEvaluate;
 
+/**
+ * 更新状态的
+ */
 public class AcRewardDetailCanNotCarry extends AcRewardDetail {
 
     @Override

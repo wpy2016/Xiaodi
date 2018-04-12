@@ -29,14 +29,13 @@ public class AcWallet extends TopBarAppComptAcitity {
 
     private LinearLayout mllInvite;
 
-    private  LinearLayout mllXiaodianRecord;
-
+    private LinearLayout mllXiaodianRecord;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Bundle bundle = new Bundle();
-        bundle.putInt(StatusBarAppComptActivity.STATUS_COLOR_STR,STATUS_BAR_COLOR);
+        bundle.putInt(StatusBarAppComptActivity.STATUS_COLOR_STR, STATUS_BAR_COLOR);
         super.onCreate(bundle);
         setContentView(R.layout.ac_wallet);
         bindView();
@@ -72,11 +71,17 @@ public class AcWallet extends TopBarAppComptAcitity {
     private void bindEvent() {
         mtvBack.setOnClickListener(view -> finish());
         mivBack.setOnClickListener(view -> finish());
+        mllXiaodianRecord.setOnClickListener(view -> toNext(AcXiaodianRecord.class));
         // TODO: 2018/4/8
     }
 
     private void toNext(Class<?> next) {
-        Intent intent = new Intent(this,next);
+        Intent intent = new Intent(this, next);
+        startActivity(intent);
+    }
+
+    private void toNextAc(Class<?> nextAc) {
+        Intent intent = new Intent(this, nextAc);
         startActivity(intent);
     }
 }

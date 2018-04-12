@@ -1,5 +1,7 @@
 package com.wpy.cqu.xiaodi.model;
 
+import android.graphics.Color;
+
 import com.google.gson.Gson;
 import com.google.gson.annotations.SerializedName;
 import com.wpy.cqu.xiaodi.R;
@@ -16,6 +18,9 @@ public class Reward implements Serializable {
     public static final int REWARD_STATE_Carry = 1;
     public static final int REWARD_STATE_ARRIVE = 2;
     public static final int REWARD_STATE_FINISH = 3;
+
+    public static final String[] REWARD_STATUS_STRING = {"未领取", "代送中", "已送达", "已完成"};
+    public static final int[] REWARD_STATUS_COLOR_TEXT = {Color.parseColor("#82e100"), Color.parseColor("#ffd700"), Color.parseColor("#1e90ff"), Color.parseColor("#ff4500")};
 
     @SerializedName("_id")
     public String id;

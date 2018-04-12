@@ -255,6 +255,8 @@
     <string name="evaluate_successful">评价成功</string>
     <string name="please_evalute">请评价</string>
     <string name="double_click_to_back">双击退出</string>
+    <string name="xiaodian_record">笑点记录</string>
+    <string name="not_xiaodian_record">没有笑点记录</string>
 
 
     <string-array name="week_date">

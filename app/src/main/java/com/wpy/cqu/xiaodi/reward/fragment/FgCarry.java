@@ -12,7 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.wpy.cqu.xiaodi.R;
-import com.wpy.cqu.xiaodi.adapter.recycler.RewardAdapter;
+import com.wpy.cqu.xiaodi.adapter.recycler.RewardWithStatusAdapter;
 import com.wpy.cqu.xiaodi.application.XiaodiApplication;
 import com.wpy.cqu.xiaodi.model.ResultResp;
 import com.wpy.cqu.xiaodi.model.Reward;
@@ -33,20 +33,20 @@ public class FgCarry extends Fragment {
 
     private RecyclerView recyclerView;
 
-    private RewardAdapter rewardAdapter;
+    private RewardWithStatusAdapter rewardAdapter;
 
     private int carryRecordType = AcCarryRecord.MySend;
 
     private IResp<List<Reward>> resp = new IResp<List<Reward>>() {
         @Override
         public void success(List<Reward> rewards) {
-            rewardAdapter.refresh(rewards,FgCarry.this.getUserVisibleHint());
+            rewardAdapter.refresh(rewards, FgCarry.this.getUserVisibleHint());
         }
 
         @Override
         public void fail(ResultResp resp) {
             if (FgCarry.this.getUserVisibleHint()) {
-                ToastUtil.toast(getActivity(),resp.message);
+                ToastUtil.toast(getActivity(), resp.message);
             }
         }
     };
@@ -87,10 +87,10 @@ public class FgCarry extends Fragment {
     private void bindData() {
         switch (carryRecordType) {
             case AcCarryRecord.MySend:
-                RewardRequst.ShowRewardsMySend(XiaodiApplication.mCurrentUser.Id,XiaodiApplication.mCurrentUser.Token,resp);
+                RewardRequst.ShowRewardsMySend(XiaodiApplication.mCurrentUser.Id, XiaodiApplication.mCurrentUser.Token, resp);
                 break;
-            case  AcCarryRecord.MyCarry:
-                RewardRequst.ShowRewardsMyCarry(XiaodiApplication.mCurrentUser.Id,XiaodiApplication.mCurrentUser.Token,resp);
+            case AcCarryRecord.MyCarry:
+                RewardRequst.ShowRewardsMyCarry(XiaodiApplication.mCurrentUser.Id, XiaodiApplication.mCurrentUser.Token, resp);
                 break;
         }
     }
@@ -99,7 +99,7 @@ public class FgCarry extends Fragment {
         recyclerView = view.findViewById(R.id.id_fg_carry_record_refreshview);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(linearLayoutManager);
-        rewardAdapter = new RewardAdapter(getContext());
+        rewardAdapter = new RewardWithStatusAdapter(getContext());
         recyclerView.setAdapter(rewardAdapter);
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL);
         recyclerView.addItemDecoration(dividerItemDecoration);
@@ -112,19 +112,19 @@ public class FgCarry extends Fragment {
     private void itemClick(Reward reward) {
         switch (carryRecordType) {
             case AcCarryRecord.MyCarry:
-                toNext(reward,AcRewardDetailCanNotCarry.class);
+                toNext(reward, AcRewardDetailCanNotCarry.class);
                 break;
             case AcCarryRecord.MySend:
                 if (Reward.REWARD_STATE_SEND == reward.state) {
-                    toNext(reward,AcEditReward.class);
+                    toNext(reward, AcEditReward.class);
                     return;
                 }
-                toNext(reward,AcRewardDetailCanNotCarry.class);
+                toNext(reward, AcRewardDetailCanNotCarry.class);
                 break;
         }
     }
 
-    private void toNext(Reward reward,Class<?> next) {
+    private void toNext(Reward reward, Class<?> next) {
         Intent intent = new Intent(getContext(), next);
         intent.putExtra("reward", reward);
         startActivity(intent);

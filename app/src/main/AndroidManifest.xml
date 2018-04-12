@@ -155,8 +155,15 @@
             </intent-filter>
         </receiver>
 
-        <activity android:name=".evaluate.AcEvaluate" />
-        <activity android:name=".sign.AcSign"></activity>
+        <activity
+            android:name=".evaluate.AcEvaluate"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".sign.AcSign"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".wallet.AcXiaodianRecord"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>
