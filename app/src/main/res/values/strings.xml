@@ -259,6 +259,12 @@
     <string name="not_xiaodian_record">没有笑点记录</string>
     <string name="click_again_to_exit">再次点击便退出</string>
     <string name="ring_on_vibrate_on">响铃必须震动</string>
+    <string name="update_img_success">更新头像成功</string>
+    <string name="password_not_black">密码不允许为空</string>
+    <string name="twice_pass_not_the_same">新密码不一致</string>
+    <string name="update_pass_successful">更新密码成功</string>
+    <string name="nickname_not_black">昵称不能为空</string>
+    <string name="update_nickname_successful">更新昵称成功</string>
 
 
     <string-array name="week_date">

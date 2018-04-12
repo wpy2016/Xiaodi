@@ -52,4 +52,17 @@ public interface IUserRequest {
     @FormUrlEncoded
     Observable<UserResultResp> GetUserInfo(@Field("user_id") String userId, @Field("token") String token, @Field("_id") String id);
 
+    @POST("user/update/pass")
+    @FormUrlEncoded
+    Observable<ResultResp> UpdatePass(@Field("user_id") String userid, @Field("token") String token, @Field("pass") String newPass, @Field("old_pass") String oldPass);
+
+
+    @POST("user/update/nickname")
+    @FormUrlEncoded
+    Observable<ResultResp> UpdateNickName(@Field("user_id") String userid, @Field("token") String token, @Field("nick_name") String nickName);
+
+    @POST("user/update/img")
+    @Multipart
+    Observable<ResultResp> UpdateImg(@Part("user_id") RequestBody userid, @Part("token") RequestBody token, @Part MultipartBody.Part img);
+
 }

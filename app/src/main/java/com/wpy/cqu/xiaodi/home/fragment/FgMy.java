@@ -1,14 +1,18 @@
 package com.wpy.cqu.xiaodi.home.fragment;
 
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -17,11 +21,14 @@ import com.wpy.cqu.xiaodi.R;
 import com.wpy.cqu.xiaodi.application.XiaodiApplication;
 import com.wpy.cqu.xiaodi.auth.AcAuth;
 import com.wpy.cqu.xiaodi.base_activity.ClipBaseFragment;
+import com.wpy.cqu.xiaodi.model.ResultResp;
 import com.wpy.cqu.xiaodi.model.User;
-import com.wpy.cqu.xiaodi.register.AcRegister;
+import com.wpy.cqu.xiaodi.net.UserRequest;
+import com.wpy.cqu.xiaodi.net.resp.IResp;
 import com.wpy.cqu.xiaodi.reward.AcCarryRecord;
 import com.wpy.cqu.xiaodi.setting.AcSetting;
 import com.wpy.cqu.xiaodi.sign.AcSign;
+import com.wpy.cqu.xiaodi.util.ToastUtil;
 import com.wpy.cqu.xiaodi.wallet.AcWallet;
 
 public class FgMy extends ClipBaseFragment {
@@ -51,6 +58,8 @@ public class FgMy extends ClipBaseFragment {
     private RelativeLayout mrlSetting;
 
     private User user;
+
+    private PopupWindow mPopWindowModifyNickName;
 
     public FgMy() {
     }
@@ -88,8 +97,10 @@ public class FgMy extends ClipBaseFragment {
     }
 
     private void initView() {
+        mivImg.setImageResource(R.drawable.default_headimg);
+        Picasso.with(getActivity()).load(user.ImgUrl).error(R.drawable.default_headimg).into(mivImg);
+
         mtvContent.setText(getResources().getString(R.string.my));
-        loadImg();
         mtvNickName.setText(user.getNickName());
         float money = user.getGoldMoney() + user.getSilverMoney();
         mtvMoney.setText("" + money);
@@ -102,19 +113,61 @@ public class FgMy extends ClipBaseFragment {
         mtvRealName.setText(user.getRealName());
     }
 
-    // TODO: 2018/4/6  需要优化，当本地有图片时，不进行网络加载，本地没有图片时，网络加载并下载下来
-    private void loadImg() {
-        mivImg.setImageResource(R.drawable.default_headimg);
-        Picasso.with(getActivity()).load(user.ImgUrl).error(R.drawable.default_headimg).into(mivImg);
-    }
-
     @Override
     public void setImg(Bitmap img, String path) {
         mivImg.setImageBitmap(img);
+        UserRequest.UpdateImg(XiaodiApplication.mCurrentUser.Id,
+                XiaodiApplication.mCurrentUser.Token, path, new IResp<ResultResp>() {
+                    @Override
+                    public void success(ResultResp object) {
+                        ToastUtil.toast(getActivity(), getResources().getString(R.string.update_img_success));
+                    }
+
+                    @Override
+                    public void fail(ResultResp resp) {
+                        ToastUtil.toast(getActivity(), resp.message);
+                    }
+                });
     }
 
     private void setNickName(View view) {
+        if (mPopWindowModifyNickName == null) {
+            View mView = LayoutInflater.from(getActivity()).inflate(R.layout.pop_modifyname, null);
+            mPopWindowModifyNickName = new PopupWindow(mView, RelativeLayout.LayoutParams.MATCH_PARENT,
+                    RelativeLayout.LayoutParams.MATCH_PARENT, true);
+            initModifyPopupWindow(mView);
+        }
+        mPopWindowModifyNickName.showAtLocation(mtvNickName, Gravity.CENTER, 0, 0);
+    }
 
+    private void initModifyPopupWindow(View view) {
+        EditText etNewNickName = view.findViewById(R.id.id_pop_modifyname_et_nickname);
+        Button btnConfirm = view.findViewById(R.id.id_pop_modifyname_btn_confirm);
+        Button btnCancel = view.findViewById(R.id.id_pop_modifyname_btn_cancel);
+
+        btnCancel.setOnClickListener(v -> mPopWindowModifyNickName.dismiss());
+        btnConfirm.setOnClickListener(v -> {
+            String newNickName = etNewNickName.getText().toString();
+            if (TextUtils.isEmpty(newNickName)) {
+                ToastUtil.toast(getActivity(), getResources().getString(R.string.nickname_not_black));
+                return;
+            }
+            UserRequest.UpdateNickname(XiaodiApplication.mCurrentUser.Id, XiaodiApplication.mCurrentUser.Token,
+                    newNickName, new IResp<ResultResp>() {
+                        @Override
+                        public void success(ResultResp object) {
+                            mPopWindowModifyNickName.dismiss();
+                            mtvNickName.setText(newNickName);
+                            ToastUtil.toast(getActivity(), getResources().getString(R.string.update_nickname_successful));
+                        }
+
+                        @Override
+                        public void fail(ResultResp resp) {
+                            ToastUtil.toast(getActivity(), resp.message);
+                            mPopWindowModifyNickName.dismiss();
+                        }
+                    });
+        });
     }
 
     @Override

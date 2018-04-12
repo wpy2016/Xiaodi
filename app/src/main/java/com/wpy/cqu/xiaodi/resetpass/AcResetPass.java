@@ -53,7 +53,7 @@ public class AcResetPass extends TopBarAppComptAcitity {
     }
 
     private void resetPass(View view) {
-
+        //此处的更新密码是没有userId的，短信验证更改密码
     }
 
     private void bindEvent() {

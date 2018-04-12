@@ -92,6 +92,43 @@ public class UserRequest {
                 .subscribe(new ResultRespConsumer("Auth", userResp), Error.getErrorConsumer(userResp));
     }
 
+    public static void UpdatePass(String userId, String token, String oldPass, String newPass, IResp<ResultResp> userResp) {
+        Retrofit retrofit = BaseRetrofit.getInstance();
+        IUserRequest userRequest = retrofit.create(IUserRequest.class);
+        Observable<ResultResp> updatePassObservable = userRequest.UpdatePass(userId, token, newPass, oldPass);
+        updatePassObservable.subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new ResultRespConsumer("UpdatePass", userResp), Error.getErrorConsumer(userResp));
+    }
+
+    public static void UpdateNickname(String userId, String token, String nickName, IResp<ResultResp> userResp) {
+        Retrofit retrofit = BaseRetrofit.getInstance();
+        IUserRequest userRequest = retrofit.create(IUserRequest.class);
+        Observable<ResultResp> updateNicknameObservable = userRequest.UpdateNickName(userId, token, nickName);
+        updateNicknameObservable.subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new ResultRespConsumer("UpdateNickname", userResp), Error.getErrorConsumer(userResp));
+    }
+
+    public static void UpdateImg(String userId, String token, String imgPath, IResp<ResultResp> userResp) {
+        MediaType textType = MediaType.parse("text/plain");
+        RequestBody userIdBody = RequestBody.create(textType, userId);
+        RequestBody tokenBody = RequestBody.create(textType, token);
+
+        MediaType fileType = MediaType.parse("multipart/form-data");
+        File imgFile = new File(imgPath);
+        RequestBody imgBody = RequestBody.create(fileType, imgFile);
+        MultipartBody.Part imgData = MultipartBody.Part.createFormData("img", "img.png", imgBody);
+
+        Retrofit retrofit = BaseRetrofit.getInstance();
+        IUserRequest userRequest = retrofit.create(IUserRequest.class);
+        Observable<ResultResp> updateImgObservable = userRequest.UpdateImg(userIdBody, tokenBody, imgData);
+        updateImgObservable.subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new ResultRespConsumer("UpdateImg", userResp), Error.getErrorConsumer(userResp));
+    }
+
+
     public static void GetMyInfo(String userId, String token, IResp<User> userResp) {
         Retrofit retrofit = BaseRetrofit.getInstance();
         IUserRequest userRequest = retrofit.create(IUserRequest.class);
