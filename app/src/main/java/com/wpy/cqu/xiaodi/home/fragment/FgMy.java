@@ -31,6 +31,8 @@ import com.wpy.cqu.xiaodi.sign.AcSign;
 import com.wpy.cqu.xiaodi.util.ToastUtil;
 import com.wpy.cqu.xiaodi.wallet.AcWallet;
 
+import java.io.File;
+
 public class FgMy extends ClipBaseFragment {
 
     private TextView mtvContent;
@@ -115,12 +117,14 @@ public class FgMy extends ClipBaseFragment {
 
     @Override
     public void setImg(Bitmap img, String path) {
-        mivImg.setImageBitmap(img);
         UserRequest.UpdateImg(XiaodiApplication.mCurrentUser.Id,
                 XiaodiApplication.mCurrentUser.Token, path, new IResp<ResultResp>() {
                     @Override
                     public void success(ResultResp object) {
+                        mivImg.setImageBitmap(img);
                         ToastUtil.toast(getActivity(), getResources().getString(R.string.update_img_success));
+                        //立即更新url
+                        UserRequest.updateUserInfo();
                     }
 
                     @Override
@@ -157,6 +161,7 @@ public class FgMy extends ClipBaseFragment {
                         @Override
                         public void success(ResultResp object) {
                             mPopWindowModifyNickName.dismiss();
+                            XiaodiApplication.mCurrentUser.NickName = newNickName;
                             mtvNickName.setText(newNickName);
                             ToastUtil.toast(getActivity(), getResources().getString(R.string.update_nickname_successful));
                         }

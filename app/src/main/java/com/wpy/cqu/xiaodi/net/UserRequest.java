@@ -184,7 +184,7 @@ public class UserRequest {
                 .subscribe();
     }
 
-    private static void updateUserInfo() {
+    public static void updateUserInfo() {
         UserRequest.GetMyInfo(XiaodiApplication.mCurrentUser.Id,
                 XiaodiApplication.mCurrentUser.Token,
                 new IResp<User>() {
