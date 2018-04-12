@@ -254,4 +254,16 @@
     <string name="back">返回</string>
     <string name="evaluate_successful">评价成功</string>
     <string name="please_evalute">请评价</string>
+    <string name="double_click_to_back">双击退出</string>
+
+
+    <string-array name="week_date">
+        <item>SUN</item>
+        <item>MON</item>
+        <item>TUES</item>
+        <item>WEDS</item>
+        <item>THUR</item>
+        <item>FRI</item>
+        <item>SAT</item>
+    </string-array>
 </resources>

@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.view.KeyEvent;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -18,6 +19,7 @@ import com.wpy.cqu.xiaodi.base_activity.TopBarAppComptAcitity;
 import com.wpy.cqu.xiaodi.home.fragment.FgHall;
 import com.wpy.cqu.xiaodi.home.fragment.FgMy;
 import com.wpy.cqu.xiaodi.im_chat.Rongyun;
+import com.wpy.cqu.xiaodi.util.ToastUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -141,6 +143,15 @@ public class AcHome extends TopBarAppComptAcitity {
         mtvHall.setTextColor(TEXT_COLOR_GRAY);
         mivMy.setImageResource(R.drawable.my_gray);
         mtvMy.setTextColor(TEXT_COLOR_GRAY);
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
+            ToastUtil.toast(AcHome.this, getResources().getString(R.string.double_click_to_back));
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 
     private class HomePagerAdaper extends FragmentPagerAdapter {

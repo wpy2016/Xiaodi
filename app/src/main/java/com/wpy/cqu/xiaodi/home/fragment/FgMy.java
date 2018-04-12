@@ -21,6 +21,7 @@ import com.wpy.cqu.xiaodi.model.User;
 import com.wpy.cqu.xiaodi.register.AcRegister;
 import com.wpy.cqu.xiaodi.reward.AcCarryRecord;
 import com.wpy.cqu.xiaodi.setting.AcSetting;
+import com.wpy.cqu.xiaodi.sign.AcSign;
 import com.wpy.cqu.xiaodi.wallet.AcWallet;
 
 public class FgMy extends ClipBaseFragment {
@@ -128,7 +129,7 @@ public class FgMy extends ClipBaseFragment {
         mrlAttestation.setOnClickListener(v -> toNext(AcAuth.class));
         mrlMoney.setOnClickListener(v -> toNext(AcWallet.class));
         mrlCarryRecord.setOnClickListener(v -> toNext(AcCarryRecord.class));
-        mrlSignature.setOnClickListener(v -> toNext(AcRegister.class));
+        mrlSignature.setOnClickListener(v -> toNext(AcSign.class));
     }
 
     private void toNext(Class<?> next) {

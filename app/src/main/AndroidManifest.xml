@@ -155,7 +155,8 @@
             </intent-filter>
         </receiver>
 
-        <activity android:name=".evaluate.AcEvaluate"></activity>
+        <activity android:name=".evaluate.AcEvaluate" />
+        <activity android:name=".sign.AcSign"></activity>
     </application>
 
 </manifest>

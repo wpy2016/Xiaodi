@@ -2,6 +2,7 @@ package com.wpy.cqu.xiaodi.net.request;
 
 import com.wpy.cqu.xiaodi.model.ResultResp;
 import com.wpy.cqu.xiaodi.model.UserResultResp;
+import com.wpy.cqu.xiaodi.sign.SignResp;
 
 import io.reactivex.Observable;
 import okhttp3.MultipartBody;
@@ -29,6 +30,14 @@ public interface IUserRequest {
     @FormUrlEncoded
     Observable<UserResultResp> Login(@Field("phone") String phone, @Field("pass") String pass);
 
+    @POST("user/sign")
+    @FormUrlEncoded
+    Observable<ResultResp> Sign(@Field("user_id") String userid, @Field("token") String token, @Field("day") String day);
+
+    @POST("user/sign/list")
+    @FormUrlEncoded
+    Observable<SignResp> SignList(@Field("user_id") String userid, @Field("token") String token, @Field("year") String year, @Field("month") String month);
+
     @POST("user/auth")
     @FormUrlEncoded
     Observable<ResultResp> Auth(@Field("user_id") String userId, @Field("token") String token,
@@ -41,6 +50,6 @@ public interface IUserRequest {
 
     @POST("user/get/id")
     @FormUrlEncoded
-    Observable<UserResultResp> GetUserInfo(@Field("user_id") String userId, @Field("token") String token,@Field("_id") String id);
+    Observable<UserResultResp> GetUserInfo(@Field("user_id") String userId, @Field("token") String token, @Field("_id") String id);
 
 }

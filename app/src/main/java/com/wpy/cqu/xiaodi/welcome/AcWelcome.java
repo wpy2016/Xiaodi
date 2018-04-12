@@ -68,7 +68,7 @@ public class AcWelcome extends StatusBarAppComptActivity {
             Observable.timer(DELAY_SECONDS_TO_NEXT_AC, TimeUnit.SECONDS)
                     .subscribeOn(AndroidSchedulers.mainThread())
                     .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(i -> Rongyun.toHomeAc(this,true,true));
+                    .subscribe(i -> Rongyun.toHomeAc(this,true,false));
             return;
         }
         delayToNextAc(AcLogin.class);

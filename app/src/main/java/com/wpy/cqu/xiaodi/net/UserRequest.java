@@ -9,6 +9,7 @@ import com.wpy.cqu.xiaodi.net.request.IUserRequest;
 import com.wpy.cqu.xiaodi.net.resp.Error;
 import com.wpy.cqu.xiaodi.net.resp.IResp;
 import com.wpy.cqu.xiaodi.net.resp.ResultRespConsumer;
+import com.wpy.cqu.xiaodi.sign.SignResp;
 
 import java.io.File;
 import java.util.concurrent.TimeUnit;
@@ -53,6 +54,33 @@ public class UserRequest {
         login.subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new UserConsumer("Login", userResp), Error.getErrorConsumer(userResp));
+    }
+
+    public static void Sign(String userId, String token, String day, IResp<ResultResp> resp) {
+        Retrofit retrofit = BaseRetrofit.getInstance();
+        IUserRequest userRequest = retrofit.create(IUserRequest.class);
+        Observable<ResultResp> sign = userRequest.Sign(userId, token, day);
+        sign.subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new ResultRespConsumer("Sign", resp), Error.getErrorConsumer(resp));
+    }
+
+    public static void GetSignList(String userId, String token, String year, String month, IResp<SignResp> resp) {
+        Retrofit retrofit = BaseRetrofit.getInstance();
+        IUserRequest userRequest = retrofit.create(IUserRequest.class);
+        Observable<SignResp> signList = userRequest.SignList(userId, token, year, month);
+        signList.subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<SignResp>() {
+                    @Override
+                    public void accept(SignResp signResp) throws Exception {
+                        if (Error.SUCCESS != signResp.ResultCode) {
+                            resp.fail(new ResultResp(signResp.ResultCode, signResp.Message));
+                            return;
+                        }
+                        resp.success(signResp);
+                    }
+                }, Error.getErrorConsumer(resp));
     }
 
     public static void Auth(String userId, String token, String schoolId, String schoolPass, String realName, IResp<ResultResp> userResp) {
