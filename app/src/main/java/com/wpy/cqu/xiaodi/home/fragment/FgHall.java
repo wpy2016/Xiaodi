@@ -44,12 +44,7 @@ public class FgHall extends Fragment {
         NEWS, KEY_WORD, XIAODIAN_DEC
     }
 
-    private static enum SERVICE_TYPE {REWARD, GOOUT}
-
-
     private TextView mtvContent;
-
-    private ImageView mivTypeDown;
 
     private ImageView mivAdd;
 
@@ -69,12 +64,8 @@ public class FgHall extends Fragment {
 
     private ShowType mShowType = ShowType.NEWS;
 
-    private SERVICE_TYPE mServiceType = SERVICE_TYPE.REWARD;
-
     //标记加载第几页数据，随着loadmore的进行会不断增大
     private int mPage = 0;
-
-    private ShowType mshowType = ShowType.NEWS;
 
     private String mKeyword = "";
 
@@ -118,10 +109,6 @@ public class FgHall extends Fragment {
     public void onPause() {
         super.onPause();
         mivAdd.setVisibility(View.INVISIBLE);
-    }
-
-    private void changeType(View view) {
-
     }
 
     private void nearby(View view) {
@@ -181,9 +168,9 @@ public class FgHall extends Fragment {
     }
 
     private void initPopSearch(View popSearchView) {
-        EditText etKeyWordSearch = (EditText) popSearchView.findViewById(R.id.id_pop_search_et_search);
-        Button btnMattch = (Button) popSearchView.findViewById(R.id.id_pop_btn_search);
-        ImageView ivClose = (ImageView) popSearchView.findViewById(R.id.id_pop_search_iv_close);
+        EditText etKeyWordSearch = popSearchView.findViewById(R.id.id_pop_search_et_search);
+        Button btnMattch = popSearchView.findViewById(R.id.id_pop_btn_search);
+        ImageView ivClose = popSearchView.findViewById(R.id.id_pop_search_iv_close);
         btnMattch.setOnClickListener(v -> {
             String sKeyword = etKeyWordSearch.getText().toString();
             if ("".equals(sKeyword)) {
@@ -200,8 +187,6 @@ public class FgHall extends Fragment {
 
     private void initView() {
         mtvContent.setText(getResources().getString(R.string.reward_hall));
-        mivTypeDown.setVisibility(View.VISIBLE);
-        mivTypeDown.setImageResource(R.drawable.hall_down_green);
         mivAdd.setVisibility(View.VISIBLE);
         mivAdd.setImageResource(R.drawable.hall_add);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
@@ -215,7 +200,6 @@ public class FgHall extends Fragment {
 
     private void bindView(View view) {
         mtvContent = view.findViewById(R.id.id_top_tv_content);
-        mivTypeDown = view.findViewById(R.id.id_top_iv_down);
         mtvSortXiaodian = view.findViewById(R.id.id_fg_hall_tv_smilepoint);
         mtvNearby = view.findViewById(R.id.id_fg_hall_tv_nearby);
         mtvSearch = view.findViewById(R.id.id_fg_hall_tv_placematch);
@@ -226,8 +210,6 @@ public class FgHall extends Fragment {
 
 
     private void bindEvent() {
-        mtvContent.setOnClickListener(this::changeType);
-        mivTypeDown.setOnClickListener(this::changeType);
         mtvSortXiaodian.setOnClickListener(this::sortByXiaoDian);
         mtvNearby.setOnClickListener(this::nearby);
         mtvSearch.setOnClickListener(v -> showPopSearch());
@@ -257,7 +239,7 @@ public class FgHall extends Fragment {
         public void success(List<Reward> rewards) {
             if (isRefresh) {
                 smartRefreshLayout.finishRefresh();
-                rewardAdapter.refresh(rewards,FgHall.this.getUserVisibleHint());
+                rewardAdapter.refresh(rewards, FgHall.this.getUserVisibleHint());
                 return;
             }
             smartRefreshLayout.finishLoadMore();

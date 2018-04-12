@@ -23,6 +23,10 @@ import com.wpy.cqu.xiaodi.util.ToastUtil;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
+
+import io.reactivex.Observable;
+import io.reactivex.disposables.Disposable;
 
 public class AcHome extends TopBarAppComptAcitity {
 
@@ -56,6 +60,10 @@ public class AcHome extends TopBarAppComptAcitity {
             Manifest.permission.ACCESS_NETWORK_STATE,
             Manifest.permission.READ_PHONE_STATE,
     };
+
+    //双击退出使用
+    private int times = 0;
+    private Disposable subscribe;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -147,11 +155,20 @@ public class AcHome extends TopBarAppComptAcitity {
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
-            ToastUtil.toast(AcHome.this, getResources().getString(R.string.double_click_to_back));
-            return true;
+        if (keyCode != KeyEvent.KEYCODE_BACK) {
+            return super.onKeyDown(keyCode, event);
         }
-        return super.onKeyDown(keyCode, event);
+        times++;
+        if (1 == times) {
+            ToastUtil.toast(AcHome.this, getResources().getString(R.string.click_again_to_exit));
+            subscribe = Observable.timer(2, TimeUnit.SECONDS)
+                    .subscribe(l -> times = 0);
+        }
+        if (2 == times) {
+            subscribe.dispose();
+            finish();
+        }
+        return true;
     }
 
     private class HomePagerAdaper extends FragmentPagerAdapter {

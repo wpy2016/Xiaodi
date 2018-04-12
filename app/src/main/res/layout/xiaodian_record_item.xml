@@ -79,7 +79,7 @@
                 android:id="@+id/id_reward_tv_weight"
                 android:layout_width="45dp"
                 android:layout_height="15dp"
-                android:layout_gravity="bottom"
+                android:layout_gravity="center"
                 android:layout_marginLeft="@dimen/min_divider"
                 android:background="@drawable/circle_weight_20"
                 android:gravity="center"

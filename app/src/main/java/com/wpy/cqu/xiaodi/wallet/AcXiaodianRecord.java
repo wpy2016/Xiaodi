@@ -108,10 +108,10 @@ public class AcXiaodianRecord extends TopBarAppComptAcitity {
     }
 
     private void initView() {
-        mtvBack.setText(getResources().getString(R.string.xiaodian_record));
+        mtvBack.setText(getResources().getString(R.string.wallet));
         mtvBack.setTextColor(Color.WHITE);
         mivBack.setImageResource(R.drawable.go_back_white);
-        mtvContent.setText(getResources().getString(R.string.wallet));
+        mtvContent.setText(getResources().getString(R.string.xiaodian_record));
     }
 
     private void bindEvent() {
