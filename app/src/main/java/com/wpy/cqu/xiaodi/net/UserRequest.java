@@ -2,6 +2,7 @@ package com.wpy.cqu.xiaodi.net;
 
 import com.orhanobut.logger.Logger;
 import com.wpy.cqu.xiaodi.application.XiaodiApplication;
+import com.wpy.cqu.xiaodi.model.OneTokenResp;
 import com.wpy.cqu.xiaodi.model.ResultResp;
 import com.wpy.cqu.xiaodi.model.User;
 import com.wpy.cqu.xiaodi.model.UserResultResp;
@@ -136,6 +137,31 @@ public class UserRequest {
         getObservable.subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new UserConsumer("GetMyInfo", userResp), Error.getErrorConsumer(userResp));
+    }
+
+    public static void GetOneToken(String phone, IResp<String> resp) {
+        Retrofit retrofit = BaseRetrofit.getInstance();
+        IUserRequest userRequest = retrofit.create(IUserRequest.class);
+        Observable<OneTokenResp> oneTokenObservable = userRequest.GetOneToken(phone);
+        oneTokenObservable.subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(oneTokenResp -> {
+                    if (Error.SUCCESS != oneTokenResp.ResultCode) {
+                        resp.fail(new ResultResp(oneTokenResp.ResultCode, oneTokenResp.message));
+                        return;
+                    }
+                    resp.success(oneTokenResp.token);
+                }, Error.getErrorConsumer(resp));
+    }
+
+    public static void AuthOneTokenAndUpdatePass(String phone, String token, String newPass, IResp<ResultResp> resp) {
+        Retrofit retrofit = BaseRetrofit.getInstance();
+        IUserRequest userRequest = retrofit.create(IUserRequest.class);
+        Observable<ResultResp> authOneTokenObservable = userRequest.AuthOneTokenAndUpdatePass(phone, token, newPass);
+        authOneTokenObservable.subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new ResultRespConsumer("AuthOneTokenAndUpdatePass", resp), Error.getErrorConsumer(resp));
+
     }
 
     public static void GetUserInfo(String userId, String token, String id, IResp<User> userResp) {

@@ -3,6 +3,7 @@ package com.wpy.cqu.xiaodi.resetpass;
 import android.Manifest;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
 import android.view.View;
@@ -12,10 +13,16 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.orhanobut.logger.Logger;
 import com.wpy.cqu.xiaodi.R;
 import com.wpy.cqu.xiaodi.base_activity.CheckPermissionsActivity;
 import com.wpy.cqu.xiaodi.base_activity.StatusBarAppComptActivity;
 import com.wpy.cqu.xiaodi.base_activity.TopBarAppComptAcitity;
+import com.wpy.cqu.xiaodi.encrypt.AESEncrypt;
+import com.wpy.cqu.xiaodi.model.ResultResp;
+import com.wpy.cqu.xiaodi.net.UserRequest;
+import com.wpy.cqu.xiaodi.net.resp.IResp;
+import com.wpy.cqu.xiaodi.util.ToastUtil;
 
 public class AcResetPass extends TopBarAppComptAcitity {
 
@@ -31,6 +38,9 @@ public class AcResetPass extends TopBarAppComptAcitity {
 
     private boolean mdisplayPwd = false;
 
+    private String phone;
+
+    private String oneToken;
     private static final String[] PERMISSION = {
             Manifest.permission.INTERNET,
             Manifest.permission.ACCESS_NETWORK_STATE,
@@ -46,14 +56,33 @@ public class AcResetPass extends TopBarAppComptAcitity {
         bundle.putStringArray(CheckPermissionsActivity.PEMISSION, PERMISSION);
         super.onCreate(bundle);
         setContentView(R.layout.ac_reset_pass);
-
+        phone = getIntent().getStringExtra("phone");
+        oneToken = getIntent().getStringExtra("token");
+        Logger.i("phone = %s,oneToken=%s", phone, oneToken);
         bindView();
         initView();
         bindEvent();
     }
 
     private void resetPass(View view) {
-        //此处的更新密码是没有userId的，短信验证更改密码
+        String newPass = metNewPass.getText().toString();
+        if (TextUtils.isEmpty(newPass)) {
+            ToastUtil.toast(this, getResources().getString(R.string.password_not_black));
+            return;
+        }
+        String newPassEncrypt = AESEncrypt.Base64AESEncrypt(newPass);
+        UserRequest.AuthOneTokenAndUpdatePass(phone, oneToken, newPassEncrypt, new IResp<ResultResp>() {
+            @Override
+            public void success(ResultResp object) {
+                ToastUtil.toast(AcResetPass.this, getResources().getString(R.string.update_pass_successful));
+                finish();
+            }
+
+            @Override
+            public void fail(ResultResp resp) {
+                ToastUtil.toast(AcResetPass.this, resp.message);
+            }
+        });
     }
 
     private void bindEvent() {

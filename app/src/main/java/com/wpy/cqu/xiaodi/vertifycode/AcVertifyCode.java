@@ -18,6 +18,9 @@ import com.wpy.cqu.xiaodi.R;
 import com.wpy.cqu.xiaodi.base_activity.CheckPermissionsActivity;
 import com.wpy.cqu.xiaodi.base_activity.StatusBarAppComptActivity;
 import com.wpy.cqu.xiaodi.base_activity.TopBarAppComptAcitity;
+import com.wpy.cqu.xiaodi.model.ResultResp;
+import com.wpy.cqu.xiaodi.net.UserRequest;
+import com.wpy.cqu.xiaodi.net.resp.IResp;
 import com.wpy.cqu.xiaodi.register.AcRegister;
 import com.wpy.cqu.xiaodi.resetpass.AcResetPass;
 import com.wpy.cqu.xiaodi.util.ToastUtil;
@@ -80,21 +83,20 @@ public class AcVertifyCode extends TopBarAppComptAcitity {
     }
 
     private void next(View v) {
-        toNext();
-//        String phone = metPhone.getText().toString();
-//        String code = metVertify.getText().toString();
-//        Logger.i("phone=%s,code=%s", phone, code);
-//        if (!phone.matches("1[0-9]{10}")) {
-//            ToastUtil.toast(this,getResources().getString(R.string.phone_no_right));
-//            return;
-//        }
-//        vertifyCode.vertifyCode(phone, code, this, ex -> {
-//            if (null == ex) {
-//                toNext();
-//                return;
-//            }
-//            ToastUtil.toast(this,getResources().getString(R.string.vertify_fail));
-//        });
+        String phone = metPhone.getText().toString();
+        String code = metVertify.getText().toString();
+        Logger.i("phone=%s,code=%s", phone, code);
+        if (!phone.matches("1[0-9]{10}")) {
+            ToastUtil.toast(this, getResources().getString(R.string.phone_no_right));
+            return;
+        }
+        vertifyCode.vertifyCode(phone, code, this, ex -> {
+            if (null == ex) {
+                toNext();
+                return;
+            }
+            ToastUtil.toast(this, getResources().getString(R.string.vertify_fail));
+        });
     }
 
     private void bindView() {
@@ -127,15 +129,32 @@ public class AcVertifyCode extends TopBarAppComptAcitity {
         String tag = getIntent().getStringExtra("next");
         if (AcRegister.TAG.equals(tag)) {
             intent = new Intent(this, AcRegister.class);
-            intent.putExtra("phone",metPhone.getText().toString());
+            intent.putExtra("phone", metPhone.getText().toString());
+            startActivity(intent);
+            finish();
         } else if (AcResetPass.TAG.equals(tag)) {
-            intent = new Intent(this, AcResetPass.class);
+            getOneTken(metPhone.getText().toString());
         } else {
             Logger.i("验证手机号界面，无法定位要跳转到哪个界面");
-            ToastUtil.toast(this,getResources().getString(R.string.tell_me_to_where));
-            return;
+            ToastUtil.toast(this, getResources().getString(R.string.tell_me_to_where));
         }
-        startActivity(intent);
-        finish();
+    }
+
+    private void getOneTken(String phone) {
+        UserRequest.GetOneToken(phone, new IResp<String>() {
+            @Override
+            public void success(String token) {
+                Intent intent = new Intent(AcVertifyCode.this, AcResetPass.class);
+                intent.putExtra("phone", phone);
+                intent.putExtra("token", token);
+                startActivity(intent);
+                finish();
+            }
+
+            @Override
+            public void fail(ResultResp resp) {
+                ToastUtil.toast(AcVertifyCode.this, resp.message);
+            }
+        });
     }
 }

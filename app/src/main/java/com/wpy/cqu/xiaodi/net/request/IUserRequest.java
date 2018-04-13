@@ -1,5 +1,6 @@
 package com.wpy.cqu.xiaodi.net.request;
 
+import com.wpy.cqu.xiaodi.model.OneTokenResp;
 import com.wpy.cqu.xiaodi.model.ResultResp;
 import com.wpy.cqu.xiaodi.model.UserResultResp;
 import com.wpy.cqu.xiaodi.sign.SignResp;
@@ -64,5 +65,13 @@ public interface IUserRequest {
     @POST("user/update/img")
     @Multipart
     Observable<ResultResp> UpdateImg(@Part("user_id") RequestBody userid, @Part("token") RequestBody token, @Part MultipartBody.Part img);
+
+    @POST("user/get/onetoken")
+    @FormUrlEncoded
+    Observable<OneTokenResp> GetOneToken(@Field("phone") String phone);
+
+    @POST("user/auth/onetoken")
+    @FormUrlEncoded
+    Observable<ResultResp> AuthOneTokenAndUpdatePass(@Field("phone") String phone, @Field("token") String token, @Field("pass") String pass);
 
 }
