@@ -120,7 +120,7 @@
                 android:layout_marginLeft="@dimen/small_divider"
                 android:textColor="@android:color/white"
                 android:layout_marginRight="@dimen/small_divider"
-                android:text="@string/other_login"
+                android:text="@string/welcome_you"
                 android:textSize="@dimen/small_textsize" />
 
             <View
@@ -134,6 +134,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/padding_left"
+            android:visibility="gone"
             android:gravity="center_horizontal"
             android:orientation="horizontal">
 

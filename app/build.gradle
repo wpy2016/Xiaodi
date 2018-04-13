@@ -27,6 +27,14 @@ android {
             jniLibs.srcDirs = ['libs']
         }
     }
+
+    //使用libs 下的aar
+    repositories{
+        flatDir{
+            dirs '../pay/libs'  //间接引用pay module下的libs
+            dirs'libs'
+        }
+    }
 }
 
 dependencies {
@@ -54,6 +62,7 @@ dependencies {
     compile 'com.android.support:design:26.+'
     compile 'com.ldoublem.loadingview:loadingviewlib:1.0'
     testCompile 'junit:junit:4.12'
+    compile project(':pay')
 }
 
 

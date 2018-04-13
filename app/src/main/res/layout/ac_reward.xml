@@ -439,6 +439,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:text="@string/share_at_same_time"
+                android:visibility="gone"
                 android:textColor="@color/text_color_thin_gray"
                 android:textSize="@dimen/small_textsize" />
 
@@ -446,6 +447,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
+                android:visibility="gone"
                 android:orientation="horizontal"
                 android:paddingLeft="@dimen/padding_left"
                 android:paddingRight="@dimen/padding_left_double">

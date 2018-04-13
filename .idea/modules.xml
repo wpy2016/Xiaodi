@@ -6,6 +6,7 @@
       <module fileurl="file://$PROJECT_DIR$/IMLib/IMLib.iml" filepath="$PROJECT_DIR$/IMLib/IMLib.iml" />
       <module fileurl="file://$PROJECT_DIR$/Xiaodi.iml" filepath="$PROJECT_DIR$/Xiaodi.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/pay/pay.iml" filepath="$PROJECT_DIR$/pay/pay.iml" />
       <module fileurl="file://$PROJECT_DIR$/vertifycode/vertifycode.iml" filepath="$PROJECT_DIR$/vertifycode/vertifycode.iml" />
     </modules>
   </component>

@@ -167,6 +167,12 @@
         <activity
             android:name=".wallet.AcXiaodianRecord"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".wallet.AcRecharge"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".wallet.AcWithdraw"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

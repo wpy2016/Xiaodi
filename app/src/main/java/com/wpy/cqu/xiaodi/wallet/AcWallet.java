@@ -72,7 +72,8 @@ public class AcWallet extends TopBarAppComptAcitity {
         mtvBack.setOnClickListener(view -> finish());
         mivBack.setOnClickListener(view -> finish());
         mllXiaodianRecord.setOnClickListener(view -> toNext(AcXiaodianRecord.class));
-        // TODO: 2018/4/8
+        mllRecharge.setOnClickListener(view -> toNext(AcRecharge.class));
+        mllWithdraw.setOnClickListener(view -> toNext(AcWithdraw.class));
     }
 
     private void toNext(Class<?> next) {

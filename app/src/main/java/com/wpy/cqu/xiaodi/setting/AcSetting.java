@@ -4,9 +4,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 import com.wpy.cqu.xiaodi.R;
 import com.wpy.cqu.xiaodi.about.AcAbout;
@@ -17,11 +15,9 @@ import com.wpy.cqu.xiaodi.im_chat.Rongyun;
 import com.wpy.cqu.xiaodi.login.AcLogin;
 import com.wpy.cqu.xiaodi.model.User;
 import com.wpy.cqu.xiaodi.resetpass.AcEditPass;
-import com.wpy.cqu.xiaodi.util.ActivityManager;
 
 import io.reactivex.Observable;
 import io.reactivex.schedulers.Schedulers;
-import io.rong.imkit.RongIM;
 
 public class AcSetting extends TopBarAppComptAcitity {
 
@@ -38,7 +34,7 @@ public class AcSetting extends TopBarAppComptAcitity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Bundle bundle = new Bundle();
-        bundle.putInt(StatusBarAppComptActivity.STATUS_COLOR_STR,STATUS_BAR_COLOR);
+        bundle.putInt(StatusBarAppComptActivity.STATUS_COLOR_STR, STATUS_BAR_COLOR);
         super.onCreate(bundle);
         setContentView(R.layout.ac_setting);
         bindView();
@@ -56,18 +52,18 @@ public class AcSetting extends TopBarAppComptAcitity {
         //ActivityManager.getActivityManager().popAllActivityExceptTop(this);
         Rongyun.logout();
         Intent intent = new Intent(this, AcLogin.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
     }
 
     private void bindView() {
-        mtvBack = (TextView) findViewById(R.id.id_top_back_tv);
-        mivBack = (ImageView) findViewById(R.id.id_top_back_iv_img);
-        mtvContent = (TextView) findViewById(R.id.id_top_tv_content);
-        mrlResetPass = (RelativeLayout) findViewById(R.id.id_setting_rl_password_reset);
-        mrlMessageNotificationSetting = (RelativeLayout) findViewById(R.id.id_setting_rl_msg_setting);
-        mrlAbout = (RelativeLayout) findViewById(R.id.id_setting_rl_aboutxd);
-        mrlExitAccount = (RelativeLayout) findViewById(R.id.id_setting_rl_exit_account);
+        mtvBack = findViewById(R.id.id_top_back_tv);
+        mivBack = findViewById(R.id.id_top_back_iv_img);
+        mtvContent = findViewById(R.id.id_top_tv_content);
+        mrlResetPass = findViewById(R.id.id_setting_rl_password_reset);
+        mrlMessageNotificationSetting = findViewById(R.id.id_setting_rl_msg_setting);
+        mrlAbout = findViewById(R.id.id_setting_rl_aboutxd);
+        mrlExitAccount = findViewById(R.id.id_setting_rl_exit_account);
     }
 
     private void initView() {
@@ -88,7 +84,7 @@ public class AcSetting extends TopBarAppComptAcitity {
     }
 
     private void toNext(Class<?> next) {
-        Intent intent = new Intent(this,next);
+        Intent intent = new Intent(this, next);
         startActivity(intent);
     }
 }
