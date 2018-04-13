@@ -47,7 +47,11 @@ public class RewardWithStatusAdapter extends RecyclerView.Adapter<RewardHolderWi
         holder.mtvThingType.setText(Thing.THING_TYPE[reward.thing.type]);
         holder.mtvThingWeight.setText(reward.thing.weight);
         holder.mtvStartPlace.setText(reward.originLocation);
-        holder.mtvDstPlace.setText(reward.dstLocation);
+        if (reward.Publisher.Id.equals("000000000")) {//说明是笑递中心
+            holder.mtvDstPlace.setText(reward.Receiver.NickName);
+        } else {
+            holder.mtvDstPlace.setText(reward.dstLocation);
+        }
         holder.mtvDeadline.setText(reward.deadline);
         holder.mtvXiaodian.setText(reward.xiaodian + "");
 
