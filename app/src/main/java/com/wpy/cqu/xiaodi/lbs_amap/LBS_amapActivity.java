@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -196,14 +197,13 @@ public class LBS_amapActivity extends TopBarAppComptAcitity
             ToastUtil.toast(this, getResources().getString(R.string.no_more_data));
             return;
         }
-        Logger.i(rewardList.toString());
         semaphoreSync = new Semaphore(0);
         Observable.just("")
                 .doOnNext(s -> {
                     for (Reward reward : rewardList) {
                         if (amapRewardsMap.containsKey(reward.originLocation)) {
                             amapRewardsMap.get(reward.originLocation).rewards.add(reward);
-                            return;
+                            continue;
                         }
                         //需要进行地址转换
                         AmapRewards amapRewards = new AmapRewards();

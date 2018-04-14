@@ -7,7 +7,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.wpy.cqu.xiaodi.R;
@@ -53,13 +52,13 @@ public class AcCarryRecord extends TopBarAppComptAcitity {
     }
 
     private void bindView() {
-        mvpFgs = (ViewPager) findViewById(R.id.id_fg_carry_record_tv_viewPager);
-        mtvMySend = (TextView) findViewById(R.id.id_fg_carry_record_tv_my_send);
-        mtvMyCarry = (TextView) findViewById(R.id.id_fg_carry_record_tv_my_carry);
+        mvpFgs = findViewById(R.id.id_fg_carry_record_tv_viewPager);
+        mtvMySend = findViewById(R.id.id_fg_carry_record_tv_my_send);
+        mtvMyCarry = findViewById(R.id.id_fg_carry_record_tv_my_carry);
 
-        mtvBack = (TextView) findViewById(R.id.id_top_back_tv);
-        mivBack = (ImageView) findViewById(R.id.id_top_back_iv_img);
-        mtvContent = (TextView) findViewById(R.id.id_top_tv_content);
+        mtvBack = findViewById(R.id.id_top_back_tv);
+        mivBack = findViewById(R.id.id_top_back_iv_img);
+        mtvContent = findViewById(R.id.id_top_tv_content);
     }
 
     private void initView() {
@@ -78,6 +77,14 @@ public class AcCarryRecord extends TopBarAppComptAcitity {
     private void bindEvent() {
         mtvBack.setOnClickListener(view -> finish());
         mivBack.setOnClickListener(view -> finish());
+        mtvMySend.setOnClickListener(view -> {
+            selectWhich(0);
+            mvpFgs.setCurrentItem(0);
+        });
+        mtvMyCarry.setOnClickListener(view -> {
+            selectWhich(1);
+            mvpFgs.setCurrentItem(1);
+        });
         mvpFgs.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {

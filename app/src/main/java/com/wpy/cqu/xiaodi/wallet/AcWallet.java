@@ -27,8 +27,6 @@ public class AcWallet extends TopBarAppComptAcitity {
 
     private LinearLayout mllWithdraw;
 
-    private LinearLayout mllInvite;
-
     private LinearLayout mllXiaodianRecord;
 
 
@@ -52,7 +50,6 @@ public class AcWallet extends TopBarAppComptAcitity {
         mtvSilverMoney = (TextView) findViewById(R.id.id_ac_wallet_tv_silver_money);
         mllRecharge = (LinearLayout) findViewById(R.id.id_ac_wallet_ll_recharge);
         mllWithdraw = (LinearLayout) findViewById(R.id.id_ac_wallet_ll_withdraw);
-        mllInvite = (LinearLayout) findViewById(R.id.id_ac_wallet_ll_invite);
         mllXiaodianRecord = (LinearLayout) findViewById(R.id.id_ac_wallet_ll_xiaodian_record);
     }
 
@@ -78,11 +75,6 @@ public class AcWallet extends TopBarAppComptAcitity {
 
     private void toNext(Class<?> next) {
         Intent intent = new Intent(this, next);
-        startActivity(intent);
-    }
-
-    private void toNextAc(Class<?> nextAc) {
-        Intent intent = new Intent(this, nextAc);
         startActivity(intent);
     }
 }
