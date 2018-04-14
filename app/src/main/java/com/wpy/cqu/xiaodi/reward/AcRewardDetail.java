@@ -134,7 +134,11 @@ public class AcRewardDetail extends TopBarAppComptAcitity {
         mtvXiaodian.setText(reward.xiaodian + "");
         mtvWeight.setText(reward.thing.weight);
         mtvStartPlace.setText(reward.originLocation);
-        mtvDstPlace.setText(reward.dstLocation);
+        if (reward.Publisher.Id.equals(Reward.XIAODIAN_CENTER)) {//说明是笑递中心
+            mtvDstPlace.setText(reward.Receiver.NickName);
+        } else {
+            mtvDstPlace.setText(reward.dstLocation);
+        }
         mtvDeadline.setText(reward.deadline);
         mtvDescribe.setText(reward.describe);
         mivPublisherImg.setImageResource(R.drawable.default_headimg);

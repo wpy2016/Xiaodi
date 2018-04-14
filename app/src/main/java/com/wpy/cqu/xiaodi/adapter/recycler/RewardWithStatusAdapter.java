@@ -17,6 +17,7 @@ import java.util.List;
 
 /**
  * Created by wangpeiyu on 2018/4/7.
+ * 带有转态的，已实现，未领取之类的
  */
 
 public class RewardWithStatusAdapter extends RecyclerView.Adapter<RewardHolderWithStatus> {
@@ -47,7 +48,7 @@ public class RewardWithStatusAdapter extends RecyclerView.Adapter<RewardHolderWi
         holder.mtvThingType.setText(Thing.THING_TYPE[reward.thing.type]);
         holder.mtvThingWeight.setText(reward.thing.weight);
         holder.mtvStartPlace.setText(reward.originLocation);
-        if (reward.Publisher.Id.equals("000000000")) {//说明是笑递中心
+        if (reward.Publisher.Id.equals(Reward.XIAODIAN_CENTER)) {//说明是笑递中心
             holder.mtvDstPlace.setText(reward.Receiver.NickName);
         } else {
             holder.mtvDstPlace.setText(reward.dstLocation);

@@ -14,6 +14,8 @@ import java.io.Serializable;
 
 public class Reward implements Serializable {
 
+    public static final String XIAODIAN_CENTER = "000000000";
+
     public static final int REWARD_STATE_SEND = 0;
     public static final int REWARD_STATE_Carry = 1;
     public static final int REWARD_STATE_ARRIVE = 2;
