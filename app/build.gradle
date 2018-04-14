@@ -11,6 +11,7 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         jackOptions.enabled = true;
+        multiDexEnabled true
     }
     buildTypes {
         release {
@@ -29,10 +30,10 @@ android {
     }
 
     //使用libs 下的aar
-    repositories{
-        flatDir{
+    repositories {
+        flatDir {
             dirs '../pay/libs'  //间接引用pay module下的libs
-            dirs'libs'
+            dirs 'libs'
         }
     }
 }
@@ -48,14 +49,12 @@ dependencies {
     compile files('libs/commons-codec-1.11.jar')
     compile project(':IMKit')
     compile 'com.squareup.picasso:picasso:2.5.2'
-
     compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
     compile 'io.reactivex.rxjava2:rxjava:2.0.5'
     compile 'com.google.code.gson:gson:2.7'
     compile 'com.squareup.retrofit2:retrofit:2.2.0'
     compile 'com.squareup.retrofit2:converter-gson:2.2.0'
     compile 'com.squareup.retrofit2:adapter-rxjava2:2.2.0'
-
     compile 'com.orhanobut:logger:2.1.1'
     compile 'com.android.support:appcompat-v7:26.+'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
@@ -63,13 +62,14 @@ dependencies {
     compile 'com.scwang.smartrefresh:SmartRefreshHeader:1.0.5.1'
     compile 'com.android.support:design:26.+'
     compile 'com.ldoublem.loadingview:loadingviewlib:1.0'
-    testCompile 'junit:junit:4.12'
+    //高德地图
+    compile 'com.amap.api:map2d:latest.integration'
+    compile 'com.amap.api:search:latest.integration'
+    compile 'com.amap.api:location:latest.integration'
     compile project(':pay')
+    testCompile 'junit:junit:4.12'
+    compile files('libs/AMap2DMap_5.2.0_AMapSearch_6.1.0_AMapLocation_3.8.0_20180330.jar')
 }
-
-
-
-
 
 repositories {
     jcenter()

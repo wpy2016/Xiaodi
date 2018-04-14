@@ -4,12 +4,12 @@
         "source": "/Users/wangpeiyu/.android/build-cache/ec2f8f1d999e6058c640354496500527ca596616/output/res/layout/support_simple_spinner_dropdown_item.xml"
     },
     {
-        "merged": "/Users/wangpeiyu/AndroidStudioProjects/Xiaodi/IMLib/build/intermediates/res/merged/debug/layout/select_dialog_item_material.xml",
-        "source": "/Users/wangpeiyu/.android/build-cache/ec2f8f1d999e6058c640354496500527ca596616/output/res/layout/select_dialog_item_material.xml"
-    },
-    {
         "merged": "/Users/wangpeiyu/AndroidStudioProjects/Xiaodi/IMLib/build/intermediates/res/merged/debug/layout/notification_template_custom_big.xml",
         "source": "/Users/wangpeiyu/.android/build-cache/0d51f909e5a4bcf307217fa9dc0f84ef80fdba75/output/res/layout/notification_template_custom_big.xml"
+    },
+    {
+        "merged": "/Users/wangpeiyu/AndroidStudioProjects/Xiaodi/IMLib/build/intermediates/res/merged/debug/layout/select_dialog_item_material.xml",
+        "source": "/Users/wangpeiyu/.android/build-cache/ec2f8f1d999e6058c640354496500527ca596616/output/res/layout/select_dialog_item_material.xml"
     },
     {
         "merged": "/Users/wangpeiyu/AndroidStudioProjects/Xiaodi/IMLib/build/intermediates/res/merged/debug/layout/tooltip.xml",

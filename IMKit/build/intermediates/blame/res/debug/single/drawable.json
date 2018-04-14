@@ -52,12 +52,12 @@
         "source": "/Users/wangpeiyu/AndroidStudioProjects/Xiaodi/IMKit/src/main/res/drawable/rc_corner_location_style.xml"
     },
     {
-        "merged": "/Users/wangpeiyu/AndroidStudioProjects/Xiaodi/IMKit/build/intermediates/res/merged/debug/drawable/rc_ic_no_selector.xml",
-        "source": "/Users/wangpeiyu/AndroidStudioProjects/Xiaodi/IMKit/src/main/res/drawable/rc_ic_no_selector.xml"
-    },
-    {
         "merged": "/Users/wangpeiyu/AndroidStudioProjects/Xiaodi/IMKit/build/intermediates/res/merged/debug/drawable/rc_ac_btn_file_download_open_button.xml",
         "source": "/Users/wangpeiyu/AndroidStudioProjects/Xiaodi/IMKit/src/main/res/drawable/rc_ac_btn_file_download_open_button.xml"
+    },
+    {
+        "merged": "/Users/wangpeiyu/AndroidStudioProjects/Xiaodi/IMKit/build/intermediates/res/merged/debug/drawable/rc_ic_no_selector.xml",
+        "source": "/Users/wangpeiyu/AndroidStudioProjects/Xiaodi/IMKit/src/main/res/drawable/rc_ic_no_selector.xml"
     },
     {
         "merged": "/Users/wangpeiyu/AndroidStudioProjects/Xiaodi/IMKit/build/intermediates/res/merged/debug/drawable/rc_sel_picsel_toolbar_back.xml",
@@ -76,12 +76,12 @@
         "source": "/Users/wangpeiyu/.android/build-cache/ec2f8f1d999e6058c640354496500527ca596616/output/res/drawable/abc_seekbar_track_material.xml"
     },
     {
-        "merged": "/Users/wangpeiyu/AndroidStudioProjects/Xiaodi/IMKit/build/intermediates/res/merged/debug/drawable/rc_bg_sidebar.xml",
-        "source": "/Users/wangpeiyu/AndroidStudioProjects/Xiaodi/IMKit/src/main/res/drawable/rc_bg_sidebar.xml"
-    },
-    {
         "merged": "/Users/wangpeiyu/AndroidStudioProjects/Xiaodi/IMKit/build/intermediates/res/merged/debug/drawable/abc_ic_ab_back_material.xml",
         "source": "/Users/wangpeiyu/.android/build-cache/ec2f8f1d999e6058c640354496500527ca596616/output/res/drawable/abc_ic_ab_back_material.xml"
+    },
+    {
+        "merged": "/Users/wangpeiyu/AndroidStudioProjects/Xiaodi/IMKit/build/intermediates/res/merged/debug/drawable/rc_bg_sidebar.xml",
+        "source": "/Users/wangpeiyu/AndroidStudioProjects/Xiaodi/IMKit/src/main/res/drawable/rc_bg_sidebar.xml"
     },
     {
         "merged": "/Users/wangpeiyu/AndroidStudioProjects/Xiaodi/IMKit/build/intermediates/res/merged/debug/drawable/abc_ic_menu_overflow_material.xml",
@@ -180,12 +180,12 @@
         "source": "/Users/wangpeiyu/AndroidStudioProjects/Xiaodi/IMKit/src/main/res/drawable/rc_cs_admin_selector.xml"
     },
     {
-        "merged": "/Users/wangpeiyu/AndroidStudioProjects/Xiaodi/IMKit/build/intermediates/res/merged/debug/drawable/rc_ic_files_selector.xml",
-        "source": "/Users/wangpeiyu/AndroidStudioProjects/Xiaodi/IMKit/src/main/res/drawable/rc_ic_files_selector.xml"
-    },
-    {
         "merged": "/Users/wangpeiyu/AndroidStudioProjects/Xiaodi/IMKit/build/intermediates/res/merged/debug/drawable/rc_switch_btn.xml",
         "source": "/Users/wangpeiyu/AndroidStudioProjects/Xiaodi/IMKit/src/main/res/drawable/rc_switch_btn.xml"
+    },
+    {
+        "merged": "/Users/wangpeiyu/AndroidStudioProjects/Xiaodi/IMKit/build/intermediates/res/merged/debug/drawable/rc_ic_files_selector.xml",
+        "source": "/Users/wangpeiyu/AndroidStudioProjects/Xiaodi/IMKit/src/main/res/drawable/rc_ic_files_selector.xml"
     },
     {
         "merged": "/Users/wangpeiyu/AndroidStudioProjects/Xiaodi/IMKit/build/intermediates/res/merged/debug/drawable/abc_edit_text_material.xml",
@@ -248,12 +248,12 @@
         "source": "/Users/wangpeiyu/AndroidStudioProjects/Xiaodi/IMKit/src/main/res/drawable/rc_bg_mentionlist_item.xml"
     },
     {
-        "merged": "/Users/wangpeiyu/AndroidStudioProjects/Xiaodi/IMKit/build/intermediates/res/merged/debug/drawable/rc_ic_phone_selector.xml",
-        "source": "/Users/wangpeiyu/AndroidStudioProjects/Xiaodi/IMKit/src/main/res/drawable/rc_ic_phone_selector.xml"
-    },
-    {
         "merged": "/Users/wangpeiyu/AndroidStudioProjects/Xiaodi/IMKit/build/intermediates/res/merged/debug/drawable/rc_plugin_toggle_selector.xml",
         "source": "/Users/wangpeiyu/AndroidStudioProjects/Xiaodi/IMKit/src/main/res/drawable/rc_plugin_toggle_selector.xml"
+    },
+    {
+        "merged": "/Users/wangpeiyu/AndroidStudioProjects/Xiaodi/IMKit/build/intermediates/res/merged/debug/drawable/rc_ic_phone_selector.xml",
+        "source": "/Users/wangpeiyu/AndroidStudioProjects/Xiaodi/IMKit/src/main/res/drawable/rc_ic_phone_selector.xml"
     },
     {
         "merged": "/Users/wangpeiyu/AndroidStudioProjects/Xiaodi/IMKit/build/intermediates/res/merged/debug/drawable/abc_ic_clear_material.xml",
@@ -264,12 +264,12 @@
         "source": "/Users/wangpeiyu/AndroidStudioProjects/Xiaodi/IMKit/src/main/res/drawable/rc_cs_back_selector.xml"
     },
     {
-        "merged": "/Users/wangpeiyu/AndroidStudioProjects/Xiaodi/IMKit/build/intermediates/res/merged/debug/drawable/notification_bg_low.xml",
-        "source": "/Users/wangpeiyu/.android/build-cache/0d51f909e5a4bcf307217fa9dc0f84ef80fdba75/output/res/drawable/notification_bg_low.xml"
-    },
-    {
         "merged": "/Users/wangpeiyu/AndroidStudioProjects/Xiaodi/IMKit/build/intermediates/res/merged/debug/drawable/rc_cs_submit_comment.xml",
         "source": "/Users/wangpeiyu/AndroidStudioProjects/Xiaodi/IMKit/src/main/res/drawable/rc_cs_submit_comment.xml"
+    },
+    {
+        "merged": "/Users/wangpeiyu/AndroidStudioProjects/Xiaodi/IMKit/build/intermediates/res/merged/debug/drawable/notification_bg_low.xml",
+        "source": "/Users/wangpeiyu/.android/build-cache/0d51f909e5a4bcf307217fa9dc0f84ef80fdba75/output/res/drawable/notification_bg_low.xml"
     },
     {
         "merged": "/Users/wangpeiyu/AndroidStudioProjects/Xiaodi/IMKit/build/intermediates/res/merged/debug/drawable/rc_cs_corner_single_check_style.xml",
@@ -280,12 +280,12 @@
         "source": "/Users/wangpeiyu/.android/build-cache/0d51f909e5a4bcf307217fa9dc0f84ef80fdba75/output/res/drawable/notification_bg.xml"
     },
     {
-        "merged": "/Users/wangpeiyu/AndroidStudioProjects/Xiaodi/IMKit/build/intermediates/res/merged/debug/drawable/rc_cs_leave_message_btn.xml",
-        "source": "/Users/wangpeiyu/AndroidStudioProjects/Xiaodi/IMKit/src/main/res/drawable/rc_cs_leave_message_btn.xml"
-    },
-    {
         "merged": "/Users/wangpeiyu/AndroidStudioProjects/Xiaodi/IMKit/build/intermediates/res/merged/debug/drawable/rc_cs_evaluate_selector.xml",
         "source": "/Users/wangpeiyu/AndroidStudioProjects/Xiaodi/IMKit/src/main/res/drawable/rc_cs_evaluate_selector.xml"
+    },
+    {
+        "merged": "/Users/wangpeiyu/AndroidStudioProjects/Xiaodi/IMKit/build/intermediates/res/merged/debug/drawable/rc_cs_leave_message_btn.xml",
+        "source": "/Users/wangpeiyu/AndroidStudioProjects/Xiaodi/IMKit/src/main/res/drawable/rc_cs_leave_message_btn.xml"
     },
     {
         "merged": "/Users/wangpeiyu/AndroidStudioProjects/Xiaodi/IMKit/build/intermediates/res/merged/debug/drawable/rc_menu_background_selector.xml",
@@ -312,12 +312,12 @@
         "source": "/Users/wangpeiyu/AndroidStudioProjects/Xiaodi/IMKit/src/main/res/drawable/rc_corner_style.xml"
     },
     {
-        "merged": "/Users/wangpeiyu/AndroidStudioProjects/Xiaodi/IMKit/build/intermediates/res/merged/debug/drawable/rc_an_voice_receive.xml",
-        "source": "/Users/wangpeiyu/AndroidStudioProjects/Xiaodi/IMKit/src/main/res/drawable/rc_an_voice_receive.xml"
-    },
-    {
         "merged": "/Users/wangpeiyu/AndroidStudioProjects/Xiaodi/IMKit/build/intermediates/res/merged/debug/drawable/rc_keyboard_selector.xml",
         "source": "/Users/wangpeiyu/AndroidStudioProjects/Xiaodi/IMKit/src/main/res/drawable/rc_keyboard_selector.xml"
+    },
+    {
+        "merged": "/Users/wangpeiyu/AndroidStudioProjects/Xiaodi/IMKit/build/intermediates/res/merged/debug/drawable/rc_an_voice_receive.xml",
+        "source": "/Users/wangpeiyu/AndroidStudioProjects/Xiaodi/IMKit/src/main/res/drawable/rc_an_voice_receive.xml"
     },
     {
         "merged": "/Users/wangpeiyu/AndroidStudioProjects/Xiaodi/IMKit/build/intermediates/res/merged/debug/drawable/rc_message_checkbox.xml",
@@ -336,12 +336,12 @@
         "source": "/Users/wangpeiyu/AndroidStudioProjects/Xiaodi/IMKit/src/main/res/drawable/rc_selector_grid_camera_mask.xml"
     },
     {
-        "merged": "/Users/wangpeiyu/AndroidStudioProjects/Xiaodi/IMKit/build/intermediates/res/merged/debug/drawable/rc_emoji_grid_item_selector.xml",
-        "source": "/Users/wangpeiyu/AndroidStudioProjects/Xiaodi/IMKit/src/main/res/drawable/rc_emoji_grid_item_selector.xml"
-    },
-    {
         "merged": "/Users/wangpeiyu/AndroidStudioProjects/Xiaodi/IMKit/build/intermediates/res/merged/debug/drawable/abc_btn_radio_material.xml",
         "source": "/Users/wangpeiyu/.android/build-cache/ec2f8f1d999e6058c640354496500527ca596616/output/res/drawable/abc_btn_radio_material.xml"
+    },
+    {
+        "merged": "/Users/wangpeiyu/AndroidStudioProjects/Xiaodi/IMKit/build/intermediates/res/merged/debug/drawable/rc_emoji_grid_item_selector.xml",
+        "source": "/Users/wangpeiyu/AndroidStudioProjects/Xiaodi/IMKit/src/main/res/drawable/rc_emoji_grid_item_selector.xml"
     },
     {
         "merged": "/Users/wangpeiyu/AndroidStudioProjects/Xiaodi/IMKit/build/intermediates/res/merged/debug/drawable/abc_cab_background_top_material.xml",

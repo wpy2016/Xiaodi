@@ -280,6 +280,11 @@
     <string name="airpay_account">支付宝账号</string>
     <string name="withdraw_tip">1-2工作日到账</string>
     <string name="withdraw_wait_to_complete">提现等待实现</string>
+    <string name="load_success">加载成功</string>
+    <string name="show_dst">按目的地显示</string>
+    <string name="show_origin">按出发地显示</string>
+    <string name="nearby_origin">附近-出发地</string>
+    <string name="nearby_dst">附近-目的地</string>
 
 
     <string-array name="week_date">

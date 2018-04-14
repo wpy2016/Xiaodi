@@ -38,6 +38,10 @@ public interface IRewardRequest {
     @FormUrlEncoded
     Observable<ShowReward> ShowRewards(@Field("pages") int pages, @Field("user_id") String userId, @Field("token") String token);
 
+    @POST("/reward/show/all")
+    @FormUrlEncoded
+    Observable<ShowReward> ShowAllRewards(@Field("user_id") String userId, @Field("token") String token);
+
     @POST("/reward/carry")
     @FormUrlEncoded
     Observable<ResultResp> CarryReward(@Field("reward_id") String rewardid, @Field("user_id") String userId, @Field("token") String token);

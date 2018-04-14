@@ -1,5 +1,6 @@
 package com.wpy.cqu.xiaodi.home.fragment;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
@@ -24,6 +25,8 @@ import com.wpy.cqu.xiaodi.R;
 import com.wpy.cqu.xiaodi.adapter.recycler.RewardAdapter;
 import com.wpy.cqu.xiaodi.application.XiaodiApplication;
 import com.wpy.cqu.xiaodi.home.AcHomeAdd;
+import com.wpy.cqu.xiaodi.lbs_amap.AmapRewards;
+import com.wpy.cqu.xiaodi.lbs_amap.LBS_amapActivity;
 import com.wpy.cqu.xiaodi.model.ResultResp;
 import com.wpy.cqu.xiaodi.model.Reward;
 import com.wpy.cqu.xiaodi.net.RewardRequst;
@@ -32,6 +35,7 @@ import com.wpy.cqu.xiaodi.reward.AcRewardDetail;
 import com.wpy.cqu.xiaodi.util.DpUtil;
 import com.wpy.cqu.xiaodi.util.ToastUtil;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -112,7 +116,19 @@ public class FgHall extends Fragment {
     }
 
     private void nearby(View view) {
+        Intent intent = new Intent(getActivity(), LBS_amapActivity.class);
+        startActivityForResult(intent, 0);
+    }
 
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode != Activity.RESULT_OK || 0 != requestCode) {
+            return;
+        }
+        Serializable serializableExtra = data.getSerializableExtra("rewards");
+        AmapRewards amapRewards = (AmapRewards) serializableExtra;
+        if (null != amapRewards){
+            rewardAdapter.refresh(amapRewards.rewards, this.getUserVisibleHint());
+        }
     }
 
     private void sortByXiaoDian(View view) {

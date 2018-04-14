@@ -129,6 +129,15 @@ public class RewardRequst {
                 .subscribe(new ShowRewardConsumer("ShowRewards", resp), Error.getErrorConsumer(resp));
     }
 
+    public static void ShowAllRewards(String userId, String token, IResp<List<Reward>> resp) {
+        Retrofit retrofit = BaseRetrofit.getInstance();
+        IRewardRequest iRewardRequest = retrofit.create(IRewardRequest.class);
+        Observable<ShowReward> showRewardObservable = iRewardRequest.ShowAllRewards(userId, token);
+        showRewardObservable.subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new ShowRewardConsumer("ShowAllRewards", resp), Error.getErrorConsumer(resp));
+    }
+
     public static void DeleteRewards(String rewardId, String userId, String token, IResp<ResultResp> resp) {
         Retrofit retrofit = BaseRetrofit.getInstance();
         IRewardRequest iRewardRequest = retrofit.create(IRewardRequest.class);

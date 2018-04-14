@@ -184,12 +184,12 @@
         "source": "/Users/wangpeiyu/.android/build-cache/ec2f8f1d999e6058c640354496500527ca596616/output/res/drawable-hdpi-v4/abc_ic_menu_paste_mtrl_am_alpha.png"
     },
     {
-        "merged": "/Users/wangpeiyu/AndroidStudioProjects/Xiaodi/IMKit/build/intermediates/res/merged/debug/drawable-hdpi-v4/abc_list_longpressed_holo.9.png",
-        "source": "/Users/wangpeiyu/.android/build-cache/ec2f8f1d999e6058c640354496500527ca596616/output/res/drawable-hdpi-v4/abc_list_longpressed_holo.9.png"
-    },
-    {
         "merged": "/Users/wangpeiyu/AndroidStudioProjects/Xiaodi/IMKit/build/intermediates/res/merged/debug/drawable-hdpi-v4/abc_tab_indicator_mtrl_alpha.9.png",
         "source": "/Users/wangpeiyu/.android/build-cache/ec2f8f1d999e6058c640354496500527ca596616/output/res/drawable-hdpi-v4/abc_tab_indicator_mtrl_alpha.9.png"
+    },
+    {
+        "merged": "/Users/wangpeiyu/AndroidStudioProjects/Xiaodi/IMKit/build/intermediates/res/merged/debug/drawable-hdpi-v4/abc_list_longpressed_holo.9.png",
+        "source": "/Users/wangpeiyu/.android/build-cache/ec2f8f1d999e6058c640354496500527ca596616/output/res/drawable-hdpi-v4/abc_list_longpressed_holo.9.png"
     },
     {
         "merged": "/Users/wangpeiyu/AndroidStudioProjects/Xiaodi/IMKit/build/intermediates/res/merged/debug/drawable-hdpi-v4/abc_cab_background_top_mtrl_alpha.9.png",

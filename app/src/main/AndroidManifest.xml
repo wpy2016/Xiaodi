@@ -9,6 +9,7 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <!-- 获取wifi网络状态的信息 -->
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <!-- 允许读取手机状态 -->
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <!-- 其他权限 短信 -->
@@ -173,6 +174,14 @@
         <activity
             android:name=".wallet.AcWithdraw"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".lbs_amap.LBS_amapActivity"
+            android:screenOrientation="portrait" />
+
+        <meta-data
+            android:name="com.amap.api.v2.apikey"
+            android:value="0121fa65ca62e6f7b3e25144e7684476" />
+
     </application>
 
 </manifest>
