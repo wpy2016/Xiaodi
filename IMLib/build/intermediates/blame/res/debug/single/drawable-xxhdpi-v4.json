@@ -1,11 +1,11 @@
 [
     {
-        "merged": "/Users/wangpeiyu/AndroidStudioProjects/Xiaodi/IMLib/build/intermediates/res/merged/debug/drawable-xxhdpi-v4/abc_textfield_search_activated_mtrl_alpha.9.png",
-        "source": "/Users/wangpeiyu/.android/build-cache/ec2f8f1d999e6058c640354496500527ca596616/output/res/drawable-xxhdpi-v4/abc_textfield_search_activated_mtrl_alpha.9.png"
-    },
-    {
         "merged": "/Users/wangpeiyu/AndroidStudioProjects/Xiaodi/IMLib/build/intermediates/res/merged/debug/drawable-xxhdpi-v4/abc_scrubber_primary_mtrl_alpha.9.png",
         "source": "/Users/wangpeiyu/.android/build-cache/ec2f8f1d999e6058c640354496500527ca596616/output/res/drawable-xxhdpi-v4/abc_scrubber_primary_mtrl_alpha.9.png"
+    },
+    {
+        "merged": "/Users/wangpeiyu/AndroidStudioProjects/Xiaodi/IMLib/build/intermediates/res/merged/debug/drawable-xxhdpi-v4/abc_textfield_search_activated_mtrl_alpha.9.png",
+        "source": "/Users/wangpeiyu/.android/build-cache/ec2f8f1d999e6058c640354496500527ca596616/output/res/drawable-xxhdpi-v4/abc_textfield_search_activated_mtrl_alpha.9.png"
     },
     {
         "merged": "/Users/wangpeiyu/AndroidStudioProjects/Xiaodi/IMLib/build/intermediates/res/merged/debug/drawable-xxhdpi-v4/abc_switch_track_mtrl_alpha.9.png",

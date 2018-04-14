@@ -4,12 +4,12 @@
         "source": "/Users/wangpeiyu/.android/build-cache/ec2f8f1d999e6058c640354496500527ca596616/output/res/drawable-xxxhdpi-v4/abc_spinner_mtrl_am_alpha.9.png"
     },
     {
-        "merged": "/Users/wangpeiyu/AndroidStudioProjects/Xiaodi/IMKit/build/intermediates/res/merged/release/drawable-xxxhdpi-v4/abc_switch_track_mtrl_alpha.9.png",
-        "source": "/Users/wangpeiyu/.android/build-cache/ec2f8f1d999e6058c640354496500527ca596616/output/res/drawable-xxxhdpi-v4/abc_switch_track_mtrl_alpha.9.png"
-    },
-    {
         "merged": "/Users/wangpeiyu/AndroidStudioProjects/Xiaodi/IMKit/build/intermediates/res/merged/release/drawable-xxxhdpi-v4/abc_scrubber_control_to_pressed_mtrl_005.png",
         "source": "/Users/wangpeiyu/.android/build-cache/ec2f8f1d999e6058c640354496500527ca596616/output/res/drawable-xxxhdpi-v4/abc_scrubber_control_to_pressed_mtrl_005.png"
+    },
+    {
+        "merged": "/Users/wangpeiyu/AndroidStudioProjects/Xiaodi/IMKit/build/intermediates/res/merged/release/drawable-xxxhdpi-v4/abc_switch_track_mtrl_alpha.9.png",
+        "source": "/Users/wangpeiyu/.android/build-cache/ec2f8f1d999e6058c640354496500527ca596616/output/res/drawable-xxxhdpi-v4/abc_switch_track_mtrl_alpha.9.png"
     },
     {
         "merged": "/Users/wangpeiyu/AndroidStudioProjects/Xiaodi/IMKit/build/intermediates/res/merged/release/drawable-xxxhdpi-v4/abc_scrubber_control_to_pressed_mtrl_000.png",
