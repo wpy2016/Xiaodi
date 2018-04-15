@@ -61,6 +61,7 @@ public class AcVertifyCode extends TopBarAppComptAcitity {
         initView();
         bindEvent();
         vertifyCode = VertifyCodeFactory.getInstance(VertifyCodeFactory.VertifyCodeEnum.BMOB);
+        vertifyCode.init(this);
     }
 
     private void sendCode(View v) {
@@ -78,7 +79,11 @@ public class AcVertifyCode extends TopBarAppComptAcitity {
                 ToastUtil.toast(this, getResources().getString(R.string.vertify_have_send));
                 return;
             }
-            ToastUtil.toast(this, getResources().getString(R.string.verify_send_fail));
+            if (null != ex.getMessage() && ex.getMessage().contains("limit")) {
+                ToastUtil.toast(this, getResources().getString(R.string.verify_send_more));
+                return;
+            }
+            ToastUtil.toast(this, getResources().getString(R.string.verify_send_fail) + ex.getMessage());
         });
     }
 

@@ -285,6 +285,7 @@
     <string name="show_origin">按出发地显示</string>
     <string name="nearby_origin">附近-出发地</string>
     <string name="nearby_dst">附近-目的地</string>
+    <string name="verify_send_more">请求发送验证码超过次数</string>
 
 
     <string-array name="week_date">

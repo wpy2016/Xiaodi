@@ -9,6 +9,8 @@ import android.widget.EditText;
 
 public interface IVertifyCode {
 
+    void init(Context context);
+
     void sendCode(String phone, Context ctx, EditText etCode, IVertifyResp resp);
 
     void vertifyCode(String phone, String code, Context ctx, IVertifyResp resp);

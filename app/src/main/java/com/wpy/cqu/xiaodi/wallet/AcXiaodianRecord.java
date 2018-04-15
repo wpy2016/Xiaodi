@@ -79,7 +79,11 @@ public class AcXiaodianRecord extends TopBarAppComptAcitity {
         helper.setText(R.id.id_reward_tv_name, Thing.THING_TYPE[reward.thing.type]);
         helper.setText(R.id.id_reward_tv_weight, reward.thing.weight);
         helper.setText(R.id.id_reward_tv_start_place, reward.originLocation);
-        helper.setText(R.id.id_reward_tv_end_place, reward.dstLocation);
+        if (reward.Publisher.Id.equals(Reward.XIAODIAN_CENTER)) {
+            helper.setText(R.id.id_reward_tv_end_place, reward.Receiver.NickName);
+        }else {
+            helper.setText(R.id.id_reward_tv_end_place, reward.dstLocation);
+        }
         if (reward.Publisher.Id.equals(XiaodiApplication.mCurrentUser.Id)) {
             Picasso.with(AcXiaodianRecord.this)
                     .load(reward.Receiver.ImgUrl)
