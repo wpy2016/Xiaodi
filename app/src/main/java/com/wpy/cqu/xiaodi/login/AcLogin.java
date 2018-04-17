@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,6 +20,7 @@ import com.wpy.cqu.xiaodi.base_activity.StatusBarAppComptActivity;
 import com.wpy.cqu.xiaodi.encrypt.AESEncrypt;
 import com.wpy.cqu.xiaodi.home.AcHome;
 import com.wpy.cqu.xiaodi.im_chat.Rongyun;
+import com.wpy.cqu.xiaodi.loading.Loading;
 import com.wpy.cqu.xiaodi.model.ResultResp;
 import com.wpy.cqu.xiaodi.model.User;
 import com.wpy.cqu.xiaodi.net.UserRequest;
@@ -53,6 +55,8 @@ public class AcLogin extends StatusBarAppComptActivity {
 
     private ImageView mivWeixinLogin;
 
+    private PopupWindow mLoadingPOpwindown;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Bundle bundle = new Bundle();
@@ -67,20 +71,33 @@ public class AcLogin extends StatusBarAppComptActivity {
         String phone = metAccount.getText().toString();
         String pass = metPass.getText().toString();
         String encryptPass = AESEncrypt.Base64AESEncrypt(pass);
+        if (null == mLoadingPOpwindown) {
+            mLoadingPOpwindown = Loading.getLoadingPopwindown(this);
+        }
+        Loading.showLoading(this, mLoadingPOpwindown);
         UserRequest.Login(phone, encryptPass, new IResp<User>() {
             @Override
             public void success(User user) {
                 XiaodiApplication.mCurrentUser = user;
                 XiaodiApplication.mCurrentUser.Pass = encryptPass;
                 XiaodiApplication.mCurrentUser.saveToLocalFile();
-                Rongyun.toHomeAc(AcLogin.this,true,false);
+                Rongyun.toHomeAc(AcLogin.this, true, false);
             }
 
             @Override
             public void fail(ResultResp resp) {
                 ToastUtil.toast(AcLogin.this, resp.message);
+                mLoadingPOpwindown.dismiss();
             }
         });
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (null != mLoadingPOpwindown) {
+            mLoadingPOpwindown.dismiss();
+        }
     }
 
     private void forgetPass(View v) {

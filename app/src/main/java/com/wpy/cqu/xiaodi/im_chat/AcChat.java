@@ -9,6 +9,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.text.TextUtils;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -72,12 +73,12 @@ public class AcChat extends TopBarAppComptAcitity {
         setContentView(R.layout.ac_chat);
         bindView();
         bindEvent();
-        initView();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
+        initView();
         initViewPager();
     }
 
@@ -103,6 +104,8 @@ public class AcChat extends TopBarAppComptAcitity {
     }
 
     private void initView() {
+        mivBack.setVisibility(View.VISIBLE);
+        mtvBack.setVisibility(View.VISIBLE);
         mtvBack.setText(getResources().getString(R.string.message_hall));
         mtvBack.setTextColor(Color.WHITE);
         mivBack.setImageResource(R.drawable.go_back_white);
@@ -140,6 +143,9 @@ public class AcChat extends TopBarAppComptAcitity {
     }
 
     private void hanlderRewards(List<Reward> rewards) {
+        if (null == rewards || rewards.isEmpty()) {
+            return;
+        }
         List<Reward> myCarryNotFinishRewards = new ArrayList<>();
         List<Reward> mySendNotFinishRewards = new ArrayList<>();
         for (Reward reward : rewards) {
@@ -227,14 +233,20 @@ public class AcChat extends TopBarAppComptAcitity {
             if (position == chatFgPos) {
                 String targetName = getIntent().getData().getQueryParameter("title");
                 mtvContent.setText(targetName);
+                mivBack.setVisibility(View.VISIBLE);
+                mtvBack.setVisibility(View.VISIBLE);
                 return;
             }
             if (position < chatFgPos) {
                 mtvContent.setText(getResources().getString(R.string.my_carry_not_finish_reward));
+                mivBack.setVisibility(View.INVISIBLE);
+                mtvBack.setVisibility(View.INVISIBLE);
                 return;
             }
 
             mtvContent.setText(getResources().getString(R.string.my_send_not_finish_reward));
+            mivBack.setVisibility(View.INVISIBLE);
+            mtvBack.setVisibility(View.INVISIBLE);
         }
 
         @Override

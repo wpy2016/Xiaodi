@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
+import com.orhanobut.logger.Logger;
 import com.squareup.picasso.Picasso;
 import com.wpy.cqu.xiaodi.R;
 import com.wpy.cqu.xiaodi.application.XiaodiApplication;
@@ -27,6 +28,11 @@ import com.wpy.cqu.xiaodi.util.ToastUtil;
 import java.io.Serializable;
 
 import io.rong.imkit.RongIM;
+import io.rong.imlib.IRongCallback;
+import io.rong.imlib.RongIMClient;
+import io.rong.imlib.model.Conversation;
+import io.rong.imlib.model.Message;
+import io.rong.message.TextMessage;
 
 public class AcRewardDetail extends TopBarAppComptAcitity {
 
@@ -111,8 +117,44 @@ public class AcRewardDetail extends TopBarAppComptAcitity {
         ToastUtil.toast(AcRewardDetail.this, getResources().getString(R.string.carry_success));
         if (null != RongIM.getInstance()) {
             RongIM.getInstance().startPrivateChat(AcRewardDetail.this, reward.Publisher.Id, reward.Publisher.NickName);
+            //并发送一条领取成功消息
+            sendCarrySuccessMsg(reward);
         }
         finish();
+    }
+
+    private void sendCarrySuccessMsg(Reward reward) {
+        TextMessage textMessage = TextMessage.obtain("领取成功,正在全速递送...");
+        Message message = Message.obtain(reward.Publisher.Id, Conversation.ConversationType.PRIVATE, textMessage);
+        if (null == RongIM.getInstance()) {
+            return;
+        }
+        RongIM.getInstance().sendMessage(message, null, null, new IRongCallback.ISendMediaMessageCallback() {
+            @Override
+            public void onProgress(Message message, int i) {
+
+            }
+
+            @Override
+            public void onCanceled(Message message) {
+
+            }
+
+            @Override
+            public void onAttached(Message message) {
+
+            }
+
+            @Override
+            public void onSuccess(Message message) {
+                Logger.i("carry reward to send message successful.");
+            }
+
+            @Override
+            public void onError(Message message, RongIMClient.ErrorCode errorCode) {
+                Logger.i("carry reward to send message fail,error=%s", message.toString());
+            }
+        });
     }
 
     private void initView() {

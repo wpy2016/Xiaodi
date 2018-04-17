@@ -66,6 +66,7 @@ public class AcWelcome extends CheckPermissionsActivity {
                     XiaodiApplication.mCurrentUser.Token, new IResp<User>() {
                         @Override
                         public void success(User user) {
+                            Logger.i("isHasAccount success. " + user.toString());
                             XiaodiApplication.mCurrentUser = user;
                             XiaodiApplication.mCurrentUser.saveToLocalFile();
                         }

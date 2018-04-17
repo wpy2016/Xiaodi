@@ -38,10 +38,11 @@ public class Rongyun {
      * @param isNeedFinishCurrentAc
      */
     public static void toHomeAc(AppCompatActivity currentAc, boolean isNeedFinishCurrentAc, boolean isNeedClearAcStack) {
+        Logger.i("toHomeAc isNeedFinishCurrentAc=%s,isNeedClearAcStack=%s", isNeedFinishCurrentAc, isNeedClearAcStack);
         connect(XiaodiApplication.mCurrentUser.RongyunToken, currentAc, new IResp<String>() {
             @Override
             public void success(String object) {
-                Logger.i("connect rongyun succcessful.");
+                Logger.i("toHome Acconnect rongyun succcessful.");
                 Intent intent = new Intent(currentAc, AcHome.class);
                 if (isNeedClearAcStack) {
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -62,13 +63,14 @@ public class Rongyun {
         });
     }
 
-    public static void logout(){
-        if(null != RongIM.getInstance()){
+    public static void logout() {
+        if (null != RongIM.getInstance()) {
             RongIM.getInstance().logout();
         }
     }
 
     private static void connect(String token, Context context, IResp<String> resp) {
+        Logger.i("token=%s",token);
         if (!context.getApplicationInfo().packageName.equals(getCurProcessName(context.getApplicationContext()))) {
             resp.fail(new ResultResp(444, "链接融云失败，进程不一致"));
             return;
