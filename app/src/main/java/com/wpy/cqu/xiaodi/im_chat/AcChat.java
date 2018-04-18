@@ -105,6 +105,8 @@ public class AcChat extends TopBarAppComptAcitity {
     }
 
     private void initViewPager() {
+        mcircleIndicator.setVisibility(View.GONE);
+        mvpNotFinishRewards.setVisibility(View.GONE);
         String targetId = getIntent().getData().getQueryParameter("targetId");
         Logger.i("targetId=%s", targetId);
 

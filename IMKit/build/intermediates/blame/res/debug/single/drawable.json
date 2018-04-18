@@ -28,12 +28,12 @@
         "source": "/Users/wangpeiyu/AndroidStudioProjects/Xiaodi/IMKit/src/main/res/drawable/rc_bg_item.xml"
     },
     {
-        "merged": "/Users/wangpeiyu/AndroidStudioProjects/Xiaodi/IMKit/build/intermediates/res/merged/debug/drawable/rc_voice_toggle_selector.xml",
-        "source": "/Users/wangpeiyu/AndroidStudioProjects/Xiaodi/IMKit/src/main/res/drawable/rc_voice_toggle_selector.xml"
-    },
-    {
         "merged": "/Users/wangpeiyu/AndroidStudioProjects/Xiaodi/IMKit/build/intermediates/res/merged/debug/drawable/abc_ic_search_api_material.xml",
         "source": "/Users/wangpeiyu/.android/build-cache/ec2f8f1d999e6058c640354496500527ca596616/output/res/drawable/abc_ic_search_api_material.xml"
+    },
+    {
+        "merged": "/Users/wangpeiyu/AndroidStudioProjects/Xiaodi/IMKit/build/intermediates/res/merged/debug/drawable/rc_voice_toggle_selector.xml",
+        "source": "/Users/wangpeiyu/AndroidStudioProjects/Xiaodi/IMKit/src/main/res/drawable/rc_voice_toggle_selector.xml"
     },
     {
         "merged": "/Users/wangpeiyu/AndroidStudioProjects/Xiaodi/IMKit/build/intermediates/res/merged/debug/drawable/rc_sp_grid_mask.xml",
@@ -144,12 +144,12 @@
         "source": "/Users/wangpeiyu/AndroidStudioProjects/Xiaodi/IMKit/src/main/res/drawable/rc_corner_voice_style.xml"
     },
     {
-        "merged": "/Users/wangpeiyu/AndroidStudioProjects/Xiaodi/IMKit/build/intermediates/res/merged/debug/drawable/rc_pb_file_download_progress.xml",
-        "source": "/Users/wangpeiyu/AndroidStudioProjects/Xiaodi/IMKit/src/main/res/drawable/rc_pb_file_download_progress.xml"
-    },
-    {
         "merged": "/Users/wangpeiyu/AndroidStudioProjects/Xiaodi/IMKit/build/intermediates/res/merged/debug/drawable/abc_cab_background_internal_bg.xml",
         "source": "/Users/wangpeiyu/.android/build-cache/ec2f8f1d999e6058c640354496500527ca596616/output/res/drawable/abc_cab_background_internal_bg.xml"
+    },
+    {
+        "merged": "/Users/wangpeiyu/AndroidStudioProjects/Xiaodi/IMKit/build/intermediates/res/merged/debug/drawable/rc_pb_file_download_progress.xml",
+        "source": "/Users/wangpeiyu/AndroidStudioProjects/Xiaodi/IMKit/src/main/res/drawable/rc_pb_file_download_progress.xml"
     },
     {
         "merged": "/Users/wangpeiyu/AndroidStudioProjects/Xiaodi/IMKit/build/intermediates/res/merged/debug/drawable/abc_dialog_material_background.xml",

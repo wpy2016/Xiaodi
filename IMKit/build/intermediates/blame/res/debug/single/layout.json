@@ -40,12 +40,12 @@
         "source": "/Users/wangpeiyu/AndroidStudioProjects/Xiaodi/IMKit/src/main/res/layout/rc_ext_input_edit_text.xml"
     },
     {
-        "merged": "/Users/wangpeiyu/AndroidStudioProjects/Xiaodi/IMKit/build/intermediates/res/merged/debug/layout/rc_ext_emoticon_tab_container.xml",
-        "source": "/Users/wangpeiyu/AndroidStudioProjects/Xiaodi/IMKit/src/main/res/layout/rc_ext_emoticon_tab_container.xml"
-    },
-    {
         "merged": "/Users/wangpeiyu/AndroidStudioProjects/Xiaodi/IMKit/build/intermediates/res/merged/debug/layout/rc_picsel_grid_item.xml",
         "source": "/Users/wangpeiyu/AndroidStudioProjects/Xiaodi/IMKit/src/main/res/layout/rc_picsel_grid_item.xml"
+    },
+    {
+        "merged": "/Users/wangpeiyu/AndroidStudioProjects/Xiaodi/IMKit/build/intermediates/res/merged/debug/layout/rc_ext_emoticon_tab_container.xml",
+        "source": "/Users/wangpeiyu/AndroidStudioProjects/Xiaodi/IMKit/src/main/res/layout/rc_ext_emoticon_tab_container.xml"
     },
     {
         "merged": "/Users/wangpeiyu/AndroidStudioProjects/Xiaodi/IMKit/build/intermediates/res/merged/debug/layout/abc_select_dialog_material.xml",
@@ -76,12 +76,12 @@
         "source": "/Users/wangpeiyu/AndroidStudioProjects/Xiaodi/IMKit/src/main/res/layout/rc_item_base_conversation.xml"
     },
     {
-        "merged": "/Users/wangpeiyu/AndroidStudioProjects/Xiaodi/IMKit/build/intermediates/res/merged/debug/layout/rc_item_public_service_input_menu.xml",
-        "source": "/Users/wangpeiyu/AndroidStudioProjects/Xiaodi/IMKit/src/main/res/layout/rc_item_public_service_input_menu.xml"
-    },
-    {
         "merged": "/Users/wangpeiyu/AndroidStudioProjects/Xiaodi/IMKit/build/intermediates/res/merged/debug/layout/abc_list_menu_item_layout.xml",
         "source": "/Users/wangpeiyu/.android/build-cache/ec2f8f1d999e6058c640354496500527ca596616/output/res/layout/abc_list_menu_item_layout.xml"
+    },
+    {
+        "merged": "/Users/wangpeiyu/AndroidStudioProjects/Xiaodi/IMKit/build/intermediates/res/merged/debug/layout/rc_item_public_service_input_menu.xml",
+        "source": "/Users/wangpeiyu/AndroidStudioProjects/Xiaodi/IMKit/src/main/res/layout/rc_item_public_service_input_menu.xml"
     },
     {
         "merged": "/Users/wangpeiyu/AndroidStudioProjects/Xiaodi/IMKit/build/intermediates/res/merged/debug/layout/rc_ac_file_preview_content.xml",
@@ -104,12 +104,12 @@
         "source": "/Users/wangpeiyu/.android/build-cache/ec2f8f1d999e6058c640354496500527ca596616/output/res/layout/abc_expanded_menu_layout.xml"
     },
     {
-        "merged": "/Users/wangpeiyu/AndroidStudioProjects/Xiaodi/IMKit/build/intermediates/res/merged/debug/layout/abc_action_bar_title_item.xml",
-        "source": "/Users/wangpeiyu/.android/build-cache/ec2f8f1d999e6058c640354496500527ca596616/output/res/layout/abc_action_bar_title_item.xml"
-    },
-    {
         "merged": "/Users/wangpeiyu/AndroidStudioProjects/Xiaodi/IMKit/build/intermediates/res/merged/debug/layout/rc_item_discussion_notification_message.xml",
         "source": "/Users/wangpeiyu/AndroidStudioProjects/Xiaodi/IMKit/src/main/res/layout/rc_item_discussion_notification_message.xml"
+    },
+    {
+        "merged": "/Users/wangpeiyu/AndroidStudioProjects/Xiaodi/IMKit/build/intermediates/res/merged/debug/layout/abc_action_bar_title_item.xml",
+        "source": "/Users/wangpeiyu/.android/build-cache/ec2f8f1d999e6058c640354496500527ca596616/output/res/layout/abc_action_bar_title_item.xml"
     },
     {
         "merged": "/Users/wangpeiyu/AndroidStudioProjects/Xiaodi/IMKit/build/intermediates/res/merged/debug/layout/rc_picsel_preview.xml",

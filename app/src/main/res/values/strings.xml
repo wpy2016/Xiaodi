@@ -289,6 +289,8 @@
     <string name="contact_ta">联系他</string>
     <string name="rong_yun_not_connect">融云未登录</string>
     <string name="wait">等待</string>
+    <string name="arrive_please_confirm">已经送达，请点击完成</string>
+    <string name="thank_you">十分感谢，我已点击完成</string>
 
 
     <string-array name="week_date">

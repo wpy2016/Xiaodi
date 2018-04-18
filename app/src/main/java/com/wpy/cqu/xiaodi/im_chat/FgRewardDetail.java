@@ -24,6 +24,13 @@ import com.wpy.cqu.xiaodi.net.RewardRequst;
 import com.wpy.cqu.xiaodi.net.resp.IResp;
 import com.wpy.cqu.xiaodi.util.ToastUtil;
 
+import io.rong.imkit.RongIM;
+import io.rong.imlib.IRongCallback;
+import io.rong.imlib.RongIMClient;
+import io.rong.imlib.model.Conversation;
+import io.rong.imlib.model.Message;
+import io.rong.message.TextMessage;
+
 /**
  * Created by wangpeiyu on 2018/4/10.
  */
@@ -122,9 +129,7 @@ public class FgRewardDetail extends Fragment {
             return;
         }
         if (isMyCarryAndRewardIsArrive(reward)) {
-
             mbtnArray.setText(R.string.wait);
-            Logger.i("33333");
             mbtnArray.setBackgroundResource(R.drawable.circle_search_gray_60);
             mbtnArray.setEnabled(false);
         }
@@ -136,6 +141,7 @@ public class FgRewardDetail extends Fragment {
                     @Override
                     public void success(ResultResp object) {
                         ToastUtil.toast(getActivity(), getResources().getString(R.string.already_finish));
+                        sendMsg(reward.Receiver.Id, getResources().getString(R.string.thank_you));
                         mbtnArray.setVisibility(View.GONE);
                         toEvaluate();
                     }
@@ -153,6 +159,7 @@ public class FgRewardDetail extends Fragment {
                     @Override
                     public void success(ResultResp object) {
                         ToastUtil.toast(getActivity(), getResources().getString(R.string.already_arrive));
+                        sendMsg(reward.Publisher.Id, getResources().getString(R.string.arrive_please_confirm));
                         mbtnArray.setEnabled(false);
                         mbtnArray.setText(R.string.wait);
                         mbtnArray.setBackgroundResource(R.drawable.circle_search_gray_60);
@@ -186,6 +193,40 @@ public class FgRewardDetail extends Fragment {
 
     private boolean isMyCarryAndRewardIsArrive(Reward reward) {
         return reward.Receiver.Id.equals(XiaodiApplication.mCurrentUser.Id) && Reward.REWARD_STATE_ARRIVE == reward.state;
+    }
+
+    private void sendMsg(String userId, String msg) {
+        TextMessage textMessage = TextMessage.obtain(msg);
+        Message message = Message.obtain(userId, Conversation.ConversationType.PRIVATE, textMessage);
+        if (null == RongIM.getInstance()) {
+            return;
+        }
+        RongIM.getInstance().sendMessage(message, null, null, new IRongCallback.ISendMediaMessageCallback() {
+            @Override
+            public void onProgress(Message message, int i) {
+
+            }
+
+            @Override
+            public void onCanceled(Message message) {
+
+            }
+
+            @Override
+            public void onAttached(Message message) {
+
+            }
+
+            @Override
+            public void onSuccess(Message message) {
+                Logger.i("send message successful.");
+            }
+
+            @Override
+            public void onError(Message message, RongIMClient.ErrorCode errorCode) {
+                Logger.i("send message fail,error=%s", message.toString());
+            }
+        });
     }
 
 }
