@@ -24,6 +24,8 @@ import com.wpy.cqu.xiaodi.model.Reward;
 import com.wpy.cqu.xiaodi.net.RewardRequst;
 import com.wpy.cqu.xiaodi.net.resp.IResp;
 import com.wpy.cqu.xiaodi.util.ToastUtil;
+import com.wpy.cqu.xiaodi.view.CircleIndicator;
+import com.wpy.cqu.xiaodi.view.DepthPageTransformer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,16 +55,9 @@ public class AcChat extends TopBarAppComptAcitity {
 
     private ChatPagerAdaper mAdaper;
 
-    private ViewPager mvpChat;
+    private ViewPager mvpNotFinishRewards;
 
-    private ConversationFragment conversationFragment;
-
-    private int chatFgPos = 0;
-
-    private ViewPager.OnPageChangeListener onPageChangeListener;
-
-    //取消订阅者
-    private Disposable disposable;
+    private CircleIndicator mcircleIndicator;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -82,31 +77,23 @@ public class AcChat extends TopBarAppComptAcitity {
         initViewPager();
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        if (null != disposable) {
-            disposable.dispose();
-        }
-    }
-
     private void bindView() {
         mtvBack = (TextView) findViewById(R.id.id_top_back_tv);
         mivBack = (ImageView) findViewById(R.id.id_top_back_iv_img);
         mtvContent = (TextView) findViewById(R.id.id_top_tv_content);
-        mvpChat = (ViewPager) findViewById(R.id.id_ac_chat_viewpager);
+        mvpNotFinishRewards = (ViewPager) findViewById(R.id.id_ac_chat_viewpager);
+        mcircleIndicator = (CircleIndicator) findViewById(R.id.id_ac_chat_indicator);
     }
 
     private void bindEvent() {
         mtvBack.setOnClickListener(view -> finish());
         mivBack.setOnClickListener(view -> finish());
-
     }
 
     private void initView() {
         mivBack.setVisibility(View.VISIBLE);
         mtvBack.setVisibility(View.VISIBLE);
-        mtvBack.setText(getResources().getString(R.string.message_hall));
+        mtvBack.setText(getResources().getString(R.string.back));
         mtvBack.setTextColor(Color.WHITE);
         mivBack.setImageResource(R.drawable.go_back_white);
 
@@ -118,12 +105,6 @@ public class AcChat extends TopBarAppComptAcitity {
     }
 
     private void initViewPager() {
-        conversationFragment = Rongyun.getConversationFragment(this);
-        List<Fragment> fragmentList = new ArrayList<>();
-        fragmentList.add(conversationFragment);
-        mAdaper = new ChatPagerAdaper(fragmentList, getSupportFragmentManager());
-        mvpChat.setAdapter(mAdaper);
-
         String targetId = getIntent().getData().getQueryParameter("targetId");
         Logger.i("targetId=%s", targetId);
 
@@ -165,9 +146,7 @@ public class AcChat extends TopBarAppComptAcitity {
             bundle.putSerializable("reward", myCarryReward);
             fragment.setArguments(bundle);
             fragments.add(fragment);
-            chatFgPos++;
         }
-        fragments.add(conversationFragment);
 
         //在右边设置为我发布的未完成的订单
         for (Reward mySendReward : mySendNotFinishRewards) {
@@ -177,19 +156,12 @@ public class AcChat extends TopBarAppComptAcitity {
             fragment.setArguments(bundle);
             fragments.add(fragment);
         }
-
-        //延迟2s更新，防止出现更新太快，屏幕闪一下
-        disposable = Observable.timer(3, TimeUnit.SECONDS)
-                .subscribeOn(Schedulers.computation())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(l -> {
-                    mAdaper.mFragments = fragments;
-                    mAdaper.notifyDataSetChanged();
-                    mvpChat.setCurrentItem(chatFgPos);
-                    //切换时，更新title
-                    onPageChangeListener = new ChatChangeListener();
-                    mvpChat.addOnPageChangeListener(onPageChangeListener);
-                });
+        mAdaper = new ChatPagerAdaper(fragments, getSupportFragmentManager());
+        mvpNotFinishRewards.setAdapter(mAdaper);
+        mvpNotFinishRewards.setPageTransformer(true, new DepthPageTransformer());
+        mcircleIndicator.setViewPager(mvpNotFinishRewards);
+        mcircleIndicator.setVisibility(View.VISIBLE);
+        mvpNotFinishRewards.setVisibility(View.VISIBLE);
     }
 
     /**
@@ -218,40 +190,6 @@ public class AcChat extends TopBarAppComptAcitity {
         @Override
         public int getItemPosition(Object object) {
             return POSITION_NONE;
-        }
-    }
-
-    private class ChatChangeListener implements ViewPager.OnPageChangeListener {
-
-        @Override
-        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-        }
-
-        @Override
-        public void onPageSelected(int position) {
-            if (position == chatFgPos) {
-                String targetName = getIntent().getData().getQueryParameter("title");
-                mtvContent.setText(targetName);
-                mivBack.setVisibility(View.VISIBLE);
-                mtvBack.setVisibility(View.VISIBLE);
-                return;
-            }
-            if (position < chatFgPos) {
-                mtvContent.setText(getResources().getString(R.string.my_carry_not_finish_reward));
-                mivBack.setVisibility(View.INVISIBLE);
-                mtvBack.setVisibility(View.INVISIBLE);
-                return;
-            }
-
-            mtvContent.setText(getResources().getString(R.string.my_send_not_finish_reward));
-            mivBack.setVisibility(View.INVISIBLE);
-            mtvBack.setVisibility(View.INVISIBLE);
-        }
-
-        @Override
-        public void onPageScrollStateChanged(int state) {
-
         }
     }
 }

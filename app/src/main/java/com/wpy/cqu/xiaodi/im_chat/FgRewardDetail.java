@@ -40,19 +40,6 @@ public class FgRewardDetail extends Fragment {
 
     private TextView mtvDstPlace;
 
-    private TextView mtvDeadline;
-
-    private TextView mtvDescribe;
-
-    private ImageView mivPublisherImg;
-
-    private TextView mtvPublisherNickName;
-
-
-    private TextView mtvAuthStatus;
-
-    private TextView mtvCredit;
-
     protected Button mbtnArray;
 
     private Reward reward;
@@ -69,7 +56,7 @@ public class FgRewardDetail extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.ac_details, null);
+        View view = inflater.inflate(R.layout.ac_details_small, null);
         bindView(view);
         return view;
     }
@@ -80,14 +67,7 @@ public class FgRewardDetail extends Fragment {
         mtvWeight = (TextView) view.findViewById(R.id.id_ac_details_tv_type);
         mtvStartPlace = (TextView) view.findViewById(R.id.id_ac_details_tv_start_place);
         mtvDstPlace = (TextView) view.findViewById(R.id.id_ac_details_tv_arrive_place);
-        mtvDeadline = (TextView) view.findViewById(R.id.id_ac_details_tv_start_stop_time);
-        mtvDescribe = (TextView) view.findViewById(R.id.id_ac_details_tv_text_des);
-        mivPublisherImg = (ImageView) view.findViewById(R.id.id_ac_details_iv_head_picture);
-        mtvPublisherNickName = (TextView) view.findViewById(R.id.id_ac_details_tv_owner_name);
-        mtvAuthStatus = (TextView) view.findViewById(R.id.id_xd_des_tv_real_name);
-        mtvCredit = (TextView) view.findViewById(R.id.id_xd_des_tv_credit);
         mbtnArray = (Button) view.findViewById(R.id.id_xd_des_btn_receive);
-        view.findViewById(R.id.id_top_rl).setVisibility(View.GONE);
     }
 
     @Override
@@ -115,27 +95,20 @@ public class FgRewardDetail extends Fragment {
         mtvWeight.setText(reward.thing.weight);
         mtvStartPlace.setText(reward.originLocation);
         mtvDstPlace.setText(reward.dstLocation);
-        mtvDeadline.setText(reward.deadline);
-        mtvDescribe.setText(reward.describe);
-        mivPublisherImg.setImageResource(R.drawable.default_headimg);
-        Picasso.with(getActivity()).load(reward.Publisher.ImgUrl).error(R.drawable.default_headimg).into(mivPublisherImg);
-        mtvPublisherNickName.setText(reward.Publisher.NickName);
-        mtvAuthStatus.setText(User.AuthStatus[reward.Publisher.UserType]);
-        mtvCredit.setText(reward.Publisher.Creditibility + "");
     }
 
     private void initButtonView() {
         Logger.i(reward.toString());
         if (isMySendAndRewardIsCarry(reward)) {
-            mbtnArray.setText(R.string.wait_ta_arrive);
-            mbtnArray.setBackgroundResource(R.drawable.login_btn_pressed);
+            mbtnArray.setText(R.string.wait);
+            mbtnArray.setBackgroundResource(R.drawable.circle_search_gray_60);
             mbtnArray.setEnabled(false);
             return;
         }
 
         if (isMyCarryAndRewardIsCarry(reward)) {
             mbtnArray.setText(R.string.arrive);
-            mbtnArray.setBackgroundResource(R.drawable.login_btn_selector);
+            mbtnArray.setBackgroundResource(R.drawable.circle_search_selector);
             mbtnArray.setEnabled(true);
             mbtnArray.setOnClickListener(this::arrive);
             return;
@@ -143,16 +116,16 @@ public class FgRewardDetail extends Fragment {
 
         if (isMySendAndRewardIsArrive(reward)) {
             mbtnArray.setText(R.string.finish);
-            mbtnArray.setBackgroundResource(R.drawable.login_btn_selector);
+            mbtnArray.setBackgroundResource(R.drawable.circle_search_selector);
             mbtnArray.setEnabled(true);
             mbtnArray.setOnClickListener(this::finish);
             return;
         }
         if (isMyCarryAndRewardIsArrive(reward)) {
 
-            mbtnArray.setText(R.string.wait_ta_finish);
+            mbtnArray.setText(R.string.wait);
             Logger.i("33333");
-            mbtnArray.setBackgroundResource(R.drawable.login_btn_pressed);
+            mbtnArray.setBackgroundResource(R.drawable.circle_search_gray_60);
             mbtnArray.setEnabled(false);
         }
     }
@@ -181,8 +154,8 @@ public class FgRewardDetail extends Fragment {
                     public void success(ResultResp object) {
                         ToastUtil.toast(getActivity(), getResources().getString(R.string.already_arrive));
                         mbtnArray.setEnabled(false);
-                        mbtnArray.setText(R.string.wait_ta_finish);
-                        mbtnArray.setBackgroundResource(R.drawable.login_btn_pressed);
+                        mbtnArray.setText(R.string.wait);
+                        mbtnArray.setBackgroundResource(R.drawable.circle_search_gray_60);
                     }
 
                     @Override
@@ -195,7 +168,7 @@ public class FgRewardDetail extends Fragment {
     //去评价
     private void toEvaluate() {
         Intent intent = new Intent(getActivity(), AcEvaluate.class);
-        intent.putExtra("reward",reward);
+        intent.putExtra("reward", reward);
         startActivity(intent);
     }
 

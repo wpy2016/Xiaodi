@@ -288,6 +288,7 @@
     <string name="verify_send_more">请求发送验证码超过次数</string>
     <string name="contact_ta">联系他</string>
     <string name="rong_yun_not_connect">融云未登录</string>
+    <string name="wait">等待</string>
 
 
     <string-array name="week_date">
