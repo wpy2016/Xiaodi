@@ -1,70 +1,93 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
-
-    <include layout="@layout/ac_top" />
+    android:layout_height="match_parent">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:background="@color/background_color_gary"
-        android:orientation="horizontal">
-        <TextView
-            android:id="@+id/id_fg_hall_tv_smilepoint"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <include layout="@layout/ac_top" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
             android:background="@color/background_color_gary"
-            android:text="@string/smile_point_sort"
-            android:textColor="@color/text_color_heavy_gray"
-            android:textSize="@dimen/hall_option_type_tv_size" />
-        <TextView
-            android:id="@+id/id_fg_hall_tv_nearby"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:background="@color/background_color_gary"
-            android:text="@string/nearby"
-            android:textColor="@color/text_color_heavy_gray"
-            android:textSize="@dimen/hall_option_type_tv_size" />
-        <TextView
-            android:id="@+id/id_fg_hall_tv_placematch"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:visibility="gone"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:background="@color/background_color_gary"
-            android:text="@string/place_match"
-            android:textColor="@color/text_color_heavy_gray"
-            android:textSize="@dimen/hall_option_type_tv_size" />
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/id_fg_hall_tv_smilepoint"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/background_color_gary"
+                android:gravity="center"
+                android:text="@string/smile_point_sort"
+                android:textColor="@color/text_color_heavy_gray"
+                android:textSize="@dimen/hall_option_type_tv_size" />
+
+            <TextView
+                android:id="@+id/id_fg_hall_tv_nearby"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/background_color_gary"
+                android:gravity="center"
+                android:text="@string/nearby"
+                android:textColor="@color/text_color_heavy_gray"
+                android:textSize="@dimen/hall_option_type_tv_size" />
+
+            <TextView
+                android:id="@+id/id_fg_hall_tv_placematch"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/background_color_gary"
+                android:gravity="center"
+                android:text="@string/place_match"
+                android:textColor="@color/text_color_heavy_gray"
+                android:textSize="@dimen/hall_option_type_tv_size"
+                android:visibility="gone" />
+        </LinearLayout>
+
+        <com.scwang.smartrefresh.layout.SmartRefreshLayout
+            android:id="@+id/id_fg_hall_refreshlayout"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <com.scwang.smartrefresh.header.DeliveryHeader
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/id_fg_hall_refreshview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#fff"
+                android:overScrollMode="never" />
+
+            <com.scwang.smartrefresh.layout.footer.BallPulseFooter
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </com.scwang.smartrefresh.layout.SmartRefreshLayout>
     </LinearLayout>
 
-    <com.scwang.smartrefresh.layout.SmartRefreshLayout
-        android:id="@+id/id_fg_hall_refreshlayout"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1">
-
-        <com.scwang.smartrefresh.header.DeliveryHeader
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/id_fg_hall_refreshview"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="#fff"
-            android:overScrollMode="never" />
-
-        <com.scwang.smartrefresh.layout.footer.BallPulseFooter
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
-
-</LinearLayout>
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/id_fg_hall_floating_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:clickable="true"
+        android:src="@drawable/hall_add"
+        app:backgroundTint="#00dec9"
+        app:borderWidth="0.0dip"
+        app:elevation="10dp"
+        app:fabSize="normal"
+        app:layout_anchor="@id/id_fg_hall_refreshlayout"
+        app:layout_anchorGravity="bottom|right"
+        app:rippleColor="#369e94" />
+</android.support.design.widget.CoordinatorLayout>

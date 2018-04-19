@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
@@ -31,6 +32,7 @@ import com.wpy.cqu.xiaodi.model.ResultResp;
 import com.wpy.cqu.xiaodi.model.Reward;
 import com.wpy.cqu.xiaodi.net.RewardRequst;
 import com.wpy.cqu.xiaodi.net.resp.IResp;
+import com.wpy.cqu.xiaodi.reward.AcReward;
 import com.wpy.cqu.xiaodi.reward.AcRewardDetail;
 import com.wpy.cqu.xiaodi.util.DpUtil;
 import com.wpy.cqu.xiaodi.util.ToastUtil;
@@ -50,7 +52,7 @@ public class FgHall extends Fragment {
 
     private TextView mtvContent;
 
-    private ImageView mivAdd;
+    private FloatingActionButton mfloatingActionButton;
 
     private TextView mtvSortXiaodian;
 
@@ -92,27 +94,15 @@ public class FgHall extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fg_hall, null);
         bindView(view);
+        initView();
+        bindEvent();
         return view;
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        initView();
-        bindEvent();
         refresh();
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        mivAdd.setVisibility(View.VISIBLE);
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        mivAdd.setVisibility(View.INVISIBLE);
     }
 
     private void nearby(View view) {
@@ -203,8 +193,6 @@ public class FgHall extends Fragment {
 
     private void initView() {
         mtvContent.setText(getResources().getString(R.string.reward_hall));
-        mivAdd.setVisibility(View.VISIBLE);
-        mivAdd.setImageResource(R.drawable.hall_add);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(linearLayoutManager);
         rewardAdapter = new RewardAdapter(getContext());
@@ -219,7 +207,7 @@ public class FgHall extends Fragment {
         mtvSortXiaodian = view.findViewById(R.id.id_fg_hall_tv_smilepoint);
         mtvNearby = view.findViewById(R.id.id_fg_hall_tv_nearby);
         mtvSearch = view.findViewById(R.id.id_fg_hall_tv_placematch);
-        mivAdd = view.findViewById(R.id.id_top_right_iv_img);
+        mfloatingActionButton = view.findViewById(R.id.id_fg_hall_floating_btn);
         smartRefreshLayout = view.findViewById(R.id.id_fg_hall_refreshlayout);
         recyclerView = view.findViewById(R.id.id_fg_hall_refreshview);
     }
@@ -229,7 +217,7 @@ public class FgHall extends Fragment {
         mtvSortXiaodian.setOnClickListener(this::sortByXiaoDian);
         mtvNearby.setOnClickListener(this::nearby);
         mtvSearch.setOnClickListener(v -> showPopSearch());
-        mivAdd.setOnClickListener(v -> toNext(AcHomeAdd.class, null));
+        mfloatingActionButton.setOnClickListener(v -> toNext(AcReward.class,null));
         smartRefreshLayout.setOnRefreshListener(layout -> refresh());
         smartRefreshLayout.setOnLoadMoreListener(layout -> loadMore());
         rewardAdapter.setOnItemClickListener(this::toDetail);

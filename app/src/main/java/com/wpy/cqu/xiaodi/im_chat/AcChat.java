@@ -1,11 +1,15 @@
 package com.wpy.cqu.xiaodi.im_chat;
 
 import android.Manifest;
+import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.text.TextUtils;
@@ -51,6 +55,7 @@ public class AcChat extends TopBarAppComptAcitity {
             Manifest.permission.ACCESS_WIFI_STATE,
             Manifest.permission.ACCESS_NETWORK_STATE,
             Manifest.permission.READ_PHONE_STATE,
+            Manifest.permission.CALL_PHONE,
     };
 
     private ChatPagerAdaper mAdaper;
@@ -58,6 +63,10 @@ public class AcChat extends TopBarAppComptAcitity {
     private ViewPager mvpNotFinishRewards;
 
     private CircleIndicator mcircleIndicator;
+
+    private FloatingActionButton mFloatingBtnPhone;
+
+    private String mPhone;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -67,13 +76,13 @@ public class AcChat extends TopBarAppComptAcitity {
         super.onCreate(bundle);
         setContentView(R.layout.ac_chat);
         bindView();
+        initView();
         bindEvent();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        initView();
         initViewPager();
     }
 
@@ -83,11 +92,21 @@ public class AcChat extends TopBarAppComptAcitity {
         mtvContent = (TextView) findViewById(R.id.id_top_tv_content);
         mvpNotFinishRewards = (ViewPager) findViewById(R.id.id_ac_chat_viewpager);
         mcircleIndicator = (CircleIndicator) findViewById(R.id.id_ac_chat_indicator);
+        mFloatingBtnPhone = (FloatingActionButton) findViewById(R.id.id_fg_chat_floating_btn);
     }
 
     private void bindEvent() {
         mtvBack.setOnClickListener(view -> finish());
         mivBack.setOnClickListener(view -> finish());
+        mFloatingBtnPhone.setOnClickListener(view -> callPhone());
+    }
+
+    private void callPhone() {
+        Logger.i("phone=%s", mPhone);
+        Intent intent_to_phone = new Intent();
+        intent_to_phone.setAction(Intent.ACTION_CALL);
+        intent_to_phone.setData(Uri.parse("tel:" + mPhone));
+        startActivity(intent_to_phone);
     }
 
     private void initView() {
@@ -107,6 +126,7 @@ public class AcChat extends TopBarAppComptAcitity {
     private void initViewPager() {
         mcircleIndicator.setVisibility(View.GONE);
         mvpNotFinishRewards.setVisibility(View.GONE);
+        mFloatingBtnPhone.setVisibility(View.GONE);
         String targetId = getIntent().getData().getQueryParameter("targetId");
         Logger.i("targetId=%s", targetId);
 
@@ -129,41 +149,35 @@ public class AcChat extends TopBarAppComptAcitity {
         if (null == rewards || rewards.isEmpty()) {
             return;
         }
-        List<Reward> myCarryNotFinishRewards = new ArrayList<>();
-        List<Reward> mySendNotFinishRewards = new ArrayList<>();
-        for (Reward reward : rewards) {
-            if (reward.Publisher.Id.equals(XiaodiApplication.mCurrentUser.Id)) {
-                mySendNotFinishRewards.add(reward);
-                continue;
-            }
-            myCarryNotFinishRewards.add(reward);
-        }
-        rewards.clear();
-
         List<Fragment> fragments = new ArrayList<>();
         //在左边设置为我领取的未完成的订单
-        for (Reward myCarryReward : myCarryNotFinishRewards) {
+        for (Reward reward : rewards) {
             Fragment fragment = new FgRewardDetail();
             Bundle bundle = new Bundle();
-            bundle.putSerializable("reward", myCarryReward);
+            bundle.putSerializable("reward", reward);
             fragment.setArguments(bundle);
             fragments.add(fragment);
         }
-
-        //在右边设置为我发布的未完成的订单
-        for (Reward mySendReward : mySendNotFinishRewards) {
-            Fragment fragment = new FgRewardDetail();
-            Bundle bundle = new Bundle();
-            bundle.putSerializable("reward", mySendReward);
-            fragment.setArguments(bundle);
-            fragments.add(fragment);
-        }
+        mcircleIndicator.setVisibility(View.VISIBLE);
+        mvpNotFinishRewards.setVisibility(View.VISIBLE);
+        mFloatingBtnPhone.setVisibility(View.VISIBLE);
         mAdaper = new ChatPagerAdaper(fragments, getSupportFragmentManager());
         mvpNotFinishRewards.setAdapter(mAdaper);
         mvpNotFinishRewards.setPageTransformer(true, new DepthPageTransformer());
         mcircleIndicator.setViewPager(mvpNotFinishRewards);
-        mcircleIndicator.setVisibility(View.VISIBLE);
-        mvpNotFinishRewards.setVisibility(View.VISIBLE);
+
+        //设置获取手机号
+        getPhone(rewards, 0); // 默认为第0个，避免只有一个时的bug
+        mvpNotFinishRewards.addOnPageChangeListener(new OnPagerChangeListenerGetPhone(rewards));
+    }
+
+    private void getPhone(List<Reward> rewards, int position) {
+        Reward reward = rewards.get(position);
+        if (reward.Publisher.Id.equals(XiaodiApplication.mCurrentUser.Id)) {
+            mPhone = reward.Receiver.Phone;
+            return;
+        }
+        mPhone = reward.phone;
     }
 
     /**
@@ -192,6 +206,31 @@ public class AcChat extends TopBarAppComptAcitity {
         @Override
         public int getItemPosition(Object object) {
             return POSITION_NONE;
+        }
+    }
+
+    private class OnPagerChangeListenerGetPhone implements ViewPager.OnPageChangeListener {
+
+        private List<Reward> rewards;
+
+        OnPagerChangeListenerGetPhone(List<Reward> rewards) {
+            this.rewards = rewards;
+        }
+
+        @Override
+        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+        }
+
+        @Override
+        public void onPageSelected(int position) {
+            getPhone(rewards, position);
+        }
+
+
+        @Override
+        public void onPageScrollStateChanged(int state) {
+
         }
     }
 }

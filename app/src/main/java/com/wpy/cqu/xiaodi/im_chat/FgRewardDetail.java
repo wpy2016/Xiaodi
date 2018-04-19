@@ -19,10 +19,10 @@ import com.wpy.cqu.xiaodi.evaluate.AcEvaluate;
 import com.wpy.cqu.xiaodi.model.ResultResp;
 import com.wpy.cqu.xiaodi.model.Reward;
 import com.wpy.cqu.xiaodi.model.Thing;
-import com.wpy.cqu.xiaodi.model.User;
 import com.wpy.cqu.xiaodi.net.RewardRequst;
 import com.wpy.cqu.xiaodi.net.resp.IResp;
 import com.wpy.cqu.xiaodi.util.ToastUtil;
+import com.wpy.cqu.xiaodi.view.RewordStatuView;
 
 import io.rong.imkit.RongIM;
 import io.rong.imlib.IRongCallback;
@@ -51,6 +51,8 @@ public class FgRewardDetail extends Fragment {
 
     private Reward reward;
 
+    private RewordStatuView mstatus;
+
     public FgRewardDetail() {
     }
 
@@ -75,6 +77,7 @@ public class FgRewardDetail extends Fragment {
         mtvStartPlace = (TextView) view.findViewById(R.id.id_ac_details_tv_start_place);
         mtvDstPlace = (TextView) view.findViewById(R.id.id_ac_details_tv_arrive_place);
         mbtnArray = (Button) view.findViewById(R.id.id_xd_des_btn_receive);
+        mstatus = (RewordStatuView) view.findViewById(R.id.id_ac_chat_rsv_statu);
     }
 
     @Override
@@ -95,7 +98,7 @@ public class FgRewardDetail extends Fragment {
 
         //mbtnArray根据reward状态进行更新
         initButtonView();
-
+        mstatus.setStatu(reward.state);
         mivThingImg.setImageResource(Thing.DEFAULT_TYPE_IMG[reward.thing.type]);
         Picasso.with(getActivity()).load(reward.thing.thumbnail).error(Thing.DEFAULT_TYPE_IMG[reward.thing.type]).into(mivThingImg);
         mtvXiaodian.setText(reward.xiaodian + "");
@@ -140,10 +143,10 @@ public class FgRewardDetail extends Fragment {
                 XiaodiApplication.mCurrentUser.Token, new IResp<ResultResp>() {
                     @Override
                     public void success(ResultResp object) {
-                        ToastUtil.toast(getActivity(), getResources().getString(R.string.already_finish));
-                        sendMsg(reward.Receiver.Id, getResources().getString(R.string.thank_you));
                         mbtnArray.setVisibility(View.GONE);
-                        toEvaluate();
+                        mstatus.setOnFinishLister(() -> toEvaluate());
+                        mstatus.setStatu(Reward.REWARD_STATE_FINISH);
+                        sendMsg(reward.Receiver.Id, getResources().getString(R.string.thank_you));
                     }
 
                     @Override
@@ -158,6 +161,7 @@ public class FgRewardDetail extends Fragment {
                 XiaodiApplication.mCurrentUser.Token, new IResp<ResultResp>() {
                     @Override
                     public void success(ResultResp object) {
+                        mstatus.setStatu(Reward.REWARD_STATE_ARRIVE);
                         ToastUtil.toast(getActivity(), getResources().getString(R.string.already_arrive));
                         sendMsg(reward.Publisher.Id, getResources().getString(R.string.arrive_please_confirm));
                         mbtnArray.setEnabled(false);
