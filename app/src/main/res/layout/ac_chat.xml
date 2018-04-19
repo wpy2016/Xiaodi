@@ -13,25 +13,32 @@
 
         <include layout="@layout/ac_top" />
 
-        <android.support.v4.view.ViewPager
-            android:id="@+id/id_ac_chat_viewpager"
+        <LinearLayout
+            android:id="@+id/id_ac_chat_viewpager_ll"
             android:layout_width="match_parent"
-            android:layout_height="130dp"
-            android:visibility="gone"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed" />
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            android:visibility="gone">
 
-        <com.wpy.cqu.xiaodi.view.CircleIndicator
-            android:id="@+id/id_ac_chat_indicator"
-            android:layout_width="match_parent"
-            android:layout_height="15dp"
-            android:layout_marginTop="-15dp"
-            android:visibility="gone"
-            app:ci_animator="@animator/indicator_animator"
-            app:ci_animator_reverse="@animator/indicator_animator_reverse"
-            app:ci_drawable="@drawable/black_radius_square"
-            app:ci_height="4dp"
-            app:ci_margin="6dp"
-            app:ci_width="10dp" />
+            <android.support.v4.view.ViewPager
+                android:id="@+id/id_ac_chat_viewpager"
+                android:layout_width="match_parent"
+                android:layout_height="130dp"
+                app:layout_scrollFlags="scroll|exitUntilCollapsed" />
+
+            <com.wpy.cqu.xiaodi.view.CircleIndicator
+                android:id="@+id/id_ac_chat_indicator"
+                android:layout_width="match_parent"
+                android:layout_height="15dp"
+                android:layout_marginTop="-15dp"
+                app:ci_animator="@animator/indicator_animator"
+                app:ci_animator_reverse="@animator/indicator_animator_reverse"
+                app:ci_drawable="@drawable/black_radius_square"
+                app:ci_height="4dp"
+                app:ci_margin="6dp"
+                app:ci_width="10dp" />
+
+        </LinearLayout>
 
         <fragment
             android:id="@+id/conversation"
@@ -46,10 +53,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="100dp"
-        android:visibility="gone"
         android:layout_marginRight="15dp"
         android:clickable="true"
         android:src="@drawable/phone"
+        android:visibility="gone"
         app:backgroundTint="#00dec9"
         app:borderWidth="0.0dip"
         app:elevation="10dp"

@@ -1,6 +1,7 @@
 package com.wpy.cqu.xiaodi.im_chat;
 
 import android.Manifest;
+import android.animation.ValueAnimator;
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
@@ -14,7 +15,9 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.orhanobut.logger.Logger;
@@ -27,6 +30,7 @@ import com.wpy.cqu.xiaodi.model.ResultResp;
 import com.wpy.cqu.xiaodi.model.Reward;
 import com.wpy.cqu.xiaodi.net.RewardRequst;
 import com.wpy.cqu.xiaodi.net.resp.IResp;
+import com.wpy.cqu.xiaodi.util.DpUtil;
 import com.wpy.cqu.xiaodi.util.ToastUtil;
 import com.wpy.cqu.xiaodi.view.CircleIndicator;
 import com.wpy.cqu.xiaodi.view.DepthPageTransformer;
@@ -60,6 +64,8 @@ public class AcChat extends TopBarAppComptAcitity {
 
     private ChatPagerAdaper mAdaper;
 
+    private LinearLayout mllViewPagerRoot;
+
     private ViewPager mvpNotFinishRewards;
 
     private CircleIndicator mcircleIndicator;
@@ -67,6 +73,11 @@ public class AcChat extends TopBarAppComptAcitity {
     private FloatingActionButton mFloatingBtnPhone;
 
     private String mPhone;
+
+    private ImageView mivTopRight;
+    private boolean isShow = true;
+    private ValueAnimator animator;
+    private float currentOffset = 0;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -93,12 +104,33 @@ public class AcChat extends TopBarAppComptAcitity {
         mvpNotFinishRewards = (ViewPager) findViewById(R.id.id_ac_chat_viewpager);
         mcircleIndicator = (CircleIndicator) findViewById(R.id.id_ac_chat_indicator);
         mFloatingBtnPhone = (FloatingActionButton) findViewById(R.id.id_fg_chat_floating_btn);
+        mllViewPagerRoot = (LinearLayout) findViewById(R.id.id_ac_chat_viewpager_ll);
+        mivTopRight = (ImageView) findViewById(R.id.id_top_right_iv_img);
     }
 
     private void bindEvent() {
         mtvBack.setOnClickListener(view -> finish());
         mivBack.setOnClickListener(view -> finish());
         mFloatingBtnPhone.setOnClickListener(view -> callPhone());
+        mivTopRight.setOnClickListener(this::showOrDismiss);
+    }
+
+    private void showOrDismiss(View view) {
+        if (isShow) {
+            isShow = false;
+            mivTopRight.setImageResource(R.drawable.go_to_down_white);
+            if (null != animator && animator.isRunning()) {
+                animator.cancel();
+            }
+            viewpagerAnimation(currentOffset, 50);
+            return;
+        }
+        isShow = true;
+        mivTopRight.setImageResource(R.drawable.go_to_up_white);
+        if (null != animator && animator.isRunning()) {
+            animator.cancel();
+        }
+        viewpagerAnimation(currentOffset, 130);
     }
 
     private void callPhone() {
@@ -124,9 +156,10 @@ public class AcChat extends TopBarAppComptAcitity {
     }
 
     private void initViewPager() {
-        mcircleIndicator.setVisibility(View.GONE);
-        mvpNotFinishRewards.setVisibility(View.GONE);
+        mllViewPagerRoot.setVisibility(View.GONE);
         mFloatingBtnPhone.setVisibility(View.GONE);
+        mivTopRight.setVisibility(View.GONE);
+        isShow = false;
         String targetId = getIntent().getData().getQueryParameter("targetId");
         Logger.i("targetId=%s", targetId);
 
@@ -158,17 +191,35 @@ public class AcChat extends TopBarAppComptAcitity {
             fragment.setArguments(bundle);
             fragments.add(fragment);
         }
-        mcircleIndicator.setVisibility(View.VISIBLE);
-        mvpNotFinishRewards.setVisibility(View.VISIBLE);
-        mFloatingBtnPhone.setVisibility(View.VISIBLE);
         mAdaper = new ChatPagerAdaper(fragments, getSupportFragmentManager());
         mvpNotFinishRewards.setAdapter(mAdaper);
         mvpNotFinishRewards.setPageTransformer(true, new DepthPageTransformer());
         mcircleIndicator.setViewPager(mvpNotFinishRewards);
 
+        viewpagerAnimation(50, 130);
+
+        mFloatingBtnPhone.setVisibility(View.VISIBLE);
+
+        mivTopRight.setVisibility(View.VISIBLE);
+        mivTopRight.setImageResource(R.drawable.go_to_up_white);
+        isShow = true;
+
         //设置获取手机号
         getPhone(rewards, 0); // 默认为第0个，避免只有一个时的bug
         mvpNotFinishRewards.addOnPageChangeListener(new OnPagerChangeListenerGetPhone(rewards));
+    }
+
+    private void viewpagerAnimation(float start, float end) {
+        mllViewPagerRoot.setVisibility(View.VISIBLE);
+        animator = ValueAnimator.ofFloat(start, end);
+        animator.setDuration(500);
+        animator.addUpdateListener(valueAnimator -> {
+            LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) mllViewPagerRoot.getLayoutParams();
+            currentOffset = (Float) valueAnimator.getAnimatedValue();
+            layoutParams.height = DpUtil.dip2px(this, currentOffset);
+            mllViewPagerRoot.setLayoutParams(layoutParams);
+        });
+        animator.start();
     }
 
     private void getPhone(List<Reward> rewards, int position) {
