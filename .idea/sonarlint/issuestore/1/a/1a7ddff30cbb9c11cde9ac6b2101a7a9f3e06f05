@@ -1,0 +1,19 @@
+
+S"squid:SwitchLastCaseIsDefaultCheck""Add a default case to this switch.(ãÁğ™øÿÿÿÿ
+9squid:S1659"Declare "y" on a separate line.(¨µú‘øÿÿÿÿ
+5squid:S1659" Declare "dy" on a separate line.(Ë­Íã
+nsquid:S3008"TRename this field "MAX_SCALE" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¸ÿÊúùÿÿÿÿ
+nsquid:S3008"TRename this field "SCALE_MID" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(œ¥İØüÿÿÿÿ
+Dsquid:S1068"*Remove this unused "mScale" private field.(Ï·†÷ûÿÿÿÿ
+Nsquid:S3516"9Refactor this method to not always return the same value.(ıÄƒ­
+Nsquid:S3516"9Refactor this method to not always return the same value.(¹´Ÿñ
+Ssquid:S3516"9Refactor this method to not always return the same value.(Óı°ûÿÿÿÿ
+Psquid:S2696"6Make the enclosing method "static" or remove this set.(¡ÙÇúÿÿÿÿ
+Psquid:S2696"6Make the enclosing method "static" or remove this set.(Š€¦ÿùÿÿÿÿ
+lsquid:S3776"RRefactor this method to reduce its Cognitive Complexity from 19 to the 15 allowed.(Óı°ûÿÿÿÿ
+hsquid:S00101"MRename this class name to match the regular expression '^[A-Z][a-zA-Z0-9]*$'.(¤ıº€øÿÿÿÿ
+6squid:S1170"!Make this final field static too.(˜œ×ò
+–squid:S1186"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(¾¦¸…
+msquid:S00116"WRename this field "SCALE_bIGGER" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ä«Èœ
+ssquid:S00116"XRename this field "SCALE_SMALLER" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ä¦ã…ûÿÿÿÿ
+msquid:S00120"WRename this package name to match the regular expression '^[a-z]+(\.[a-z][a-z0-9]*)*$'.(·µÿ˜

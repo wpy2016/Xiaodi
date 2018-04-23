@@ -1,0 +1,4 @@
+
+†"squid:ClassVariableVisibilityCheck"UMake mtvStatus a static final constant or non-public and provide accessors if needed.(€Σωÿÿÿÿ
+\squid:UselessImportCheck"5Remove this unused import 'android.widget.ImageView'.(ϊ―λΰόÿÿÿÿ
+esquid:UselessImportCheck"CRemove this unused import 'android.support.v7.widget.RecyclerView'.(Κασ

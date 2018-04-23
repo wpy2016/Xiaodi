@@ -1,0 +1,46 @@
+
+Zsquid:S2184"@Cast one of the operands of this integer division to a "double".(ü¯Ÿ³ıÿÿÿÿ
+Zsquid:S2184"@Cast one of the operands of this integer division to a "double".(Ñêğ‰üÿÿÿÿ
+Zsquid:S2184"@Cast one of the operands of this integer division to a "double".(–ß¥Íıÿÿÿÿ
+Usquid:S2184"@Cast one of the operands of this integer division to a "double".(Ö³ñ«
+Usquid:S2184"@Cast one of the operands of this integer division to a "double".(»úœÕ
+Zsquid:S2184"@Cast one of the operands of this integer division to a "double".(ÎŞ æúÿÿÿÿ
+Zsquid:S2184"@Cast one of the operands of this integer division to a "double".(úÓ©îøÿÿÿÿ
+Zsquid:S2184"@Cast one of the operands of this integer division to a "double".(Ã‚Ìæùÿÿÿÿ
+\squid:S2184"GCast one of the operands of this multiplication operation to a "float".(Û€ª…
+Zsquid:S2184"@Cast one of the operands of this integer division to a "double".(ïßş÷ÿÿÿÿÿ
+Zsquid:S2184"@Cast one of the operands of this integer division to a "double".(œÖ¿Îÿÿÿÿÿ
+Usquid:S2184"@Cast one of the operands of this integer division to a "double".(ÎÁ¸“
+Tsquid:S2184"@Cast one of the operands of this integer division to a "double".(áğ\
+Usquid:S2184"@Cast one of the operands of this integer division to a "double".(›ôÈ…
+Tsquid:S2184"@Cast one of the operands of this integer division to a "double".(áğ\
+Usquid:S2184"@Cast one of the operands of this integer division to a "double".(èûæô
+Nsquid:S3516"9Refactor this method to not always return the same value.(ôó§è
+esquid:S1301"KReplace this "switch" statement by "if" statements to increase readability.(ıŞ³‹ùÿÿÿÿ
+„squid:S1319"oThe type of the "data" object should be an interface such as "List" rather than the implementation "ArrayList".(½à¿«
+„squid:S1319"oThe type of the "data" object should be an interface such as "List" rather than the implementation "ArrayList".(“¸–ô
+[squid:S1126"AReplace this if-then-else statement by a single return statement.(Âíœìúÿÿÿÿ
+Vsquid:S1126"AReplace this if-then-else statement by a single return statement.(›ôÈ…
+"squid:ClassVariableVisibilityCheck"NMake id a static final constant or non-public and provide accessors if needed.(¯éï‰ùÿÿÿÿ
+€"squid:ClassVariableVisibilityCheck"TMake itemText a static final constant or non-public and provide accessors if needed.(ìŠÊ
+~"squid:ClassVariableVisibilityCheck"MMake x a static final constant or non-public and provide accessors if needed.(¤äÍ‚şÿÿÿÿ
+~"squid:ClassVariableVisibilityCheck"MMake y a static final constant or non-public and provide accessors if needed.(ßÕÊ‹ùÿÿÿÿ
+"squid:ClassVariableVisibilityCheck"PMake move a static final constant or non-public and provide accessors if needed.(´œ…’şÿÿÿÿ
+=squid:S1905"(Remove this unnecessary cast to "float".(„“Îô
+Bsquid:S1905"(Remove this unnecessary cast to "float".(ı¢ïüÿÿÿÿ
+Bsquid:S1905"(Remove this unnecessary cast to "float".(ı¢ïüÿÿÿÿ
+gsquid:S3776"RRefactor this method to reduce its Cognitive Complexity from 21 to the 15 allowed.(™Ò™Ô
+lsquid:S3776"RRefactor this method to reduce its Cognitive Complexity from 32 to the 15 allowed.(ü‰Ùìøÿÿÿÿ
+[squid:S2142"FEither re-interrupt this method or rethrow the "InterruptedException".(ä ¹€
+[squid:S2142"FEither re-interrupt this method or rethrow the "InterruptedException".(ä ¹€
+[squid:S2142"FEither re-interrupt this method or rethrow the "InterruptedException".(ä ¹€
+vsquid:S1845"aRename method "move" to prevent any misunderstanding/clash with field "move" defined on line 691.(˜ö‘¢
+?squid:S00108")Either remove or fill this block of code.(”ı¾
+=squid:S1604"(Make this anonymous inner class a lambda(ÉãÃ®
+=squid:S1604"(Make this anonymous inner class a lambda(ÉãÃ®
+=squid:S1185"(Remove this method to simply inherit it.(ñ£
+gsquid:S00117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(˜ö‘¢
+gsquid:S00117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(­£ÆÆ
+=squid:S1148"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
+=squid:S1148"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
+=squid:S1148"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ

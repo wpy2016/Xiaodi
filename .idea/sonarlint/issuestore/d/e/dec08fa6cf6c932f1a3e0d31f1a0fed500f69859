@@ -1,0 +1,11 @@
+
+Wsquid:S00107"AConstructor has 9 parameters, which is greater than 7 authorized.(ÛÎÍÏ
+hsquid:S00116"MRename this field "Id" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ì¡Şıÿÿÿÿ
+nsquid:S00116"SRename this field "NickName" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(‹ÍÆşÿÿÿÿ
+nsquid:S00116"SRename this field "RealName" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(€¼ùİüÿÿÿÿ
+ksquid:S00116"PRename this field "Phone" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ş œÅıÿÿÿÿ
+hsquid:S00116"SRename this field "UserType" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ı‡é&
+gsquid:S00116"QRename this field "Campus" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÙÇ¥å
+isquid:S00116"SRename this field "SchoolID" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(í·•Ñ
+gsquid:S00116"QRename this field "ImgUrl" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Äíë
+ssquid:S00116"XRename this field "Creditibility" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÉğŸ¼ùÿÿÿÿ

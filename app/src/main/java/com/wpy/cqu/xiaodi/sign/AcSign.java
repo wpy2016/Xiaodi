@@ -109,8 +109,7 @@ public class AcSign extends TopBarAppComptAcitity {
                     @Override
                     public void success(ResultResp object) {
                         ToastUtil.toast(AcSign.this, getResources().getString(R.string.sign_success));
-                        UserRequest.updateUserInfo();
-                        finish();
+                        UpdateData();
                     }
 
                     @Override
@@ -118,6 +117,11 @@ public class AcSign extends TopBarAppComptAcitity {
                         ToastUtil.toast(AcSign.this, resp.message);
                     }
                 });
+    }
+
+    private void UpdateData() {
+        UserRequest.updateUserInfo();
+        setSignData();
     }
 
     private void initView() {

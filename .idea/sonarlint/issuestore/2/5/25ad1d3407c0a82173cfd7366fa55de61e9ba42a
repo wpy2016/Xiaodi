@@ -1,0 +1,7 @@
+
+@squid:S1172"+Remove this unused method parameter "view".(€ÐÄŠ
+Esquid:S1172"+Remove this unused method parameter "view".(ãÊÄžÿÿÿÿÿ
+–squid:S1186"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(¾’‘Â
+Tsquid:UselessImportCheck"3Remove this unused import 'android.content.Intent'.(³ð‹G
+psquid:UselessImportCheck"NRemove this unused import 'io.reactivex.android.schedulers.AndroidSchedulers'.(¶çþ 
+fsquid:UselessImportCheck"?Remove this unused import 'com.wpy.cqu.xiaodi.util.BitmapUtil'.(üÇ™áýÿÿÿÿ

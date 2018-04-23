@@ -1,0 +1,24 @@
+
+>squid:S1068")Remove this unused "mUser" private field.(®²…ø
+Fsquid:S1068",Remove this unused "mContext" private field.(»úÅ¾øÿÿÿÿ
+isquid:S1450"TRemove the "mUser" field and declare it as a local variable in the relevant methods.(®²…ø
+qsquid:S1450"WRemove the "mContext" field and declare it as a local variable in the relevant methods.(»úÅ¾øÿÿÿÿ
+@squid:S1172"+Remove this unused method parameter "view".(†á´ñ
+usquid:S00115"ZRename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.(ÊäŒñúÿÿÿÿ
+gsquid:S00117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ßÌ·â
+gsquid:S00117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¼£Í«
+lsquid:S00117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(˜¯Â ûÿÿÿÿ
+lsquid:S00117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(èÂÇ×ùÿÿÿÿ
+gsquid:S00117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ßÌ·â
+lsquid:S00117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¤ä„²úÿÿÿÿ
+Msquid:UselessImportCheck"+Remove this unused import 'java.util.Date'.(¸…¼ü
+\squid:UselessImportCheck"5Remove this unused import 'android.widget.ImageView'.(ú¯ëàüÿÿÿÿ
+Tsquid:UselessImportCheck"-Remove this unused import 'android.util.Log'.(Ô¦Ø²øÿÿÿÿ
+9squid:S2131"Use "Integer.toString" instead.(Ô¼åÉÿÿÿÿÿ
+4squid:S2131"Use "Integer.toString" instead.(ÿø¼
+9squid:S2131"Use "Integer.toString" instead.(€óÛŸüÿÿÿÿ
+9squid:S2131"Use "Integer.toString" instead.(¢êåÿÿÿÿÿ
+4squid:S2131"Use "Integer.toString" instead.(ú¿…
+4squid:S2131"Use "Integer.toString" instead.(Ô²Éò
+9squid:S2131"Use "Integer.toString" instead.(±óÓ¥ûÿÿÿÿ
+9squid:S2131"Use "Integer.toString" instead.(±óÓ¥ûÿÿÿÿ

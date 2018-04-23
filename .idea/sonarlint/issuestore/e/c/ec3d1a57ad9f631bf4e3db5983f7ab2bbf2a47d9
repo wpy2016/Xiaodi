@@ -1,0 +1,10 @@
+
+Esquid:S1172"+Remove this unused method parameter "view".(¨ΗΰΎϊÿÿÿÿ
+?squid:S1172"+Remove this unused method parameter "view".(…±s
+•squid:S1186"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(‰¶‡
+›squid:S1186"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(·¦ζωÿÿÿÿ
+–squid:S1186"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(φι†ε
+–squid:S1186"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(Κάδ
+=squid:S1185"(Remove this method to simply inherit it.(Φ‰όΌ
+Fsquid:S1612",Replace this lambda with a method reference.(―φ©ϊÿÿÿÿ
+rsquid:S00120"WRename this package name to match the regular expression '^[a-z]+(\.[a-z][a-z0-9]*)*$'.(ε…“ψÿÿÿÿ

@@ -20,6 +20,7 @@ import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.wpy.cqu.xiaodi.R;
 import com.wpy.cqu.xiaodi.application.XiaodiApplication;
@@ -119,7 +120,8 @@ public abstract class ClipBaseActivity extends TopBarAppComptAcitity {
             case PHOTOBYGALLERY:
                 uri = data.getData();
                 if (null == uri) {
-                    // TODO: 2018/3/30  图片加载失败,提示
+                    Toast.makeText(this,"图片加载失败",Toast.LENGTH_SHORT).show();
+                    finish();
                     break;
                 }
                 if (DocumentsContract.isDocumentUri(this, uri)) {

@@ -1,0 +1,16 @@
+
+osquid:S3008"URename this field "PERMISSION" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(šöİìúÿÿÿÿ
+ksquid:S1450"VRemove the "mAdaper" field and declare it as a local variable in the relevant methods.( û±Û
+‚"squid:ClassVariableVisibilityCheck"VMake mFragments a static final constant or non-public and provide accessors if needed.(„ñÒÖ
+@squid:S1172"+Remove this unused method parameter "view".(’Òß¼
+›squid:S1186"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(ø´´øÿÿÿÿ
+›squid:S1186"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(™Î«şÿÿÿÿ
+lsquid:S00117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÏÕè¡ùÿÿÿÿ
+rsquid:S00120"WRename this package name to match the regular expression '^[a-z]+(\.[a-z][a-z0-9]*)*$'.(åŠ…“øÿÿÿÿ
+psquid:UselessImportCheck"NRemove this unused import 'io.reactivex.android.schedulers.AndroidSchedulers'.(¶çş 
+fsquid:UselessImportCheck"?Remove this unused import 'io.reactivex.schedulers.Schedulers'.(š‰¢úÿÿÿÿ
+Usquid:UselessImportCheck"3Remove this unused import 'android.view.ViewGroup'.(‹îá
+osquid:UselessImportCheck"HRemove this unused import 'io.rong.imkit.fragment.ConversationFragment'.(ä®Ä“şÿÿÿÿ
+bsquid:UselessImportCheck"@Remove this unused import 'io.reactivex.disposables.Disposable'.(¶µ¾®
+Vsquid:UselessImportCheck"4Remove this unused import 'io.reactivex.Observable'.(–˜¼
+\squid:UselessImportCheck":Remove this unused import 'java.util.concurrent.TimeUnit'.(Æ™ş

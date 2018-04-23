@@ -1,0 +1,6 @@
+
+~squid:S1450"jRemove the "subConversationListFragment" field and declare it as a local variable in the relevant methods.(Þ¦ªl
+nsquid:S1450"YRemove the "mtvContent" field and declare it as a local variable in the relevant methods.(ËŒØ¾
+rsquid:S00120"WRename this package name to match the regular expression '^[a-z]+(\.[a-z][a-z0-9]*)*$'.(åŠ…“øÿÿÿÿ
+lsquid:UselessImportCheck"ERemove this unused import 'android.support.v7.app.AppCompatActivity'.(«Û®ûüÿÿÿÿ
+hsquid:MaximumInheritanceDepth"<This class has 6 parents which is greater than 5 authorized.(þ¹¨Ïüÿÿÿÿ

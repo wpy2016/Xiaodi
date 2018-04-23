@@ -1,0 +1,6 @@
+
+msquid:ModifiersOrderCheck"EReorder the modifiers to comply with the Java Language Specification.(½îÖ¾ÿÿÿÿÿ
+Osquid:S1118":Add a private constructor to hide the implicit public one.(Ü„Ãö
+=squid:S1604"(Make this anonymous inner class a lambda(àÙ§ì
+:squid:S2116"%Use "Arrays.toString(array)" instead.(î…á
+8squid:S1148"#Use a logger to log this exception.(Óùóÿ

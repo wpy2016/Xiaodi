@@ -74,6 +74,8 @@ public class AcChat extends TopBarAppComptAcitity {
 
     private String mPhone;
 
+    private ImageView mivRefresh;
+
     private ImageView mivTopRight;
     private boolean isShow = true;
     private ValueAnimator animator;
@@ -106,6 +108,7 @@ public class AcChat extends TopBarAppComptAcitity {
         mFloatingBtnPhone = (FloatingActionButton) findViewById(R.id.id_fg_chat_floating_btn);
         mllViewPagerRoot = (LinearLayout) findViewById(R.id.id_ac_chat_viewpager_ll);
         mivTopRight = (ImageView) findViewById(R.id.id_top_right_iv_img);
+        mivRefresh = (ImageView)findViewById(R.id.id_top_iv_down);
     }
 
     private void bindEvent() {
@@ -113,6 +116,7 @@ public class AcChat extends TopBarAppComptAcitity {
         mivBack.setOnClickListener(view -> finish());
         mFloatingBtnPhone.setOnClickListener(view -> callPhone());
         mivTopRight.setOnClickListener(this::showOrDismiss);
+        mivRefresh.setOnClickListener(view -> initViewPager());
     }
 
     private void showOrDismiss(View view) {
@@ -147,6 +151,8 @@ public class AcChat extends TopBarAppComptAcitity {
         mtvBack.setText(getResources().getString(R.string.back));
         mtvBack.setTextColor(Color.WHITE);
         mivBack.setImageResource(R.drawable.go_back_white);
+        mivRefresh.setVisibility(View.VISIBLE);
+        mivRefresh.setImageResource(R.drawable.refresh);
 
         String targetName = getIntent().getData().getQueryParameter("title");
         if (TextUtils.isEmpty(targetName)) {

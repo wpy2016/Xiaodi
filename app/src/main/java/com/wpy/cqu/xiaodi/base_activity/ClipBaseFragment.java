@@ -21,6 +21,7 @@ import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.wpy.cqu.xiaodi.R;
 import com.wpy.cqu.xiaodi.application.XiaodiApplication;
@@ -124,7 +125,7 @@ public abstract class ClipBaseFragment extends Fragment {
             case PHOTOBYGALLERY:
                 uri = data.getData();
                 if (null == uri) {
-                    // TODO: 2018/3/30  图片加载失败,提示
+                    Toast.makeText(getActivity(),"图片加载失败",Toast.LENGTH_SHORT).show();
                     break;
                 }
                 if (DocumentsContract.isDocumentUri(getActivity(), uri)) {

@@ -1,0 +1,13 @@
+
+S"squid:SwitchLastCaseIsDefaultCheck""Add a default case to this switch.(×ö³–úÿÿÿÿ
+gsquid:ModifiersOrderCheck"EReorder the modifiers to comply with the Java Language Specification.(‹¡İ`
+hsquid:ModifiersOrderCheck"EReorder the modifiers to comply with the Java Language Specification.(ŞğÊ
+msquid:ModifiersOrderCheck"EReorder the modifiers to comply with the Java Language Specification.(Íîµêøÿÿÿÿ
+msquid:ModifiersOrderCheck"EReorder the modifiers to comply with the Java Language Specification.(£‘ŞÄûÿÿÿÿ
+;squid:S1075"&Remove this hard-coded path-delimiter.(©’¨
+gsquid:S3776"RRefactor this method to reduce its Cognitive Complexity from 16 to the 15 allowed.(ŸŒ¹Ñ
+nsquid:S00116"XRename this field "PHOTOSAVEPATH" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(©’¨
+lsquid:S00117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(äïÚµùÿÿÿÿ
+msquid:S00120"WRename this package name to match the regular expression '^[a-z]+(\.[a-z][a-z0-9]*)*$'.(¡À°Ÿ
+T
+squid:S899";Do something with the "boolean" value returned by "delete".(²Œ­ûÿÿÿÿ

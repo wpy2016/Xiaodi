@@ -1,0 +1,4 @@
+
+Csquid:S2786")Remove this redundant "static" qualifier.(†»²íÿÿÿÿÿ
+`squid:S1301"KReplace this "switch" statement by "if" statements to increase readability.(ôæóª
+Osquid:S1118":Add a private constructor to hide the implicit public one.(þ»þŠ

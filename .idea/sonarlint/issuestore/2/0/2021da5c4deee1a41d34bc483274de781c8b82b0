@@ -1,0 +1,15 @@
+
+=squid:S1172"(Remove this unused method parameter "v".(ôÀ™ğ
+Bsquid:S1172"(Remove this unused method parameter "v".(µ³Ôûùÿÿÿÿ
+=squid:S1172"(Remove this unused method parameter "v".(È¹ÂÙ
+Bsquid:S1172"(Remove this unused method parameter "v".(Äİ½Äÿÿÿÿÿ
+=squid:S1172"(Remove this unused method parameter "v".(°Ş€£
+=squid:S1172"(Remove this unused method parameter "v".(ªÁí
+usquid:S00115"ZRename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.(ÊäŒñúÿÿÿÿ
+psquid:UselessImportCheck"NRemove this unused import 'io.reactivex.android.schedulers.AndroidSchedulers'.(¶çş 
+Xsquid:UselessImportCheck"1Remove this unused import 'android.widget.Toast'.(©›ïÍúÿÿÿÿ
+Vsquid:UselessImportCheck"4Remove this unused import 'io.reactivex.Observable'.(–˜¼
+fsquid:UselessImportCheck"?Remove this unused import 'io.reactivex.schedulers.Schedulers'.(š‰¢úÿÿÿÿ
+\squid:UselessImportCheck";Remove this unused import 'com.wpy.cqu.xiaodi.home.AcHome'.(Ñ¬—I
+csquid:UselessImportCheck"<Remove this unused import 'io.reactivex.functions.Consumer'.(áè—Õüÿÿÿÿ
+zsquid:UselessImportCheck"SRemove this unused import 'android.support.v4.media.session.MediaControllerCompat'.(úÙš¡øÿÿÿÿ

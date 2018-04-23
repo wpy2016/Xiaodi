@@ -1,0 +1,39 @@
+
+Dsquid:S2093"*Change this "try" to a try-with-resources.(¡»¢üùÿÿÿÿ
+Dsquid:S2093"*Change this "try" to a try-with-resources.(¡»¢üùÿÿÿÿ
+Hsquid:S2095"3Close this "FileInputStream" in a "finally" clause.(‹ÉŒ¤
+Nsquid:S2095"4Close this "FileOutputStream" in a "finally" clause.(ÈóÙ´ùÿÿÿÿ
+nsquid:S1488"YImmediately return this expression instead of assigning it to the temporary variable "s".(ËÈ¢Ë
+isquid:S00100"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ûâû×üÿÿÿÿ
+•squid:S1186"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(øş±,
+2squid:S2386"Make this member "protected".(ßÑ¿à
+Zsquid:S2147"ECombine this catch with the one at line 270, which has the same body.(ıàÑÎ
+hsquid:S00116"MRename this field "Id" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ì¡Şıÿÿÿÿ
+nsquid:S00116"SRename this field "NickName" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(‹ÍÆşÿÿÿÿ
+nsquid:S00116"SRename this field "RealName" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(€¼ùİüÿÿÿÿ
+ksquid:S00116"PRename this field "Phone" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ş œÅıÿÿÿÿ
+esquid:S00116"ORename this field "Pass" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ö§è
+hsquid:S00116"SRename this field "UserType" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ı‡é&
+gsquid:S00116"QRename this field "Campus" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÙÇ¥å
+isquid:S00116"SRename this field "SchoolID" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(í·•Ñ
+gsquid:S00116"QRename this field "ImgUrl" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Äíë
+rsquid:S00116"WRename this field "ImgLocalPath" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(‘¶‚èüÿÿÿÿ
+osquid:S00116"TRename this field "GoldMoney" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(–À¥ÿÿÿÿÿ
+ksquid:S00116"VRename this field "SilverMoney" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÿŠÕ
+ssquid:S00116"XRename this field "Creditibility" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÉğŸ¼ùÿÿÿÿ
+jsquid:S00116"ORename this field "Sign" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(©É—üÿÿÿÿ
+ksquid:S00116"PRename this field "Token" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Á˜Î¥ıÿÿÿÿ
+msquid:S00116"WRename this field "RongyunToken" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ïã§Ä
+=squid:S1148"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
+=squid:S1148"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
+=squid:S1148"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
+=squid:S1148"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
+=squid:S1148"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
+Jsquid:S1143"5Remove this return statement from this finally block.(ûÁİ…
+Jsquid:S1143"5Remove this return statement from this finally block.(®”ÛĞ
+N
+squid:S899";Do something with the "boolean" value returned by "delete".(œ¤¶$
+N
+squid:S899";Do something with the "boolean" value returned by "delete".(œ¤¶$
+V
+squid:S899"BDo something with the "boolean" value returned by "createNewFile".(«Î§ü

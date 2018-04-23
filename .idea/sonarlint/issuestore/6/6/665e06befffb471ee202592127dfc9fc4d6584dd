@@ -1,0 +1,8 @@
+
+M"squid:SwitchLastCaseIsDefaultCheck""Add a default case to this switch.(ªáçe
+M"squid:SwitchLastCaseIsDefaultCheck""Add a default case to this switch.(ªáçe
+usquid:S1450"[Remove the "recyclerView" field and declare it as a local variable in the relevant methods.(¿á© ýÿÿÿÿ
+_squid:S1301"KReplace this "switch" statement by "if" statements to increase readability.(ªáçe
+_squid:S1301"KReplace this "switch" statement by "if" statements to increase readability.(ªáçe
+<squid:S1185"(Remove this method to simply inherit it.(¥Ë©
+=squid:S1185"(Remove this method to simply inherit it.(öÿÕÅ

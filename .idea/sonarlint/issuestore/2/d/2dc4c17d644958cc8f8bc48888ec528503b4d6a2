@@ -1,0 +1,5 @@
+
+†squid:S1488"lImmediately return this expression instead of assigning it to the temporary variable "conversationFragment".(‹Ëµðþÿÿÿÿ
+Osquid:S1118":Add a private constructor to hide the implicit public one.(ÜÕÎ¤
+Dsquid:S1172"/Remove this unused method parameter "activity".(“–ýÉ
+rsquid:S00120"WRename this package name to match the regular expression '^[a-z]+(\.[a-z][a-z0-9]*)*$'.(åŠ…“øÿÿÿÿ

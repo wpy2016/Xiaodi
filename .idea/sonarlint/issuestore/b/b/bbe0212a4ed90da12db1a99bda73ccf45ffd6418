@@ -1,0 +1,5 @@
+
+;squid:S1075"&Remove this hard-coded path-delimiter.(Ÿ“í‚
+Isquid:S1066"/Merge this if statement with the enclosing one.(¾ô®ùÿÿÿÿ
+Zsquid:UselessImportCheck"8Remove this unused import 'com.orhanobut.logger.Logger'.(—°ı¹
+=squid:S1148"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ

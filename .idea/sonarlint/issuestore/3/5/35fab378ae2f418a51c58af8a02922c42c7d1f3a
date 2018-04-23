@@ -1,0 +1,7 @@
+
+>squid:S2786")Remove this redundant "static" qualifier.(ÁÈ°ƒ
+isquid:S00100"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¦Ú§¦ÿÿÿÿÿ
+Esquid:S1172"+Remove this unused method parameter "view".(ÍåÍÿÿÿÿÿ
+@squid:S1172"+Remove this unused method parameter "view".(·“–»
+<squid:S1185"(Remove this method to simply inherit it.(¥Ë©
+esquid:UselessImportCheck">Remove this unused import 'com.wpy.cqu.xiaodi.home.AcHomeAdd'.(¬Úª€şÿÿÿÿ

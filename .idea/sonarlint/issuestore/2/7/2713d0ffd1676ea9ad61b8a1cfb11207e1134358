@@ -1,0 +1,7 @@
+
+jsquid:S1201"UEither override Object.equals(Object), or rename the method to prevent any confusion.(¶Çžª
+isquid:S00100"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Îêˆçúÿÿÿÿ
+dsquid:S00100"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ž¶ÄÛ
+nsquid:S00116"YRename this field "specific_place" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(èÅŸ;
+lsquid:S00117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(â®â„úÿÿÿÿ
+gsquid:S00117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ž¶ÄÛ

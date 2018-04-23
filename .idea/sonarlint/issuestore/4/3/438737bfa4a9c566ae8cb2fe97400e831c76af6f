@@ -1,0 +1,8 @@
+
+ssquid:S1210"YOverride "equals(Object obj)" to comply with the contract of the "compareTo(T o)" method.(¥“Õ®úÿÿÿÿ
+€"squid:ClassVariableVisibilityCheck"OMake key a static final constant or non-public and provide accessors if needed.(·¢¼Òüÿÿÿÿ
+„"squid:ClassVariableVisibilityCheck"SMake rewards a static final constant or non-public and provide accessors if needed.(”Çßëûÿÿÿÿ
+€"squid:ClassVariableVisibilityCheck"OMake lat a static final constant or non-public and provide accessors if needed.(¡ô´ğÿÿÿÿÿ
+€"squid:ClassVariableVisibilityCheck"OMake lon a static final constant or non-public and provide accessors if needed.(È¡ûüÿÿÿÿ
+rsquid:S00120"WRename this package name to match the regular expression '^[a-z]+(\.[a-z][a-z0-9]*)*$'.(â³éµÿÿÿÿÿ
+>squid:S1948"$Make "rewards" private or transient.(”Çßëûÿÿÿÿ

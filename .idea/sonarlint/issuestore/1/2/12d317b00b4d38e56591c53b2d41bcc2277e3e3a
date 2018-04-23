@@ -1,0 +1,18 @@
+
+Rsquid:UnusedPrivateMethod"/Remove this unused private "getPayName" method.(‘ìú
+N"squid:SwitchLastCaseIsDefaultCheck""Add a default case to this switch.(Š”É†
+msquid:ModifiersOrderCheck"EReorder the modifiers to comply with the Java Language Specification.(Â”÷‡üÿÿÿÿ
+msquid:ModifiersOrderCheck"EReorder the modifiers to comply with the Java Language Specification.(°¥¿®ÿÿÿÿÿ
+msquid:ModifiersOrderCheck"EReorder the modifiers to comply with the Java Language Specification.(·Ä©˜üÿÿÿÿ
+msquid:ModifiersOrderCheck"EReorder the modifiers to comply with the Java Language Specification.(–˜æ¡şÿÿÿÿ
+msquid:ModifiersOrderCheck"EReorder the modifiers to comply with the Java Language Specification.(ñÒİíÿÿÿÿÿ
+hsquid:ModifiersOrderCheck"EReorder the modifiers to comply with the Java Language Specification.(õÙ
+esquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(’´¦êùÿÿÿÿ
+esquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(´Íô»úÿÿÿÿ
+Gsquid:S1135"2Complete the task associated to this TODO comment.(¾¾¶â
+Fsquid:S1135"2Complete the task associated to this TODO comment.(¬è©C
+@squid:S1172"+Remove this unused method parameter "view".(Îœ
+Dsquid:S1172"/Remove this unused method parameter "rmbLevel".(‘ìú
+\squid:UselessImportCheck"5Remove this unused import 'android.widget.ImageView'.(ú¯ëàüÿÿÿÿ
+lsquid:UselessImportCheck"ERemove this unused import 'android.support.v7.app.AppCompatActivity'.(«Û®ûüÿÿÿÿ
+[squid:UselessImportCheck"4Remove this unused import 'android.widget.TextView'.(„Ë‚ˆÿÿÿÿÿ
