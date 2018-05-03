@@ -100,7 +100,11 @@ public class FgRewardDetail extends Fragment {
         initButtonView();
         mstatus.setStatu(reward.state);
         mivThingImg.setImageResource(Thing.DEFAULT_TYPE_IMG[reward.thing.type]);
-        Picasso.with(getActivity()).load(reward.thing.thumbnail).error(Thing.DEFAULT_TYPE_IMG[reward.thing.type]).into(mivThingImg);
+        Picasso.with(getActivity())
+                .load(reward.thing.thumbnail)
+                .placeholder(Thing.DEFAULT_TYPE_IMG[reward.thing.type])
+                .error(Thing.DEFAULT_TYPE_IMG[reward.thing.type])
+                .into(mivThingImg);
         mtvXiaodian.setText(reward.xiaodian + "");
         mtvWeight.setText(reward.thing.weight);
         mtvStartPlace.setText(reward.originLocation);

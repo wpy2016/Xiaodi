@@ -35,6 +35,9 @@ import com.wpy.cqu.xiaodi.util.ToastUtil;
 import com.wpy.cqu.xiaodi.view.CircleIndicator;
 import com.wpy.cqu.xiaodi.view.DepthPageTransformer;
 
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -42,6 +45,7 @@ import java.util.concurrent.TimeUnit;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 import io.rong.imkit.fragment.ConversationFragment;
 

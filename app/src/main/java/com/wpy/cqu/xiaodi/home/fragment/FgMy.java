@@ -100,7 +100,11 @@ public class FgMy extends ClipBaseFragment {
 
     private void initView() {
         mivImg.setImageResource(R.drawable.default_headimg);
-        Picasso.with(getActivity()).load(user.ImgUrl).error(R.drawable.default_headimg).into(mivImg);
+        Picasso.with(getActivity())
+                .load(user.ImgUrl)
+                .placeholder(R.drawable.default_headimg)
+                .error(R.drawable.default_headimg)
+                .into(mivImg);
 
         mtvContent.setText(getResources().getString(R.string.my));
         mtvNickName.setText(user.getNickName());

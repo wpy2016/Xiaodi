@@ -172,7 +172,11 @@ public class AcRewardDetail extends TopBarAppComptAcitity {
         }
         reward = (Reward) serializable;
         mivThingImg.setImageResource(Thing.DEFAULT_TYPE_IMG[reward.thing.type]);
-        Picasso.with(this).load(reward.thing.thumbnail).error(Thing.DEFAULT_TYPE_IMG[reward.thing.type]).into(mivThingImg);
+        Picasso.with(this)
+                .load(reward.thing.thumbnail)
+                .placeholder(Thing.DEFAULT_TYPE_IMG[reward.thing.type])
+                .error(Thing.DEFAULT_TYPE_IMG[reward.thing.type])
+                .into(mivThingImg);
         mtvXiaodian.setText(reward.xiaodian + "");
         mtvWeight.setText(reward.thing.weight);
         mtvStartPlace.setText(reward.originLocation);
@@ -184,7 +188,11 @@ public class AcRewardDetail extends TopBarAppComptAcitity {
         mtvDeadline.setText(reward.deadline);
         mtvDescribe.setText(reward.describe);
         mivPublisherImg.setImageResource(R.drawable.default_headimg);
-        Picasso.with(this).load(reward.Publisher.ImgUrl).error(R.drawable.default_headimg).into(mivPublisherImg);
+        Picasso.with(this)
+                .load(reward.Publisher.ImgUrl)
+                .placeholder(R.drawable.default_headimg)
+                .error(R.drawable.default_headimg)
+                .into(mivPublisherImg);
         mtvPublisherNickName.setText(reward.Publisher.NickName);
         mtvAuthStatus.setText(User.AuthStatus[reward.Publisher.UserType]);
         mtvCredit.setText(reward.Publisher.Creditibility + "");

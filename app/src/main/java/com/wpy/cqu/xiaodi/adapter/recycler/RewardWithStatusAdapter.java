@@ -42,9 +42,9 @@ public class RewardWithStatusAdapter extends RecyclerView.Adapter<RewardHolderWi
     @Override
     public void onBindViewHolder(RewardHolderWithStatus holder, int position) {
         Reward reward = rewards.get(position);
-        holder.mivImg.setImageResource(Thing.DEFAULT_TYPE_IMG[reward.thing.type]);
-        Picasso.with(mContext).load(reward.thing.thumbnail).
-                error(Thing.DEFAULT_TYPE_IMG[reward.thing.type]).into(holder.mivImg);
+        Picasso.with(mContext).load(reward.thing.thumbnail)
+                .placeholder(Thing.DEFAULT_TYPE_IMG[reward.thing.type])
+                .error(Thing.DEFAULT_TYPE_IMG[reward.thing.type]).into(holder.mivImg);
         holder.mtvThingType.setText(Thing.THING_TYPE[reward.thing.type]);
         holder.mtvThingWeight.setText(reward.thing.weight);
         holder.mtvStartPlace.setText(reward.originLocation);

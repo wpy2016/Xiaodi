@@ -87,6 +87,7 @@ public class AcXiaodianRecord extends TopBarAppComptAcitity {
         if (reward.Publisher.Id.equals(XiaodiApplication.mCurrentUser.Id)) {
             Picasso.with(AcXiaodianRecord.this)
                     .load(reward.Receiver.ImgUrl)
+                    .placeholder(R.drawable.default_headimg)
                     .error(R.drawable.default_headimg)
                     .into((ImageView) helper.getConvertView().findViewById(R.id.id_reward_iv_img));
             helper.setText(R.id.id_reward_tv_user_name, reward.Receiver.NickName);
@@ -96,6 +97,7 @@ public class AcXiaodianRecord extends TopBarAppComptAcitity {
         }
         Picasso.with(AcXiaodianRecord.this)
                 .load(reward.Publisher.ImgUrl)
+                .placeholder(R.drawable.default_headimg)
                 .error(R.drawable.default_headimg)
                 .into((ImageView) helper.getConvertView().findViewById(R.id.id_reward_iv_img));
         helper.setText(R.id.id_reward_tv_user_name, reward.Publisher.NickName);

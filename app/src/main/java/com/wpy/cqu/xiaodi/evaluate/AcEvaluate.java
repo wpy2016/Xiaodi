@@ -64,7 +64,10 @@ public class AcEvaluate extends TopBarAppComptAcitity {
             mtvXiaodianTip.setText(R.string.you_have_get_pay);
         }
         mivImg.setImageResource(R.drawable.default_headimg);
-        Picasso.with(this).load(showUser.ImgUrl).error(R.drawable.default_headimg).into(mivImg);
+        Picasso.with(this)
+                .load(showUser.ImgUrl)
+                .placeholder(R.drawable.default_headimg)
+                .error(R.drawable.default_headimg).into(mivImg);
         mtvName.setText(showUser.NickName);
         mtvXiaodian.setText(reward.xiaodian + "");
     }

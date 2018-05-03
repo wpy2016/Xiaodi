@@ -106,6 +106,7 @@ public class AcEditReward extends AcReward {
         ImageView[] imageViews = {mivExpress, mivFood, mivPaper, mivOther};
         int typePos = reward.thing.type;
         Picasso.with(this).load(reward.thing.thumbnail)
+                .placeholder(Thing.DEFAULT_TYPE_IMG[typePos])
                 .error(Thing.DEFAULT_TYPE_IMG[typePos])
                 .into(imageViews[typePos]);
         imageViews[typePos].setBackgroundResource(R.drawable.circle_stroke_green_60);
