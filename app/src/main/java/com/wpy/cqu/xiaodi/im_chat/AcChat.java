@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -14,6 +15,8 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.text.TextUtils;
+import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -112,13 +115,14 @@ public class AcChat extends TopBarAppComptAcitity {
         mFloatingBtnPhone = (FloatingActionButton) findViewById(R.id.id_fg_chat_floating_btn);
         mllViewPagerRoot = (LinearLayout) findViewById(R.id.id_ac_chat_viewpager_ll);
         mivTopRight = (ImageView) findViewById(R.id.id_top_right_iv_img);
-        mivRefresh = (ImageView)findViewById(R.id.id_top_iv_down);
+        mivRefresh = (ImageView) findViewById(R.id.id_top_iv_down);
     }
 
     private void bindEvent() {
         mtvBack.setOnClickListener(view -> finish());
         mivBack.setOnClickListener(view -> finish());
         mFloatingBtnPhone.setOnClickListener(view -> callPhone());
+        mFloatingBtnPhone.setOnTouchListener(new DragListener(mFloatingBtnPhone));
         mivTopRight.setOnClickListener(this::showOrDismiss);
         mivRefresh.setOnClickListener(view -> initViewPager());
     }
@@ -292,6 +296,41 @@ public class AcChat extends TopBarAppComptAcitity {
         @Override
         public void onPageScrollStateChanged(int state) {
 
+        }
+    }
+
+    private class DragListener implements View.OnTouchListener {
+
+        private float downX;
+        private float downY;
+        private int originRightMargin;
+        private int originButtomMargin;
+        private FloatingActionButton button;
+
+        DragListener(FloatingActionButton button) {
+            this.button = button;
+        }
+
+        @Override
+        public boolean onTouch(View view, MotionEvent event) {
+            CoordinatorLayout.MarginLayoutParams layoutParams = (CoordinatorLayout.MarginLayoutParams) button.getLayoutParams();
+            switch (event.getAction()) {
+                case MotionEvent.ACTION_DOWN:
+                    downX = event.getX();
+                    downY = event.getY();
+                    originRightMargin = layoutParams.rightMargin;
+                    originButtomMargin = layoutParams.bottomMargin;
+                    break;
+                case MotionEvent.ACTION_MOVE:
+                    final float xDistance = event.getX() - downX;
+                    final float yDistance = event.getY() - downY;
+                    int rightMargin = (int) (originRightMargin - xDistance);
+                    int bottomMargin = (int) (originButtomMargin - yDistance);
+                    layoutParams.setMargins(layoutParams.leftMargin,layoutParams.topMargin,rightMargin,bottomMargin);
+                    button.requestLayout();
+                    break;
+            }
+            return false;
         }
     }
 }
